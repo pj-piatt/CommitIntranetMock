@@ -130,3 +130,61 @@ button:hover {
   border-left: 5px solid #1c2b39;
   border-radius: 4px;
 }
+.site-header {
+  background-color: #1c2b39;
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.site-header .logo {
+  height: 48px;
+}
+
+.site-header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.site-header nav ul li {
+  margin: 0;
+}
+
+.site-header nav ul li a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.site-header nav ul li a:hover,
+.site-header nav ul li a.active {
+  text-decoration: underline;
+  color: #f7941e;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.widget {
+  background: white;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  color: #666;
+  font-size: 0.9rem;
+}
+
