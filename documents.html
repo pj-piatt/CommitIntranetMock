@@ -1,1 +1,114 @@
-<!-- Placeholder for documents.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Documents | Commit Intranet Hub</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
+    <h1>Commit Intranet Hub</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="documents.html" class="active">Documents</a></li>
+        <li><a href="shoutouts.html">Shoutouts</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Document Library</h2>
+    <p>Browse and upload internal resources across departments. This simulates file management for collaboration and compliance.</p>
+
+    <section class="panel-grid">
+
+      <div class="panel">
+        <h3>Human Resources</h3>
+        <ul id="hr-docs">
+          <li><a href="#">Employee Handbook.pdf</a></li>
+          <li><a href="#">PTO Policy 2025.docx</a></li>
+        </ul>
+        <form class="upload-form" data-list="hr-docs">
+          <input type="file" />
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>IT Department</h3>
+        <ul id="it-docs">
+          <li><a href="#">VPN Setup Guide.pdf</a></li>
+          <li><a href="#">Device Standards 2025.xlsx</a></li>
+        </ul>
+        <form class="upload-form" data-list="it-docs">
+          <input type="file" />
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Operations</h3>
+        <ul id="ops-docs">
+          <li><a href="#">Q3 Logistics Timeline.xlsx</a></li>
+        </ul>
+        <form class="upload-form" data-list="ops-docs">
+          <input type="file" />
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Policy</h3>
+        <ul id="policy-docs">
+          <li><a href="#">Education Funding Brief.pdf</a></li>
+        </ul>
+        <form class="upload-form" data-list="policy-docs">
+          <input type="file" />
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Development</h3>
+        <ul id="dev-docs">
+          <li><a href="#">Donor List 2025.xlsx</a></li>
+        </ul>
+        <form class="upload-form" data-list="dev-docs">
+          <input type="file" />
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 The Commit Partnership. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Simulate upload for each panel
+    document.querySelectorAll('.upload-form').forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const input = this.querySelector('input[type="file"]');
+        const listId = this.getAttribute('data-list');
+        const list = document.getElementById(listId);
+
+        if (input.files.length > 0) {
+          const li = document.createElement('li');
+          li.textContent = input.files[0].name + " (Uploaded)";
+          list.appendChild(li);
+          input.value = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
