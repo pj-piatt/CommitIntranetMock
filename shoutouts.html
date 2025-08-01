@@ -1,1 +1,60 @@
-<!-- Placeholder for shoutouts.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shoutouts & Recognition | Commit Intranet</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="scripts/shoutouts.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
+    <h1>Commit Intranet Hub</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="shoutouts.html" class="active">Shoutouts</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Team Shoutouts & Recognition</h2>
+
+    <section class="panel">
+      <h3>Recent Shoutouts</h3>
+      <ul id="shoutout-list">
+        <li>👏 Huge thanks to Marcus from IT for the rapid laptop deployment!</li>
+        <li>🎉 Shoutout to the Ops team for pulling off a flawless event launch!</li>
+        <li>🌟 Kudos to Jasmine in HR for the new onboarding workflow!</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h3>Give a Shoutout</h3>
+      <form id="shoutout-form">
+        <label for="from">Your Name:</label>
+        <input type="text" id="from" name="from" required />
+
+        <label for="to">Shoutout To:</label>
+        <input type="text" id="to" name="to" required />
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" placeholder="Enter your message..." required></textarea>
+
+        <button type="submit">Submit Shoutout</button>
+        <p class="success-message" id="shoutout-success">🎊 Your shoutout was posted successfully (simulated)!</p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 The Commit Partnership. All rights reserved.</p>
+  </footer>
+</body>
+</html>
