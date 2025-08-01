@@ -102,21 +102,41 @@ document.querySelectorAll(".modal-close").forEach(btn => {
     this.closest(".modal").style.display = "none";
   });
 });
+
+// Simulated AI Bot
 function submitAIQuestion() {
   const input = document.getElementById("ai-input");
   const response = document.getElementById("ai-response");
 
   if (!input || !response) return;
 
-  const question = input.value.trim();
+  const question = input.value.trim().toLowerCase();
   if (!question) {
     response.textContent = "Please enter a question.";
     return;
   }
 
-  // Simulate an AI response
+  // Simulated responses based on keyword detection
+  let answer = "";
+
+  if (question.includes("pto") || question.includes("vacation")) {
+    answer = "You can submit PTO requests through ADP. Be sure to notify your supervisor in advance.";
+  } else if (question.includes("benefits")) {
+    answer = "Our benefits information is located in the Benefits Guide on the Documents page.";
+  } else if (question.includes("holiday")) {
+    answer = "You can view upcoming company holidays on the Calendar page.";
+  } else if (question.includes("tech support") || question.includes("it help")) {
+    answer = "For IT support, please submit a help desk ticket or email support@commit.org.";
+  } else if (question.includes("dress code")) {
+    answer = "We follow a business casual dress code unless otherwise specified for events or client meetings.";
+  } else {
+    // Default fallback
+    answer = `I'm a mock assistant. For your question, "${input.value}", please check the Employee Handbook or contact HR.`;
+  }
+
+  // Simulate a response delay
   setTimeout(() => {
-    response.innerHTML = `<strong>AI Response:</strong> I'm a mock assistant. For your question, "${question}", please check the Employee Handbook or contact HR.`;
+    response.innerHTML = `<strong>AI Response:</strong> ${answer}`;
   }, 500);
 }
 
