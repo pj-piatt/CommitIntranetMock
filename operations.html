@@ -1,1 +1,69 @@
-<!-- Placeholder for operations.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Operations | Commit Intranet</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="scripts/upload-sim.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
+    <h1>Commit Intranet Hub</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="shoutouts.html">Shoutouts</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+        <li><a href="operations.html" class="active">Operations</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Operations Department</h2>
+
+    <section class="panel">
+      <h3>Welcome to Operations</h3>
+      <p>The Operations team ensures smooth internal processes, oversees compliance, and supports org-wide efficiency initiatives. Access your key resources, documents, and updates here.</p>
+    </section>
+
+    <section class="panel">
+      <h3>Upload Operations Documents</h3>
+      <form id="upload-form">
+        <label for="fileInput">Choose a file to upload:</label>
+        <input type="file" id="fileInput" name="fileInput" />
+        <button type="submit">Upload</button>
+        <p class="success-message" id="upload-success">File uploaded successfully (simulated)!</p>
+      </form>
+      <ul id="uploaded-list"></ul>
+    </section>
+
+    <section class="panel">
+      <h3>Recent Ops News</h3>
+      <ul>
+        <li><strong>July 30:</strong> New inventory system goes live!</li>
+        <li><strong>July 24:</strong> Office supply request form updated</li>
+        <li><strong>July 15:</strong> Facility safety audit passed with 100%</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h3>Quick Access</h3>
+      <ul>
+        <li><a href="hardware-request.html">Request Office Equipment</a></li>
+        <li><a href="pto-request.html">Submit Time Off Request</a></li>
+        <li><a href="documents.html">All Shared Documents</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 The Commit Partnership. All rights reserved.</p>
+  </footer>
+</body>
+</html>
