@@ -1,1 +1,96 @@
-<!-- Placeholder for development.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Development | Commit Intranet Hub</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
+    <h1>Commit Intranet Hub</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="shoutouts.html">Shoutouts</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Development Department</h2>
+    <p>Welcome to the Development Team page. Here you’ll find the latest resources, updates, and documents to support our fundraising, grants, and donor engagement work.</p>
+
+    <section class="panel-grid">
+      <div class="panel">
+        <h3>Recent News</h3>
+        <ul>
+          <li><strong>Aug 1:</strong> $250K grant awarded by the City Education Fund.</li>
+          <li><strong>Jul 23:</strong> Annual Gala sponsorships surpassed goal by 18%.</li>
+          <li><strong>Jul 15:</strong> CRM migration to Salesforce completed.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3>Key Documents</h3>
+        <ul id="dev-doc-list">
+          <li><a href="#">FY25 Grant Tracker.xlsx</a></li>
+          <li><a href="#">2025 Gala Deck.pptx</a></li>
+          <li><a href="#">Donor Stewardship Plan.docx</a></li>
+        </ul>
+        <form id="dev-upload-form">
+          <label for="dev-upload">Upload New Document</label>
+          <input type="file" id="dev-upload" name="dev-upload" />
+          <button type="submit">Upload</button>
+          <p class="success-message" id="dev-success">File uploaded (mock only).</p>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Useful Links</h3>
+        <ul>
+          <li><a href="#">Salesforce Login</a></li>
+          <li><a href="#">2025 Gala Planning Folder</a></li>
+          <li><a href="#">Fundraising Event Tracker</a></li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3>Team Contacts</h3>
+        <ul>
+          <li><strong>Olivia James</strong> – Director of Development</li>
+          <li><strong>Andre Lewis</strong> – Grants Manager</li>
+          <li><strong>Sophia Chang</strong> – Donor Engagement Specialist</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 The Commit Partnership. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('dev-upload-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const input = document.getElementById('dev-upload');
+      const list = document.getElementById('dev-doc-list');
+      const msg = document.getElementById('dev-success');
+
+      if (input.files.length > 0) {
+        const fileName = input.files[0].name;
+        const li = document.createElement('li');
+        li.textContent = fileName + ' (Uploaded)';
+        list.appendChild(li);
+        msg.style.display = 'block';
+        input.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
