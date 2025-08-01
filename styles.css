@@ -1,6 +1,4 @@
 
-/* Commit Partnership - SharePoint Mock Site - Enhanced Styles */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 body {
@@ -11,46 +9,79 @@ body {
     color: #333;
 }
 
-header {
-    background-color: #005587;
-    color: white;
-    padding: 1em 2em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    height: 50px;
-}
-
 nav {
-    background-color: #f18f01;
-    padding: 0.75em 2em;
-    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    background-color: #005587;
+    padding-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav .logo {
+    width: 150px;
+    margin-bottom: 2em;
 }
 
 nav a {
     color: white;
-    margin: 0 15px;
     text-decoration: none;
-    font-weight: 600;
+    margin: 0.5em 0;
+    font-weight: bold;
 }
 
 nav a:hover {
     text-decoration: underline;
-    color: #003f6b;
+}
+
+header {
+    margin-left: 240px;
+    height: 60px;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.search-box {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
 }
 
 main {
+    margin-left: 260px;
     padding: 2em;
 }
 
-h1, h2 {
-    color: #005587;
+.tile {
+    background-color: #f18f01;
+    color: white;
+    padding: 1em;
+    margin: 0.5em;
+    border-radius: 4px;
+    text-align: center;
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
 }
 
-section {
+.tile:hover {
+    background-color: #d77c00;
+}
+
+.card {
+    background: white;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     margin-top: 1.5em;
 }
 
@@ -60,31 +91,5 @@ footer {
     padding: 1em;
     font-size: 0.9em;
     color: #333;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.card {
-    border: 1px solid #ccc;
-    padding: 1em;
-    border-radius: 8px;
-    background-color: #fff;
-    margin-bottom: 1em;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.button {
-    background-color: #f18f01;
-    color: white;
-    padding: 0.5em 1em;
-    border: none;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #d77c00;
+    margin-left: 240px;
 }
