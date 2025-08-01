@@ -1,58 +1,104 @@
-// scripts.js
+// scripts.js – Complete Site Functionality with Enhancements
 
-// Navigation Highlight (optional global behavior)
-document.addEventListener('DOMContentLoaded', () => {
-  const path = window.location.pathname.split("/").pop();
-  document.querySelectorAll('nav a').forEach(link => {
-    if (link.getAttribute('href') === path) {
-      link.classList.add('active');
+// ===== Form Handling (Universal) =====
+document.querySelectorAll("form").forEach(form => {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const success = form.querySelector(".success-message");
+    if (success) {
+      success.style.display = "block";
+      setTimeout(() => success.style.display = "none", 4000);
     }
+    form.reset();
   });
 });
 
-// Form Handling
-function handleFormSubmission(formId, successMessageId) {
-  const form = document.getElementById(formId);
-  const message = document.getElementById(successMessageId);
-
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      // Simulate async form submission
-      setTimeout(() => {
-        message.style.display = 'block';
-        form.reset();
-      }, 500);
+// ===== Mock Upload Handler =====
+document.querySelectorAll(".upload-input").forEach(input => {
+  input.addEventListener("change", function () {
+    const list = this.closest("section").querySelector(".uploaded-list");
+    Array.from(this.files).forEach(file => {
+      const item = document.createElement("li");
+      item.textContent = file.name;
+      list.appendChild(item);
     });
-  }
+  });
+});
+
+// ===== Drag and Drop Uploads =====
+document.querySelectorAll(".dropzone").forEach(zone => {
+  const input = zone.querySelector("input[type='file']");
+  const list = zone.querySelector(".uploaded-list");
+
+  zone.addEventListener("dragover", e => {
+    e.preventDefault();
+    zone.classList.add("dragover");
+  });
+
+  zone.addEventListener("dragleave", () => zone.classList.remove("dragover"));
+  zone.addEventListener("drop", e => {
+    e.preventDefault();
+    zone.classList.remove("dragover");
+    const files = Array.from(e.dataTransfer.files);
+    files.forEach(file => {
+      const item = document.createElement("li");
+      item.textContent = file.name;
+      list.appendChild(item);
+    });
+  });
+});
+
+// ===== Calendar Highlights =====
+if (document.querySelector(".calendar")) {
+  const today = new Date();
+  document.querySelectorAll(".calendar li").forEach(item => {
+    const dateMatch = item.textContent.match(/([A-Za-z]{3,9}) (\d{1,2})/);
+    if (dateMatch) {
+      const [_, monthName, day] = dateMatch;
+      const eventDate = new Date(`${monthName} ${day}, ${today.getFullYear()}`);
+      if ((eventDate - today) / (1000 * 60 * 60 * 24) <= 7) {
+        item.style.fontWeight = "bold";
+        item.style.color = "#f7941e";
+      }
+    }
+  });
 }
 
-// Help Desk Request Form
-handleFormSubmission("helpdesk-form", "helpdesk-success");
+// ===== Search Filter for Lists =====
+document.querySelectorAll(".searchable").forEach(section => {
+  const input = section.querySelector(".search-input");
+  const items = section.querySelectorAll("li");
 
-// PTO Request Form
-handleFormSubmission("pto-form", "pto-success");
-
-// IT Hardware/Software Request Form
-handleFormSubmission("hardware-form", "hardware-success");
-
-// Document Upload Simulation
-document.addEventListener("DOMContentLoaded", () => {
-  const uploadInput = document.getElementById("upload-input");
-  const uploadedList = document.getElementById("uploaded-list");
-
-  if (uploadInput && uploadedList) {
-    uploadInput.addEventListener("change", (e) => {
-      const files = Array.from(e.target.files);
-      files.forEach(file => {
-        const listItem = document.createElement("li");
-        listItem.textContent = file.name + " (mock uploaded)";
-        uploadedList.appendChild(listItem);
+  if (input) {
+    input.addEventListener("input", function () {
+      const term = input.value.toLowerCase();
+      items.forEach(item => {
+        item.style.display = item.textContent.toLowerCase().includes(term) ? "" : "none";
       });
-
-      // Reset input
-      uploadInput.value = "";
     });
   }
+});
+
+// ===== Department Tabs Logic (Optional Interactivity) =====
+document.querySelectorAll(".department-tabs button").forEach(btn => {
+  btn.addEventListener("click", function () {
+    document.querySelectorAll(".department-content").forEach(c => c.style.display = "none");
+    document.getElementById(this.dataset.target).style.display = "block";
+    document.querySelectorAll(".department-tabs button").forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+  });
+});
+
+// ===== Modal Support (Optional, if used) =====
+document.querySelectorAll(".modal-trigger").forEach(trigger => {
+  trigger.addEventListener("click", function () {
+    const modal = document.getElementById(this.dataset.modal);
+    if (modal) modal.style.display = "block";
+  });
+});
+
+document.querySelectorAll(".modal-close").forEach(btn => {
+  btn.addEventListener("click", function () {
+    this.closest(".modal").style.display = "none";
+  });
 });
