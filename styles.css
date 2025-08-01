@@ -1,38 +1,90 @@
 
+/* Commit Partnership - SharePoint Mock Site - Enhanced Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     margin: 0;
-    background: #f8f9fa;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
 }
+
 header {
     background-color: #005587;
     color: white;
-    padding: 1em;
+    padding: 1em 2em;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
+
 .logo {
     height: 50px;
-    margin-right: 1em;
 }
+
 nav {
     background-color: #f18f01;
-    padding: 0.5em;
+    padding: 0.75em 2em;
     text-align: center;
 }
+
 nav a {
-    margin: 0 15px;
     color: white;
+    margin: 0 15px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
 }
+
+nav a:hover {
+    text-decoration: underline;
+    color: #003f6b;
+}
+
 main {
     padding: 2em;
 }
+
+h1, h2 {
+    color: #005587;
+}
+
+section {
+    margin-top: 1.5em;
+}
+
 footer {
     background-color: #e5e5e5;
     text-align: center;
     padding: 1em;
     font-size: 0.9em;
     color: #333;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 1em;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.button {
+    background-color: #f18f01;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #d77c00;
 }
