@@ -1,95 +1,88 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
+/* SharePoint-style with Commit branding */
 body {
-    font-family: 'Inter', Arial, sans-serif;
+    font-family: "Segoe UI", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
-    color: #333;
-}
-
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 240px;
-    height: 100%;
-    background-color: #005587;
-    padding-top: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-nav .logo {
-    width: 150px;
-    margin-bottom: 2em;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0.5em 0;
-    font-weight: bold;
-}
-
-nav a:hover {
-    text-decoration: underline;
+    background-color: #f4f4f4;
 }
 
 header {
-    margin-left: 240px;
-    height: 60px;
-    background-color: white;
-    border-bottom: 1px solid #ccc;
+    background-color: #003A70;
+    color: white;
+    padding: 20px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
 }
 
-.search-box {
-    border: 1px solid #ccc;
-    padding: 5px;
-    border-radius: 4px;
+header img {
+    height: 50px;
+}
+
+nav {
+    background-color: #e6e6e6;
+    padding: 20px;
+    width: 220px;
+    height: 100vh;
+    position: fixed;
+    top: 90px;
+    left: 0;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+}
+
+nav a {
+    display: block;
+    margin-bottom: 15px;
+    color: #003A70;
+    text-decoration: none;
+    font-weight: 600;
 }
 
 main {
     margin-left: 260px;
-    padding: 2em;
-}
-
-.tile {
-    background-color: #f18f01;
-    color: white;
-    padding: 1em;
-    margin: 0.5em;
-    border-radius: 4px;
-    text-align: center;
-    display: inline-block;
-    width: 150px;
-    font-weight: bold;
-}
-
-.tile:hover {
-    background-color: #d77c00;
-}
-
-.card {
+    padding: 40px;
     background: white;
-    padding: 1em;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    margin-top: 1.5em;
+    min-height: calc(100vh - 90px);
 }
 
-footer {
-    background-color: #e5e5e5;
-    text-align: center;
-    padding: 1em;
-    font-size: 0.9em;
-    color: #333;
-    margin-left: 240px;
+h1, h2 {
+    color: #003A70;
+}
+
+.news-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #F0F8FF;
+    border-left: 5px solid #0078D4;
+    border-radius: 4px;
+}
+
+.upload-area {
+    margin-top: 30px;
+    background: #F9FAFB;
+    border: 2px dashed #0078D4;
+    padding: 25px;
+    border-radius: 6px;
+}
+
+.upload-area input[type="file"] {
+    margin-bottom: 10px;
+}
+
+ul#documentList {
+    list-style-type: disc;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+button {
+    background-color: #0078D4;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
 }
