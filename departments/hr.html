@@ -4,15 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Human Resources</title>
-  <link rel="stylesheet" href="../css/styles.css"/>
-  <script defer src="../js/scripts.js"></script>
+  <link rel="stylesheet" href="../css/styles.css" />
+
+  <style>
+    .calendar-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .day {
+      text-align: center;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      min-height: 70px;
+    }
+
+    .day.today {
+      background-color: #f5faff;
+      border: 2px solid #0078d4;
+      font-weight: bold;
+    }
+
+    .event {
+      font-size: 0.75rem;
+      margin-top: 5px;
+      color: #444;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Human Resources</h1>
     <nav><a href="../index.html">← Back to Dashboard</a></nav>
   </header>
-
   <main>
     <section class="widget">
       <h2>Upcoming Birthdays</h2>
@@ -24,25 +66,24 @@
 
     <section class="widget">
       <h2>PTO Calendar</h2>
-      <div class="calendar-wrapper">
-        <iframe src="../calendar.html" style="width: 100%; height: 600px; border: none;"></iframe>
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <h3 id="month-year"></h3>
+          <button onclick="prevMonth()">←</button>
+          <button onclick="nextMonth()">→</button>
+        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
       </div>
     </section>
 
     <section class="widget">
       <h2>PTO Request Form</h2>
       <form id="pto-form">
-        <label for="pto-name">Your Name:</label>
-        <input type="text" id="pto-name" name="name" required />
-
-        <label for="start-date">Start Date:</label>
-        <input type="date" id="start-date" name="start-date" required />
-
-        <label for="end-date">End Date:</label>
-        <input type="date" id="end-date" name="end-date" required />
-
+        <label>Name: <input type="text" name="name" required /></label>
+        <label>Start Date: <input type="date" name="start" required /></label>
+        <label>End Date: <input type="date" name="end" required /></label>
         <button type="submit">Submit Request</button>
-        <p id="pto-success" class="success-message" style="display:none;">✅ PTO request submitted successfully!</p>
+        <p id="pto-success" style="display:none; color:green;">Request submitted successfully!</p>
       </form>
     </section>
 
@@ -54,5 +95,83 @@
       </ul>
     </section>
   </main>
+
+  <script src="../js/scripts.js"></script>
+  <script>
+    // Calendar Logic
+    const calendarGrid = document.getElementById("calendar-grid");
+    const monthYear = document.getElementById("month-year");
+    let currentDate = new Date();
+
+    const events = {
+      "2025-08-05": "All-Staff Meeting",
+      "2025-08-12": "Summer PTO Deadline",
+      "2025-08-20": "Birthday Bash 🎉",
+      "2025-08-30": "Labor Day PTO"
+    };
+
+    function renderCalendar(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      calendarGrid.innerHTML = "";
+      monthYear.textContent = `${date.toLocaleString("default", { month: "long" })} ${year}`;
+
+      // Day headers
+      ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach(day => {
+        const div = document.createElement("div");
+        div.className = "day";
+        div.style.fontWeight = "bold";
+        div.textContent = day;
+        calendarGrid.appendChild(div);
+      });
+
+      for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement("div");
+        empty.className = "day";
+        calendarGrid.appendChild(empty);
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dayDiv = document.createElement("div");
+        const current = new Date();
+        const cellDate = new Date(year, month, d);
+        const iso = cellDate.toISOString().split("T")[0];
+
+        dayDiv.className = "day";
+        if (
+          cellDate.getDate() === current.getDate() &&
+          cellDate.getMonth() === current.getMonth() &&
+          cellDate.getFullYear() === current.getFullYear()
+        ) {
+          dayDiv.classList.add("today");
+        }
+
+        dayDiv.innerHTML = `<strong>${d}</strong>`;
+        if (events[iso]) {
+          const event = document.createElement("div");
+          event.className = "event";
+          event.textContent = events[iso];
+          dayDiv.appendChild(event);
+        }
+
+        calendarGrid.appendChild(dayDiv);
+      }
+    }
+
+    function prevMonth() {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar(currentDate);
+    }
+
+    function nextMonth() {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar(currentDate);
+    }
+
+    renderCalendar(currentDate);
+  </script>
 </body>
 </html>
