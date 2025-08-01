@@ -102,3 +102,21 @@ document.querySelectorAll(".modal-close").forEach(btn => {
     this.closest(".modal").style.display = "none";
   });
 });
+function submitAIQuestion() {
+  const input = document.getElementById("ai-input");
+  const response = document.getElementById("ai-response");
+
+  if (!input || !response) return;
+
+  const question = input.value.trim();
+  if (!question) {
+    response.textContent = "Please enter a question.";
+    return;
+  }
+
+  // Simulate an AI response
+  setTimeout(() => {
+    response.innerHTML = `<strong>AI Response:</strong> I'm a mock assistant. For your question, "${question}", please check the Employee Handbook or contact HR.`;
+  }, 500);
+}
+
