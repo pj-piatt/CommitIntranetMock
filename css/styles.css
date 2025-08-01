@@ -1,1 +1,132 @@
-<!-- Placeholder for css/styles.css -->
+/* Base styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+header {
+  background-color: #1c2b39; /* Commit navy */
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header img {
+  height: 48px;
+}
+
+h1, h2, h3 {
+  color: #1c2b39;
+}
+
+nav {
+  background-color: #243b53;
+  padding: 10px 20px;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover,
+nav a.active {
+  text-decoration: underline;
+  color: #f7941e; /* Commit orange */
+}
+
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Dashboard Panel Styles */
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.panel {
+  background: white;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.panel:hover {
+  transform: scale(1.01);
+}
+
+.panel h3 {
+  margin-top: 0;
+  color: #1c2b39;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"],
+textarea,
+select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+button {
+  background-color: #f7941e; /* Commit orange */
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #e68310;
+}
+
+/* Success messages */
+.success-message {
+  display: none;
+  color: green;
+  font-weight: bold;
+}
+
+/* Document Upload Styles */
+#uploaded-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+#uploaded-list li {
+  background-color: #e8f0fe;
+  padding: 8px;
+  margin: 4px 0;
+  border-left: 5px solid #1c2b39;
+  border-radius: 4px;
+}
