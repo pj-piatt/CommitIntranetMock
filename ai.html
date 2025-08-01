@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ask Commit AI – Virtual Assistant</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/scripts.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
+    <h1>Ask Commit AI</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="shoutouts.html">Shoutouts</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+        <li><a href="ai.html" class="active">Ask AI</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="widget">
+      <h2>Virtual Assistant</h2>
+      <div class="ai-widget">
+        <label for="ai-input">Ask your question below:</label>
+        <textarea id="ai-input" rows="4" placeholder="Example: 'What’s the PTO policy?'"></textarea>
+        <button onclick="submitAIQuestion()">Ask</button>
+        <div id="ai-response" class="ai-response"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 The Commit Partnership. All rights reserved.</p>
+  </footer>
+</body>
+</html>
