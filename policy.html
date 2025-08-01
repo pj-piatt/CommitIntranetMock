@@ -1,1 +1,69 @@
-<!-- Placeholder for policy.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Policy | Commit Intranet</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="scripts/upload-sim.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
+    <h1>Commit Intranet Hub</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="shoutouts.html">Shoutouts</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+        <li><a href="policy.html" class="active">Policy</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Policy Department</h2>
+
+    <section class="panel">
+      <h3>Welcome to Policy</h3>
+      <p>The Policy team leads initiatives that drive equity, access, and data-informed solutions. Explore our latest publications, upload drafts for review, and stay connected with team updates.</p>
+    </section>
+
+    <section class="panel">
+      <h3>Upload Policy Documents</h3>
+      <form id="upload-form">
+        <label for="fileInput">Upload draft or resource:</label>
+        <input type="file" id="fileInput" name="fileInput" />
+        <button type="submit">Upload</button>
+        <p class="success-message" id="upload-success">File uploaded successfully (simulated)!</p>
+      </form>
+      <ul id="uploaded-list"></ul>
+    </section>
+
+    <section class="panel">
+      <h3>Recent Policy Highlights</h3>
+      <ul>
+        <li><strong>July 31:</strong> New Charter Policy Analysis Released</li>
+        <li><strong>July 22:</strong> Research on Teacher Impact Published</li>
+        <li><strong>July 10:</strong> Stakeholder Roundtable Scheduled</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h3>Quick Access</h3>
+      <ul>
+        <li><a href="documents.html">All Policy Documents</a></li>
+        <li><a href="wiki.html">Policy Wiki Entries</a></li>
+        <li><a href="calendar.html">Upcoming Public Events</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 The Commit Partnership. All rights reserved.</p>
+  </footer>
+</body>
+</html>
