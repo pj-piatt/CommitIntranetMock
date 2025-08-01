@@ -232,3 +232,19 @@ button:hover {
 .department-tabs button:hover {
   background-color: #f7941e;
 }
+/* AI Button Style */
+.button-link {
+  display: inline-block;
+  background-color: #0078d4;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.button-link:hover {
+  background-color: #005fa3;
+}
+
