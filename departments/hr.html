@@ -3,102 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Human Resources</title>
+  <title>Human Resources | Commit Intranet</title>
   <link rel="stylesheet" href="../css/styles.css" />
-
-  <style>
-    .calendar-container {
-      max-width: 800px;
-      margin: 2rem auto;
-      background: #fff;
-      border-radius: 8px;
-      padding: 1rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-    }
-
-    .day {
-      text-align: center;
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      min-height: 70px;
-    }
-
-    .day.today {
-      background-color: #f5faff;
-      border: 2px solid #0078d4;
-      font-weight: bold;
-    }
-
-    .event {
-      font-size: 0.75rem;
-      margin-top: 5px;
-      color: #444;
-    }
-  </style>
+  <script defer src="../js/scripts.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Human Resources</h1>
-    <nav><a href="../index.html">← Back to Dashboard</a></nav>
-  </header>
-  <main>
-    <section class="widget">
-      <h2>Upcoming Birthdays</h2>
-      <ul>
-        <li>Aug 5 - Jane Doe</li>
-        <li>Aug 12 - Mike Smith</li>
-      </ul>
-    </section>
-
-    <section class="widget">
-      <h2>PTO Calendar</h2>
-      <div class="calendar-container">
-        <div class="calendar-header">
-          <h3 id="month-year"></h3>
-          <button onclick="prevMonth()">←</button>
-          <button onclick="nextMonth()">→</button>
-        </div>
-        <div class="calendar-grid" id="calendar-grid"></div>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Department Navigation">
+      <div class="sidebar-header">
+        <img src="../assets/commit-logo.png" alt="Commit Logo" class="sidebar-logo" />
+        <form class="sidebar-search" role="search" aria-label="Site Search">
+          <input type="text" placeholder="Search the intranet..." />
+        </form>
+        <h2>Departments</h2>
       </div>
-    </section>
+      <nav>
+        <ul>
+          <li><a href="hr.html" class="active">👥 HR</a></li>
+          <li><a href="it.html">💻 IT Support</a></li>
+          <li><a href="operations.html">📦 Operations</a></li>
+          <li><a href="policy.html">📜 Policy</a></li>
+          <li><a href="development.html">💡 Development</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-    <section class="widget">
-      <h2>PTO Request Form</h2>
-      <form id="pto-form">
-        <label>Name: <input type="text" name="name" required /></label>
-        <label>Start Date: <input type="date" name="start" required /></label>
-        <label>End Date: <input type="date" name="end" required /></label>
-        <button type="submit">Submit Request</button>
-        <p id="pto-success" style="display:none; color:green;">Request submitted successfully!</p>
-      </form>
-    </section>
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="site-header">
+        <h1>Human Resources</h1>
+        <nav class="topnav">
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../news.html">News</a></li>
+            <li><a href="../calendar.html">Calendar</a></li>
+            <li><a href="../documents.html">Documents</a></li>
+            <li><a href="../shoutouts.html">Shoutouts</a></li>
+            <li><a href="../wiki.html">Wiki</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <section class="widget">
-      <h2>HR Documents</h2>
-      <ul>
-        <li><a href="#">Employee Handbook.pdf</a></li>
-        <li><a href="#">Benefits Overview.pdf</a></li>
-      </ul>
-    </section>
-  </main>
+      <main class="container">
+        <section class="panel">
+          <h2>Upcoming Birthdays</h2>
+          <ul>
+            <li>Aug 5 - Jane Doe</li>
+            <li>Aug 12 - Mike Smith</li>
+          </ul>
+        </section>
 
-  <script src="../js/scripts.js"></script>
+        <section class="panel">
+          <h2>PTO Calendar</h2>
+          <div class="calendar-container">
+            <div class="calendar-header">
+              <h3 id="month-year"></h3>
+              <button onclick="prevMonth()">←</button>
+              <button onclick="nextMonth()">→</button>
+            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>PTO Request Form</h2>
+          <form id="pto-form">
+            <label>Name: <input type="text" name="name" required /></label>
+            <label>Start Date: <input type="date" name="start" required /></label>
+            <label>End Date: <input type="date" name="end" required /></label>
+            <button type="submit">Submit Request</button>
+            <p id="pto-success" style="display:none; color:green;">Request submitted successfully!</p>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>HR Documents</h2>
+          <ul>
+            <li><a href="#">Employee Handbook.pdf</a></li>
+            <li><a href="#">Benefits Overview.pdf</a></li>
+          </ul>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Calendar Script -->
   <script>
-    // Calendar Logic
     const calendarGrid = document.getElementById("calendar-grid");
     const monthYear = document.getElementById("month-year");
     let currentDate = new Date();
@@ -119,7 +114,6 @@
       calendarGrid.innerHTML = "";
       monthYear.textContent = `${date.toLocaleString("default", { month: "long" })} ${year}`;
 
-      // Day headers
       ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach(day => {
         const div = document.createElement("div");
         div.className = "day";
