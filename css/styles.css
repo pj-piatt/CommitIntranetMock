@@ -1,296 +1,407 @@
-/* styles.css – Complete Stylesheet for Commit Intranet Hub */
+/* styles.css – Complete Stylesheet for Fully Functional Intranet Dashboard */
 
 /* Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
+  margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f6f9;
   color: #333;
-  line-height: 1.6;
 }
 
-a {
+h1, h2, h3 {
   color: #1c2b39;
-  text-decoration: none;
 }
 
-ul {
+header, .site-header {
+  background-color: #1c2b39;
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+header img, .site-header .logo {
+  height: 48px;
+}
+
+nav {
+  background-color: #243b53;
+  padding: 10px 20px;
+  display: flex;
+  gap: 20px;
+}
+
+nav a, .site-header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover,
+nav a.active,
+.site-header nav ul li a:hover,
+.site-header nav ul li a.active {
+  text-decoration: underline;
+  color: #f7941e;
+}
+
+.site-header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Panels & Widgets */
+.panel-grid, .dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.panel, .widget {
+  background: white;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.panel:hover {
+  transform: scale(1.01);
+}
+
+.panel h3 {
+  margin-top: 0;
+  color: #1c2b39;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"],
+textarea,
+select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+button {
+  background-color: #f7941e;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #e68310;
+}
+
+.success-message {
+  display: none;
+  color: green;
+  font-weight: bold;
+}
+
+/* Upload Styles */
+.uploaded-list, #uploaded-list {
   list-style: none;
   padding-left: 0;
 }
 
-/* Header */
-.site-header {
-  background-color: #fff;
-  padding: 1rem;
-  border-bottom: 1px solid #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.uploaded-list li, #uploaded-list li {
+  background-color: #e8f0fe;
+  padding: 8px;
+  margin: 4px 0;
+  border-left: 5px solid #1c2b39;
+  border-radius: 4px;
 }
 
-.logo {
-  height: 40px;
-  margin-right: 1rem;
+.dropzone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  border-radius: 6px;
+  background-color: #fafafa;
+  transition: border-color 0.3s;
 }
 
-.site-header h1 {
-  font-size: 1.5rem;
-  color: #1c2b39;
-  flex: 1;
+.dropzone.dragover {
+  border-color: #1c2b39;
+  background-color: #e8f0fe;
 }
 
-/* Navigation */
-nav ul {
-  display: flex;
-  gap: 1rem;
-}
-
-nav a {
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-}
-
-nav a:hover,
-nav a.active {
-  background-color: #f7941e;
-  color: white;
-}
-
-/* Main Layout */
-main.container {
-  padding: 2rem;
-}
-
-.panel-grid {
+/* Departments Grid */
+.department-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
 }
 
-.panel {
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+.department-tile {
+  background-color: #ffffff;
+  border: 1px solid #dbe2ea;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+  color: #1c2b39;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
+}
+
+.department-tile:hover {
+  background-color: #f4f6f9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.department-tile .icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Calendar */
+.calendar {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.calendar li {
+  padding: 6px 0;
+  border-bottom: 1px solid #ddd;
 }
 
 /* Footer */
 .site-footer {
   text-align: center;
-  padding: 1rem;
-  background-color: #1c2b39;
-  color: white;
-  margin-top: 2rem;
+  padding: 20px;
+  background-color: #f4f4f4;
+  color: #666;
+  font-size: 0.9rem;
 }
 
-/* Forms */
-form label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-form input,
-form textarea,
-form select {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.25rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-form button {
-  margin-top: 1.5rem;
-  background-color: #1c2b39;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: #f7941e;
-}
-
-.success-message {
-  margin-top: 1rem;
-  color: green;
-  display: none;
-}
-
-/* Wiki Layout */
-.wiki-layout {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.wiki-sidebar {
-  flex: 1 1 250px;
-  max-width: 250px;
-  background: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  position: sticky;
-  top: 90px;
-  height: fit-content;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.wiki-main-content {
-  flex: 3;
-}
-
-/* Search Box */
-.search-box input {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 1rem;
-}
-
-/* Wiki Articles */
-.wiki-article-list .article {
-  padding: 1rem;
-  background: #fff;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-  transition: background 0.3s;
-  cursor: pointer;
-}
-
-.wiki-article-list .article:hover {
-  background-color: #f0f0f0;
-}
-
-/* Tags / Chips */
-.tag {
-  display: inline-block;
-  background-color: #f7941e;
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  margin-right: 0.5rem;
-  cursor: pointer;
-}
-
-.tag:hover {
-  opacity: 0.8;
-}
-
-/* Feedback Buttons */
-.article-feedback {
-  margin-top: 0.5rem;
-}
-
-.article-feedback button {
-  margin-right: 0.5rem;
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
-.article-feedback button:hover {
-  color: #f7941e;
-}
-
-/* Emoji Picker */
-.emoji-picker {
-  display: flex;
-  flex-wrap: wrap;
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 0.5rem;
-  border-radius: 8px;
-  margin-top: 0.5rem;
-  gap: 0.25rem;
-}
-
-.emoji-picker button {
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-}
-
-/* Upload Section */
-.dropzone {
-  padding: 1rem;
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  text-align: center;
-  margin-top: 1rem;
-  transition: background-color 0.2s;
-}
-
-.dropzone.dragover {
-  background-color: #f9f9f9;
-}
-
-.uploaded-list {
-  margin-top: 1rem;
-}
-
-.uploaded-list li {
-  background: #eee;
-  padding: 0.5rem;
-  margin-bottom: 0.25rem;
-  border-radius: 4px;
-}
-
-/* Department Tabs */
+/* Tabs */
 .department-tabs {
   display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .department-tabs button {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  background: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.department-tabs button.active {
-  background: #1c2b39;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #243b53;
   color: white;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
+.department-tabs button.active,
+.department-tabs button:hover {
+  background-color: #f7941e;
+}
+/* AI Button Style */
+.button-link {
+  display: inline-block;
+  background-color: #0078d4;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.button-link:hover {
+  background-color: #005fa3;
+}
+/* Sidebar Layout */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  width: 240px;
+  background-color: #1c2b39;
+  color: white;
+  flex-shrink: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.sidebar-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.sidebar h2 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #f7941e;
+  text-align: center;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 12px;
+}
+
+.sidebar nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  padding: 10px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  background-color: #2d3f54;
+  color: #f7941e;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Adjust header to stay within main content */
+.site-header {
+  background-color: transparent;
+  color: #1c2b39;
+  padding: 0;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.topnav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 20px;
+}
+
+.topnav ul li a {
+  color: #1c2b39;
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.topnav ul li a.active,
+.topnav ul li a:hover {
+  border-bottom: 2px solid #f7941e;
+  color: #f7941e;
+}
+
+/* Responsive Sidebar */
+@media screen and (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+
+  .sidebar nav ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+
+  .sidebar nav ul li {
+    margin: 0 10px;
+  }
+
+  .sidebar-header {
+    flex-direction: row;
+    gap: 15px;
+    margin-bottom: 0;
+  }
+
+  .sidebar h2 {
+    font-size: 1rem;
+  }
+
+  .main-content {
+    padding: 16px;
+  }
+
   .site-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
   }
 
-  nav ul {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .wiki-layout {
-    flex-direction: column;
-  }
-
-  .wiki-sidebar {
-    position: relative;
-    top: 0;
-    max-width: 100%;
+  .topnav ul {
+    flex-wrap: wrap;
+    gap: 10px;
   }
 }
+
