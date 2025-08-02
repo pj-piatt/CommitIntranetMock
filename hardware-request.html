@@ -8,62 +8,78 @@
   <script src="js/scripts.js" defer></script>
 </head>
 <body>
-  <div class="sidebar">
-    <div class="sidebar-header">
-      <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="sidebar-logo" />
-      <input type="text" id="sidebarSearch" placeholder="Search..." onkeyup="filterSidebar()" />
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" aria-label="Department Navigation">
+      <div class="sidebar-header">
+        <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="sidebar-logo" />
+        <form class="sidebar-search" role="search" aria-label="Site Search">
+          <input type="text" placeholder="Search the intranet..." />
+        </form>
+        <h2>Departments</h2>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="departments/hr.html">👥 HR</a></li>
+          <li><a href="departments/it.html">💻 IT Support</a></li>
+          <li><a href="departments/operations.html">📦 Operations</a></li>
+          <li><a href="departments/policy.html">📜 Policy</a></li>
+          <li><a href="departments/development.html">💡 Development</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="site-header">
+        <h1>Hardware Request</h1>
+        <nav class="topnav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="calendar.html">Calendar</a></li>
+            <li><a href="documents.html">Documents</a></li>
+            <li><a href="shoutouts.html">Shoutouts</a></li>
+            <li><a href="wiki.html">Wiki</a></li>
+            <li><a href="hardware-request.html" class="active">Hardware Request</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main class="container">
+        <form id="hardware-form" class="standard-form">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="department">Department</label>
+          <select id="department" name="department" required>
+            <option value="">-- Select --</option>
+            <option value="IT">IT</option>
+            <option value="HR">Human Resources</option>
+            <option value="Operations">Operations</option>
+            <option value="Policy">Policy</option>
+            <option value="Development">Development</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label for="hardware">Requested Hardware</label>
+          <input type="text" id="hardware" name="hardware" placeholder="e.g., MacBook Pro, monitor, headset" required />
+
+          <label for="justification">Justification / Comments</label>
+          <textarea id="justification" name="justification" rows="4" placeholder="Explain why the hardware is needed" required></textarea>
+
+          <button type="submit">Submit Request</button>
+          <p id="hardware-success" class="upload-success">Request submitted (simulation only).</p>
+        </form>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
     </div>
-    <nav class="sidebar-nav">
-      <ul>
-        <li><a href="index.html">🏠 Home</a></li>
-        <li><a href="news.html">🗞️ News</a></li>
-        <li><a href="calendar.html">📅 Calendar</a></li>
-        <li><a href="documents.html">📁 Documents</a></li>
-        <li><a href="shoutouts.html">🎉 Shoutouts</a></li>
-        <li><a href="wiki.html">📚 Wiki</a></li>
-        <li><a href="hardware.html" class="active">💻 Hardware Request</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <div class="main-content">
-    <header class="main-header">
-      <h1>Hardware Request Form</h1>
-    </header>
-
-    <main class="container">
-      <form id="hardware-form" class="standard-form">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required />
-
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required />
-
-        <label for="department">Department</label>
-        <select id="department" name="department" required>
-          <option value="">-- Select --</option>
-          <option value="IT">IT</option>
-          <option value="HR">Human Resources</option>
-          <option value="Operations">Operations</option>
-          <option value="Policy">Policy</option>
-          <option value="Development">Development</option>
-          <option value="Other">Other</option>
-        </select>
-
-        <label for="hardware">Requested Hardware</label>
-        <input type="text" id="hardware" name="hardware" placeholder="e.g., MacBook Pro, monitor, headset" required />
-
-        <label for="justification">Justification / Comments</label>
-        <textarea id="justification" name="justification" rows="4" placeholder="Explain why the hardware is needed" required></textarea>
-
-        <button type="submit">Submit Request</button>
-        <p id="hardware-success" class="upload-success">Request submitted (simulation only).</p>
-      </form>
-    </main>
-
-    <footer class="site-footer">
-      <p>© 2025 The Commit Partnership. All rights reserved.</p>
-    </footer>
   </div>
 </body>
 </html>
