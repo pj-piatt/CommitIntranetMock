@@ -59,6 +59,67 @@
         <h1>Policy Department</h1>
         <nav class="topnav">
           <ul>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Policy | Commit Intranet</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/ai-assistant.css" />
+  <style>
+    .uploaded-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1rem;
+    }
+
+    .uploaded-list li {
+      background-color: #e8f0fe;
+      padding: 8px 12px;
+      margin: 4px 0;
+      border-left: 5px solid #1c2b39;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .uploaded-list li::before {
+      content: "📎";
+      font-size: 1.1rem;
+    }
+  </style>
+  <script defer src="scripts/upload-sim.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Department Navigation">
+      <div class="sidebar-header">
+        <img src="../assets/commit-logo-white.svg" alt="Commit Partnership Logo" class="sidebar-logo" />
+       
+        
+      </div>
+      <nav>
+        <ul>
+          <h2>Departments</h2>
+          <li><a href="hr.html">👥 HR</a></li>
+          <li><a href="it.html">💻 IT Support</a></li>
+          <li><a href="operations.html">📦 Operations</a></li>
+          <li><a href="departments/policy.html" class="active">📜 Policy</a></li>
+          <li><a href="development.html">💡 Development</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="site-header">
+        <h1>Policy Department</h1>
+        <nav class="topnav">
+          <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="news.html">News</a></li>
             <li><a href="calendar.html">Calendar</a></li>
@@ -66,6 +127,101 @@
             <li><a href="shoutouts.html">Shoutouts</a></li>
             <li><a href="wiki.html">Wiki</a></li>
             <li><a href="../policy.html" class="active">Policy</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main class="container">
+        <section class="panel">
+          <h3>Welcome to Policy</h3>
+          <p>The Policy team leads initiatives that drive equity, access, and data-informed solutions. Explore our latest publications, upload drafts for review, and stay connected with team updates.</p>
+        </section>
+
+        <section class="panel">
+          <h3>Upload Policy Documents</h3>
+          <form id="upload-form">
+            <label for="fileInput">Upload draft or resource:</label>
+            <input type="file" id="fileInput" name="fileInput" />
+            <button type="submit">Upload</button>
+            <p class="success-message" id="upload-success" style="display: none;">✔ File uploaded successfully (simulated)!</p>
+          </form>
+          <ul id="uploaded-list" class="uploaded-list"></ul>
+        </section>
+
+        <section class="panel">
+          <h3>Recent Policy Highlights</h3>
+          <ul>
+            <li><strong>July 31:</strong> New Charter Policy Analysis Released</li>
+            <li><strong>July 22:</strong> Research on Teacher Impact Published</li>
+            <li><strong>July 10:</strong> Stakeholder Roundtable Scheduled</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3>Quick Access</h3>
+          <ul>
+            <li><a href="documents.html">📁 View All Policy Documents</a></li>
+            <li><a href="wiki.html">📚 Browse Policy Wiki Articles</a></li>
+            <li><a href="calendar.html">📆 Upcoming Public Events</a></li>
+          </ul>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="../js/scripts.js" defer></script>
+
+  <!-- Upload Simulation -->
+  <script>
+    document.getElementById("upload-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const fileInput = document.getElementById("fileInput");
+      const successMsg = document.getElementById("upload-success");
+      const uploadedList = document.getElementById("uploaded-list");
+
+      if (fileInput.files.length > 0) {
+        const fileName = fileInput.files[0].name;
+
+        // Add file to visual list
+        const listItem = document.createElement("li");
+        listItem.textContent = fileName;
+        uploadedList.insertBefore(listItem, uploadedList.firstChild);
+
+        // Show success message briefly
+        successMsg.style.display = "block";
+        setTimeout(() => {
+          successMsg.style.display = "none";
+        }, 2000);
+
+        fileInput.value = "";
+      }
+    });
+  </script>
+  
+  <!-- AI Assistant Bubble -->
+<div id="ai-chat-widget">
+  <button id="ai-toggle" aria-label="Open AI Assistant">🤖</button>
+  <div id="ai-chat-window" style="display: none;">
+    <div class="ai-chat-header">
+      <span>Commit AI Assistant</span>
+      <button id="ai-close">×</button>
+    </div>
+    <div class="ai-chat-body" id="ai-messages"></div>
+    <textarea id="ai-user-input" placeholder="Ask a question..."></textarea>
+    <button id="ai-send">Send</button>
+  </div>
+</div>
+
+<script src="../js/ai-assistant.js" defer></script>
+  
+
+</body>
+</html>
           </ul>
         </nav>
       </header>
