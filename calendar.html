@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calendar – Commit Intranet Hub</title>
   <link rel="stylesheet" href="css/styles.css"/>
+
   <style>
     .calendar-container {
       max-width: 800px;
@@ -50,36 +51,64 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
-    <h1>Commit Intranet Hub</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="calendar.html" class="active">Calendar</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href="shoutouts.html">Shoutouts</a></li>
-        <li><a href="wiki.html">Wiki</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <div class="calendar-container">
-      <div class="calendar-header">
-        <h2 id="month-year"></h2>
-        <button onclick="prevMonth()">←</button>
-        <button onclick="nextMonth()">→</button>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Department Navigation">
+      <div class="sidebar-header">
+        <img src="assets/commit-logo.png" alt="Commit Logo" class="sidebar-logo" />
+        <form class="sidebar-search" role="search" aria-label="Site Search">
+          <input type="text" placeholder="Search the intranet..." />
+        </form>
+        <h2>Departments</h2>
       </div>
-      <div class="calendar-grid" id="calendar-grid"></div>
+      <nav>
+        <ul>
+          <li><a href="departments/hr.html">👥 HR</a></li>
+          <li><a href="departments/it.html">💻 IT Support</a></li>
+          <li><a href="departments/operations.html">📦 Operations</a></li>
+          <li><a href="departments/policy.html">📜 Policy</a></li>
+          <li><a href="departments/development.html">💡 Development</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="site-header">
+        <h1>Calendar</h1>
+        <nav class="topnav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="calendar.html" class="active">Calendar</a></li>
+            <li><a href="documents.html">Documents</a></li>
+            <li><a href="shoutouts.html">Shoutouts</a></li>
+            <li><a href="wiki.html">Wiki</a></li>
+            <li><a href="ai.html">Ask AI</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <h2 id="month-year"></h2>
+            <div>
+              <button onclick="prevMonth()">←</button>
+              <button onclick="nextMonth()">→</button>
+            </div>
+          </div>
+          <div class="calendar-grid" id="calendar-grid"></div>
+        </div>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
     </div>
-  </main>
+  </div>
 
-  <footer class="site-footer">
-    <p>© 2025 The Commit Partnership. All rights reserved.</p>
-  </footer>
-
+  <!-- JavaScript Calendar Logic -->
   <script>
     const calendarGrid = document.getElementById("calendar-grid");
     const monthYear = document.getElementById("month-year");
@@ -154,6 +183,18 @@
     }
 
     renderCalendar(currentDate);
+  </script>
+
+  <!-- Sidebar Search Logic -->
+  <script>
+    document.querySelector('.sidebar-search input').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      const widgets = document.querySelectorAll('.widget');
+      widgets.forEach(widget => {
+        const text = widget.innerText.toLowerCase();
+        widget.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
   </script>
 </body>
 </html>
