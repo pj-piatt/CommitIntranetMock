@@ -14,8 +14,8 @@ async function loadPartial(id, url) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadPartial("sidebar", "partials/sidebar.html");
-  loadPartial("topnav", "partials/header.html");
-  loadPartial("footer", "partials/footer.html");
-  loadPartial("ai-widget", "partials/ai-widget.html");
+  loadPartial("sidebar", "../partials/sidebar.html");
+  loadPartial("topnav", "../partials/header.html");
+  loadPartial("footer", "../partials/footer.html");
+  loadPartial("ai-widget", "../partials/ai-widget.html");
 });
