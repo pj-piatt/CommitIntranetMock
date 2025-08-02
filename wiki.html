@@ -5,13 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Company Wiki | Commit Intranet Hub</title>
   <link rel="stylesheet" href="css/styles.css" />
-  <script defer src="scripts/wiki.js"></script>
+  <link rel="stylesheet" href="css/ai-assistant.css" />
+  <style>
+    .tag-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .tag-chip {
+      background-color: #e0e0e0;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .tag-chip.active,
+    .tag-chip:hover {
+      background-color: #f7941e;
+      color: white;
+    }
+    .article {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      margin-bottom: 16px;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .article:hover {
+      transform: translateY(-2px);
+    }
+    .article h3 {
+      margin-top: 0;
+    }
+    .article-content {
+      display: none;
+      margin-top: 10px;
+    }
+    .tags {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      background-color: #1c2b39;
+      color: white;
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      border-radius: 3px;
+    }
+    .feedback {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: #333;
+    }
+    .feedback button {
+      margin-left: 8px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <div class="layout">
-    <!-- Sidebar Navigation -->
     <aside class="sidebar sticky">
       <img src="assets/commit-logo-white.svg" alt="Commit Logo" class="logo" />
+    
       <nav>
         <ul>
           <h2>Departments</h2>
@@ -23,85 +86,152 @@
           <li><a href="wiki.html" class="active">Wiki</a></li>
         </ul>
       </nav>
-
-      <!-- Sticky Category Filters -->
-      <div class="sidebar-categories">
-        <h4>Categories</h4>
-        <ul>
-          <li><button class="tag-chip" data-tag="IT">IT</button></li>
-          <li><button class="tag-chip" data-tag="HR">HR</button></li>
-          <li><button class="tag-chip" data-tag="Onboarding">Onboarding</button></li>
-          <li><button class="tag-chip" data-tag="Tools">Tools</button></li>
-        </ul>
-      </div>
     </aside>
 
-   <main class="main-content">
-  <header class="site-header">
-    <h1>Company Wiki</h1>
-    <nav class="topnav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href="shoutouts.html">Shoutouts</a></li>
-        <li><a href="wiki.html" class="active">Wiki</a></li>
-        <li><a href="ai.html">Ask AI</a></li>
-      </ul>
-    </nav>
-  </header>
+    <div class="main-content">
+      <header class="site-header">
+        <h1>Company Wiki</h1>
+        <nav class="topnav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="calendar.html">Calendar</a></li>
+            <li><a href="documents.html">Documents</a></li>
+            <li><a href="shoutouts.html">Shoutouts</a></li>
+            <li><a href="wiki.html" class="active">Wiki</a></li>
+            <li><a href="ai.html">Ask AI</a></li>
+          </ul>
+        </nav>
+      </header>
+
       <p>Explore internal resources, policies, how-tos, and FAQs. Search and filter articles below.</p>
 
       <input type="text" id="wiki-search" placeholder="Search articles..." class="search-bar" />
 
-      <section class="wiki-grid" id="wiki-articles">
-        <!-- Each .article is a real link with feedback -->
-        <a href="wiki-articles/reset-password.html" class="article" data-tags="IT,Tools">
-          <h3>How to Reset Your Password</h3>
-          <p>Visit the password reset portal or contact IT for MFA support.</p>
-          <div class="feedback">
-            <span>Was this helpful?</span>
-            <button class="thumbs-up">👍</button>
-            <button class="thumbs-down">👎</button>
-          </div>
-        </a>
+      <div class="tag-filters">
+        <button class="tag-chip active" data-tag="all">All</button>
+        <button class="tag-chip" data-tag="IT">IT</button>
+        <button class="tag-chip" data-tag="HR">HR</button>
+        <button class="tag-chip" data-tag="Onboarding">Onboarding</button>
+        <button class="tag-chip" data-tag="Tools">Tools</button>
+      </div>
 
-        <a href="wiki-articles/onboarding-checklist.html" class="article" data-tags="HR,Onboarding">
-          <h3>New Hire Onboarding Checklist</h3>
-          <p>Get started with accounts, tools, HR paperwork, and Commit culture.</p>
-          <div class="feedback">
-            <span>Was this helpful?</span>
-            <button class="thumbs-up">👍</button>
-            <button class="thumbs-down">👎</button>
-          </div>
-        </a>
+      <section class="wiki-grid" id="wiki-articles"></section>
 
-        <a href="wiki-articles/software-request.html" class="article" data-tags="IT,Tools">
-          <h3>Submit a Software Access Request</h3>
-          <p>Instructions and form to request software installation or license access.</p>
-          <div class="feedback">
-            <span>Was this helpful?</span>
-            <button class="thumbs-up">👍</button>
-            <button class="thumbs-down">👎</button>
-          </div>
-        </a>
+      <section class="panel" style="margin-top: 2rem;">
+        <h2>📄 Submit a New Wiki Article</h2>
+        <form id="wiki-submission-form">
+          <label for="article-title">Title</label>
+          <input type="text" id="article-title" name="article-title" required />
 
-        <a href="wiki-articles/pto-policy.html" class="article" data-tags="HR">
-          <h3>Understanding PTO & Leave Policies</h3>
-          <p>Review our updated policies on vacation, sick time, and parental leave.</p>
-          <div class="feedback">
-            <span>Was this helpful?</span>
-            <button class="thumbs-up">👍</button>
-            <button class="thumbs-down">👎</button>
-          </div>
-        </a>
+          <label for="article-content">Content</label>
+          <textarea id="article-content" name="article-content" rows="6" required placeholder="Write the article content here..."></textarea>
+
+          <label for="article-tags">Tags (comma-separated)</label>
+          <input type="text" id="article-tags" name="article-tags" placeholder="e.g., IT, Onboarding" />
+
+          <button type="submit">Submit Article</button>
+          <p class="success-message" id="submission-success" style="display: none;">✅ Thank you! Your article has been submitted for review.</p>
+        </form>
       </section>
-    </main>
+
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
+    </div>
   </div>
 
-  <footer class="site-footer">
-    <p>© 2025 The Commit Partnership. All rights reserved.</p>
-  </footer>
+  <div id="ai-chat-widget">
+    <button id="ai-toggle" aria-label="Open AI Assistant">🤖</button>
+    <div id="ai-chat-window" style="display: none;">
+      <div class="ai-chat-header">
+        <span>Commit AI Assistant</span>
+        <button id="ai-close">×</button>
+      </div>
+      <div class="ai-chat-body" id="ai-messages"></div>
+      <textarea id="ai-user-input" placeholder="Ask a question..."></textarea>
+      <button id="ai-send">Send</button>
+    </div>
+  </div>
+
+  <script>
+    let aiKnowledge = [];
+
+    fetch('faq.json')
+      .then(response => response.json())
+      .then(data => aiKnowledge = data);
+
+    document.getElementById('ai-send').addEventListener('click', () => {
+      const input = document.getElementById('ai-user-input');
+      const aiMessages = document.getElementById('ai-messages');
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      const userDiv = document.createElement('div');
+      userDiv.textContent = `You: ${userText}`;
+      aiMessages.appendChild(userDiv);
+
+      const aiDiv = document.createElement('div');
+      aiDiv.textContent = 'Commit AI: Thinking...';
+      aiMessages.appendChild(aiDiv);
+
+      const match = aiKnowledge.find(entry =>
+        entry.keywords.some(kw => userText.toLowerCase().includes(kw))
+      );
+      aiDiv.textContent = `Commit AI: ${match ? match.answer : "I'm not sure, but try searching the Wiki or reaching out to HR/IT."}`;
+
+      input.value = '';
+      aiMessages.scrollTop = aiMessages.scrollHeight;
+    });
+
+    document.getElementById('ai-toggle').addEventListener('click', () => {
+      document.getElementById('ai-chat-window').style.display = 'block';
+    });
+    document.getElementById('ai-close').addEventListener('click', () => {
+      document.getElementById('ai-chat-window').style.display = 'none';
+    });
+
+    document.getElementById('wiki-submission-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const title = document.getElementById('article-title').value;
+      const content = document.getElementById('article-content').value;
+      const tags = document.getElementById('article-tags').value.split(',').map(tag => tag.trim());
+
+      const section = document.getElementById('wiki-articles');
+      const card = document.createElement('div');
+      card.className = 'article';
+      card.dataset.tags = tags.join(',');
+      card.innerHTML = `<h3>${title}</h3><div class="article-content"><p>${content}</p><div class="tags">${tags.map(t => `<span class='tag'>${t}</span>`).join('')}</div><div class="feedback">Was this helpful?<button onclick=\"alert('Thanks!')\">👍</button><button onclick=\"alert('We\'ll improve it!')\">👎</button></div></div>`;
+      section.appendChild(card);
+      card.querySelector('h3').addEventListener('click', () => {
+        const content = card.querySelector('.article-content');
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+
+      this.reset();
+      document.getElementById('submission-success').style.display = 'block';
+      document.getElementById('submission-success').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.querySelectorAll('.tag-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.tag-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const tag = chip.dataset.tag.toLowerCase();
+        document.querySelectorAll('.article').forEach(article => {
+          const tags = article.dataset.tags.toLowerCase();
+          article.style.display = tag === 'all' || tags.includes(tag) ? 'block' : 'none';
+        });
+      });
+    });
+
+    document.getElementById('wiki-search').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      document.querySelectorAll('.article').forEach(article => {
+        const text = article.innerText.toLowerCase();
+        article.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+  </script>
 </body>
 </html>
