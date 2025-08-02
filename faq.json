@@ -1,0 +1,90 @@
+[
+  {
+    "keywords": [
+      "reset",
+      "password",
+      "login",
+      "access"
+    ],
+    "answer": "To reset your password or get login help, please contact IT Support through the Help Desk form in the intranet or email support@commitpartnership.org."
+  },
+  {
+    "keywords": [
+      "pto",
+      "vacation",
+      "leave",
+      "paid time off"
+    ],
+    "answer": "Our PTO policy outlines vacation, sick leave, and other types of time off. You can review the full policy in the HR section of the Wiki."
+  },
+  {
+    "keywords": [
+      "mission",
+      "vision",
+      "about",
+      "organization"
+    ],
+    "answer": "The Commit Partnership works to ensure that all North Texas students receive a quality education, especially across early childhood, K-12, and postsecondary outcomes. Learn more at https://www.commitpartnership.org/about."
+  },
+  {
+    "keywords": [
+      "board",
+      "members",
+      "leadership"
+    ],
+    "answer": "You can view our Board Members and Leadership Team on our public site: https://www.commitpartnership.org/about/leadership."
+  },
+  {
+    "keywords": [
+      "software",
+      "tool",
+      "request"
+    ],
+    "answer": "To request software or tool access, use the Software Request form found on the intranet dashboard under Quick Links."
+  },
+  {
+    "keywords": [
+      "calendar",
+      "event",
+      "schedule",
+      "meeting"
+    ],
+    "answer": "You can view all upcoming events and organization-wide meetings on the intranet's Calendar page."
+  },
+  {
+    "keywords": [
+      "equity",
+      "data",
+      "dashboard",
+      "gap"
+    ],
+    "answer": "Commit Partnership leverages data dashboards to monitor equity gaps across race, income, and geography. For public insights, visit: https://www.commitpartnership.org/dashboard."
+  },
+  {
+    "keywords": [
+      "policy",
+      "legislation",
+      "advocacy",
+      "texas"
+    ],
+    "answer": "Our Policy team supports legislation that improves educational outcomes in Texas. Recent priorities can be found in the Policy section of the intranet or at https://www.commitpartnership.org/policy."
+  },
+  {
+    "keywords": [
+      "onboarding",
+      "new hire",
+      "orientation",
+      "training"
+    ],
+    "answer": "New employees should start with the Onboarding Checklist in the Wiki. It includes account setup, benefits info, and orientation resources."
+  },
+  {
+    "keywords": [
+      "ai",
+      "assistant",
+      "chatbot",
+      "help"
+    ],
+    "answer": "You can use the Commit AI Assistant to ask questions, find internal resources, or get directed to helpful pages across the intranet."
+  }
+]
