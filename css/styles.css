@@ -215,10 +215,77 @@ button:hover {
   background-color: #e68310;
 }
 
+/* Helpdesk-specific form card */
+.form-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 600px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.form-card label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.form-card input,
+.form-card select,
+.form-card textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-card button[type="submit"] {
+  margin-top: 1.5rem;
+  background-color: #1c2b39;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.form-card button[type="submit"]:hover {
+  background-color: #31435a;
+}
+
+/* Fake success message */
 .success-message {
   display: none;
-  color: green;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #e6f4ea;
+  color: #1a3e2b;
+  border-left: 4px solid #2d8a58;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* View ticket simulation button */
+.view-ticket-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #0073e6;
+  color: #fff;
+  text-decoration: none;
   font-weight: bold;
+  border-radius: 4px;
+  transition: background 0.2s ease-in-out;
+}
+
+.view-ticket-button:hover {
+  background-color: #005bb5;
 }
 
 /* Upload Styles */
@@ -385,6 +452,7 @@ button:hover {
     gap: 10px;
   }
 }
+
 /* Document File Entry */
 .file-entry {
   margin-bottom: 8px;
@@ -468,4 +536,3 @@ button:hover {
   border: 1px solid #ccc;
   border-radius: 6px;
 }
-
