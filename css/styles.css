@@ -491,5 +491,37 @@ button:hover {
   cursor: pointer;
   font-weight: bold;
 }
+.article {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+.article:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.article h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+.tags {
+  margin-top: 0.5rem;
+}
+.tag {
+  display: inline-block;
+  background-color: #e8f0fe;
+  color: #1c2b39;
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-right: 4px;
+  font-size: 0.75rem;
+}
+.feedback {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #555;
+}
 
 
