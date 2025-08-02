@@ -5,108 +5,315 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Documents | Commit Intranet Hub</title>
   <link rel="stylesheet" href="css/styles.css"/>
+  <style>
+    .file-entry {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .file-entry a {
+      font-weight: 500;
+      text-decoration: none;
+      color: #1c2b39;
+    }
+
+    .file-entry a:hover {
+      text-decoration: underline;
+    }
+
+    .file-meta {
+      font-size: 0.85rem;
+      color: #666;
+      flex: 1;
+    }
+
+    .download-btn {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      margin-left: auto;
+      cursor: pointer;
+      color: #0078d4;
+      transition: color 0.2s;
+    }
+
+    .download-btn:hover {
+      color: #005fa3;
+    }
+
+    .upload-success {
+      color: green;
+      font-size: 0.85rem;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .doc-tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tag-btn {
+      background-color: #f4f4f4;
+      border: 1px solid #ccc;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .tag-btn.active,
+    .tag-btn:hover {
+      background-color: #f7941e;
+      color: white;
+      border-color: #f7941e;
+    }
+
+    .search-bar {
+      margin: 20px 0;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
-    <h1>Commit Intranet Hub</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="documents.html" class="active">Documents</a></li>
-        <li><a href="shoutouts.html">Shoutouts</a></li>
-        <li><a href="wiki.html">Wiki</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main class="container">
-    <h2>Document Library</h2>
-    <p>Browse and upload internal resources across departments. This simulates file management for collaboration and compliance.</p>
-
-    <section class="panel-grid">
-
-      <div class="panel">
-        <h3>Human Resources</h3>
-        <ul id="hr-docs">
-          <li><a href="#">Employee Handbook.pdf</a></li>
-          <li><a href="#">PTO Policy 2025.docx</a></li>
-        </ul>
-        <form class="upload-form" data-list="hr-docs">
-          <input type="file" />
-          <button type="submit">Upload</button>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Department Navigation">
+      <div class="sidebar-header">
+        <img src="assets/commit-logo.png" alt="Commit Logo" class="sidebar-logo" />
+        <form class="sidebar-search" role="search" aria-label="Site Search">
+          <input type="text" placeholder="Search the intranet..." />
         </form>
+        <h2>Departments</h2>
       </div>
-
-      <div class="panel">
-        <h3>IT Department</h3>
-        <ul id="it-docs">
-          <li><a href="#">VPN Setup Guide.pdf</a></li>
-          <li><a href="#">Device Standards 2025.xlsx</a></li>
+      <nav>
+        <ul>
+          <li><a href="departments/hr.html">👥 HR</a></li>
+          <li><a href="departments/it.html">💻 IT Support</a></li>
+          <li><a href="departments/operations.html">📦 Operations</a></li>
+          <li><a href="departments/policy.html">📜 Policy</a></li>
+          <li><a href="development.html">💡 Development</a></li>
         </ul>
-        <form class="upload-form" data-list="it-docs">
-          <input type="file" />
-          <button type="submit">Upload</button>
-        </form>
-      </div>
+      </nav>
+    </aside>
 
-      <div class="panel">
-        <h3>Operations</h3>
-        <ul id="ops-docs">
-          <li><a href="#">Q3 Logistics Timeline.xlsx</a></li>
-        </ul>
-        <form class="upload-form" data-list="ops-docs">
-          <input type="file" />
-          <button type="submit">Upload</button>
-        </form>
-      </div>
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="site-header">
+        <h1>Documents</h1>
+        <nav class="topnav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="calendar.html">Calendar</a></li>
+            <li><a href="documents.html" class="active">Documents</a></li>
+            <li><a href="shoutouts.html">Shoutouts</a></li>
+            <li><a href="wiki.html">Wiki</a></li>
+            <li><a href="ai.html">Ask AI</a></li>
+          </ul>
+        </nav>
+      </header>
 
-      <div class="panel">
-        <h3>Policy</h3>
-        <ul id="policy-docs">
-          <li><a href="#">Education Funding Brief.pdf</a></li>
-        </ul>
-        <form class="upload-form" data-list="policy-docs">
-          <input type="file" />
-          <button type="submit">Upload</button>
-        </form>
-      </div>
+      <main>
+        <section class="widget">
+          <h2>Document Library</h2>
+          <p>Browse, filter, and upload internal resources across departments.</p>
 
-      <div class="panel">
-        <h3>Development</h3>
-        <ul id="dev-docs">
-          <li><a href="#">Donor List 2025.xlsx</a></li>
-        </ul>
-        <form class="upload-form" data-list="dev-docs">
-          <input type="file" />
-          <button type="submit">Upload</button>
-        </form>
-      </div>
+          <div class="search-bar">
+            <input type="text" id="doc-search" placeholder="Search all documents..." />
+          </div>
 
-    </section>
-  </main>
+          <div class="doc-tags">
+            <button class="tag-btn active" data-type="all">All</button>
+            <button class="tag-btn" data-type=".pdf">PDF</button>
+            <button class="tag-btn" data-type=".docx">DOCX</button>
+            <button class="tag-btn" data-type=".xlsx">XLSX</button>
+            <button class="tag-btn" data-type=".pptx">PPTX</button>
+          </div>
+        </section>
 
-  <footer class="site-footer">
-    <p>© 2025 The Commit Partnership. All rights reserved.</p>
-  </footer>
+        <section class="panel-grid">
+          <!-- HR -->
+          <div class="panel">
+            <h3>Human Resources</h3>
+            <div class="file-entry">
+              📝 <a href="#">Employee Handbook.pdf</a>
+              <span class="file-meta">Last updated: Jan 5, 2025</span>
+              <button class="download-btn">📥</button>
+            </div>
+            <div class="file-entry">
+              📝 <a href="#">PTO Policy 2025.docx</a>
+              <span class="file-meta">Last updated: Feb 15, 2025</span>
+              <button class="download-btn">📥</button>
+            </div>
+            <form class="upload-form">
+              <input type="file" />
+              <button type="submit">Upload</button>
+              <div class="upload-success">✔ File uploaded</div>
+            </form>
+          </div>
 
+          <!-- IT -->
+          <div class="panel">
+            <h3>IT Department</h3>
+            <div class="file-entry">
+              📄 <a href="#">VPN Setup Guide.pdf</a>
+              <span class="file-meta">Last updated: Mar 22, 2025</span>
+              <button class="download-btn">📥</button>
+            </div>
+            <div class="file-entry">
+              📊 <a href="#">Device Standards 2025.xlsx</a>
+              <span class="file-meta">Last updated: Apr 1, 2025</span>
+              <button class="download-btn">📥</button>
+            </div>
+            <form class="upload-form">
+              <input type="file" />
+              <button type="submit">Upload</button>
+              <div class="upload-success">✔ File uploaded</div>
+            </form>
+          </div>
+
+          <!-- Operations -->
+          <div class="panel">
+            <h3>Operations</h3>
+            <div class="file-entry">
+              📊 <a href="#">Q3 Logistics Timeline.xlsx</a>
+              <span class="file-meta">Last updated: Jul 10, 2025</span>
+              <button class="download-btn">📥</button>
+            </div>
+            <form class="upload-form">
+              <input type="file" />
+              <button type="submit">Upload</button>
+              <div class="upload-success">✔ File uploaded</div>
+            </form>
+          </div>
+
+          <!-- Policy -->
+          <div class="panel">
+            <h3>Policy</h3>
+            <div class="file-entry">
+              📝 <a href="#">Education Funding Brief.pdf</a>
+              <span class="file-meta">Last updated: May 6, 2025</span>
+              <button class="download-btn">📥</button>
+            </div>
+            <div class="file-entry">
+              📄 <a href="#">Legislative Overview 2025.docx</a>
+              <span class="file-meta">Last updated: Mar 8, 2025</span>
+              <button class="download-btn">📥</button>
+            </div>
+            <form class="upload-form">
+              <input type="file" />
+              <button type="submit">Upload</button>
+              <div class="upload-success">✔ File uploaded</div>
+            </form>
+          </div>
+
+          <!-- Development -->
+          <div class="panel">
+            <h3>Development</h3>
+            <div class="file-entry">
+              📊 <a href="#">Donor List 2025.xlsx</a>
+              <span class="file-meta">Last updated: Aug 1, 2025</span>
+              <button class="download-btn">📥</button>
+            </div>
+            <div class="file-entry">
+              📝 <a href="#">2025 Gala Slide Deck.pptx</a>
+              <span class="file-meta">Last updated: Jul 25, 2025</span>
+              <button class="download-btn">📥</button>
+            </div>
+            <form class="upload-form">
+              <input type="file" />
+              <button type="submit">Upload</button>
+              <div class="upload-success">✔ File uploaded</div>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- JavaScript Enhancements -->
   <script>
-    // Simulate upload for each panel
+    // Upload simulation
     document.querySelectorAll('.upload-form').forEach(form => {
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         const input = this.querySelector('input[type="file"]');
-        const listId = this.getAttribute('data-list');
-        const list = document.getElementById(listId);
+        const panel = this.closest('.panel');
+        const success = this.querySelector('.upload-success');
 
         if (input.files.length > 0) {
-          const li = document.createElement('li');
-          li.textContent = input.files[0].name + " (Uploaded)";
-          list.appendChild(li);
+          const fileName = input.files[0].name;
+          const ext = fileName.split('.').pop().toLowerCase();
+          const icon = ext === 'pdf' ? '📄' : ext === 'xlsx' ? '📊' : ext === 'docx' ? '📝' : '📎';
+
+          const div = document.createElement('div');
+          div.className = 'file-entry';
+          div.innerHTML = `${icon} <a href="#">${fileName}</a>
+            <span class="file-meta">Just now</span>
+            <button class="download-btn">📥</button>`;
+          panel.insertBefore(div, form);
+
           input.value = '';
+          success.style.display = 'block';
+          setTimeout(() => success.style.display = 'none', 2000);
         }
+      });
+    });
+
+    // Download simulation
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('download-btn')) {
+        e.target.textContent = '⬇️ Downloaded!';
+        setTimeout(() => e.target.textContent = '📥', 1500);
+      }
+    });
+
+    // Keyword search
+    document.getElementById('doc-search').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      document.querySelectorAll('.file-entry').forEach(entry => {
+        const text = entry.innerText.toLowerCase();
+        entry.style.display = text.includes(query) ? 'flex' : 'none';
+      });
+    });
+
+    // Tag filter
+    document.querySelectorAll('.tag-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const type = btn.dataset.type;
+        document.querySelectorAll('.file-entry').forEach(entry => {
+          const fileName = entry.querySelector('a').textContent.toLowerCase();
+          entry.style.display = (type === "all" || fileName.endsWith(type)) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // Sidebar search
+    document.querySelector('.sidebar-search input').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      document.querySelectorAll('.panel').forEach(panel => {
+        const text = panel.innerText.toLowerCase();
+        panel.style.display = text.includes(query) ? 'block' : 'none';
       });
     });
   </script>
