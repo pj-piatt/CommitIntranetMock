@@ -7,6 +7,50 @@
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/ai-assistant.css" />
   <script defer src="../js/scripts.js"></script>
+  <style>
+  .calendar-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+
+  .day {
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-height: 70px;
+  }
+
+  .day.today {
+    background-color: #f5faff;
+    border: 2px solid #0078d4;
+    font-weight: bold;
+  }
+
+  .event {
+    font-size: 0.75rem;
+    margin-top: 5px;
+    color: #444;
+  }
+</style>
+
 </head>
 <body>
   <div class="layout">
