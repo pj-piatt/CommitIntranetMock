@@ -1,4 +1,4 @@
-/* styles.css – Complete Stylesheet for Fully Functional Intranet Dashboard */
+/* styles.css – Complete Stylesheet for Commit Intranet Dashboard */
 
 /* Base Styles */
 body {
@@ -12,60 +12,152 @@ h1, h2, h3 {
   color: #1c2b39;
 }
 
-header, .site-header {
+/* Layout Container */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  width: 240px;
   background-color: #1c2b39;
   color: white;
+  flex-shrink: 0;
   padding: 20px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  flex-direction: column;
 }
 
-header img, .site-header .logo {
-  height: 48px;
-}
-
-nav {
-  background-color: #243b53;
-  padding: 10px 20px;
+.sidebar-header {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
 }
 
-nav a, .site-header nav ul li a {
+.sidebar-logo {
+  width: 80px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+/* Confluence-style Sidebar Search */
+.sidebar-search {
+  width: 100%;
+  margin: 12px 0;
+}
+
+.sidebar-search input[type="text"] {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #fff;
+  color: #1c2b39;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-search input::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+.sidebar-search input[type="text"]:focus {
+  border: 1px solid #f7941e;
+  box-shadow: 0 0 0 2px rgba(247, 148, 30, 0.3);
+  background-color: #fff;
+}
+
+/* Department Links */
+.sidebar h2 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #f7941e;
+  text-align: center;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 12px;
+}
+
+.sidebar nav ul li a {
   color: white;
   text-decoration: none;
   font-weight: 500;
+  display: block;
+  padding: 10px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
-nav a:hover,
-nav a.active,
-.site-header nav ul li a:hover,
-.site-header nav ul li a.active {
-  text-decoration: underline;
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  background-color: #2d3f54;
   color: #f7941e;
 }
 
-.site-header nav ul {
-  list-style: none;
-  display: flex;
-  gap: 16px;
-  margin-left: auto;
-}
-
-.container {
+/* Main Content */
+.main-content {
+  flex: 1;
   padding: 20px;
-  max-width: 1200px;
-  margin: auto;
 }
 
-/* Panels & Widgets */
+/* Top Header */
+.site-header {
+  background-color: transparent;
+  color: #1c2b39;
+  padding: 0;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.topnav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 20px;
+}
+
+.topnav ul li a {
+  color: #1c2b39;
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.topnav ul li a.active,
+.topnav ul li a:hover {
+  border-bottom: 2px solid #f7941e;
+  color: #f7941e;
+}
+
+/* Dashboard Panels */
 .panel-grid, .dashboard {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .panel, .widget {
@@ -232,6 +324,7 @@ button:hover {
 .department-tabs button:hover {
   background-color: #f7941e;
 }
+
 /* AI Button Style */
 .button-link {
   display: inline-block;
@@ -246,112 +339,6 @@ button:hover {
 
 .button-link:hover {
   background-color: #005fa3;
-}
-/* Sidebar Layout */
-.layout {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* Sidebar Navigation */
-.sidebar {
-  width: 240px;
-  background-color: #1c2b39;
-  color: white;
-  flex-shrink: 0;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.sidebar-logo {
-  width: 100px;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.sidebar h2 {
-  font-size: 1.1rem;
-  margin: 0;
-  color: #f7941e;
-  text-align: center;
-}
-
-.sidebar nav ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-}
-
-.sidebar nav ul li {
-  margin-bottom: 12px;
-}
-
-.sidebar nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  display: block;
-  padding: 10px 12px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-.sidebar nav ul li a:hover,
-.sidebar nav ul li a.active {
-  background-color: #2d3f54;
-  color: #f7941e;
-}
-
-/* Main Content Area */
-.main-content {
-  flex: 1;
-  padding: 20px;
-}
-
-/* Adjust header to stay within main content */
-.site-header {
-  background-color: transparent;
-  color: #1c2b39;
-  padding: 0;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.site-header h1 {
-  font-size: 2rem;
-  margin: 0;
-}
-
-.topnav ul {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  gap: 20px;
-}
-
-.topnav ul li a {
-  color: #1c2b39;
-  text-decoration: none;
-  font-weight: 500;
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
-}
-
-.topnav ul li a.active,
-.topnav ul li a:hover {
-  border-bottom: 2px solid #f7941e;
-  color: #f7941e;
 }
 
 /* Responsive Sidebar */
@@ -379,14 +366,8 @@ button:hover {
     margin: 0 10px;
   }
 
-  .sidebar-header {
-    flex-direction: row;
-    gap: 15px;
-    margin-bottom: 0;
-  }
-
-  .sidebar h2 {
-    font-size: 1rem;
+  .sidebar-logo {
+    width: 60px;
   }
 
   .main-content {
@@ -404,5 +385,3 @@ button:hover {
     gap: 10px;
   }
 }
-
-
