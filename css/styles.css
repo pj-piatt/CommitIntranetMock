@@ -385,3 +385,87 @@ button:hover {
     gap: 10px;
   }
 }
+/* Document File Entry */
+.file-entry {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.file-entry a {
+  font-weight: 500;
+  text-decoration: none;
+  color: #1c2b39;
+}
+
+.file-entry a:hover {
+  text-decoration: underline;
+}
+
+.file-meta {
+  font-size: 0.85rem;
+  color: #666;
+  flex: 1;
+}
+
+/* Download Button Simulation */
+.download-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #0078d4;
+  transition: color 0.2s;
+}
+
+.download-btn:hover {
+  color: #005fa3;
+}
+
+/* Upload Feedback */
+.upload-success {
+  color: green;
+  font-size: 0.85rem;
+  margin-top: 6px;
+  display: none;
+}
+
+/* Document Type Filter Tags */
+.doc-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.tag-btn {
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.tag-btn.active,
+.tag-btn:hover {
+  background-color: #f7941e;
+  color: white;
+  border-color: #f7941e;
+}
+
+/* Document Search Bar */
+.search-bar {
+  margin: 20px 0;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
