@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IT Help Desk | Commit Intranet</title>
   <link rel="stylesheet" href="css/styles.css" />
-  <script src="js/scripts.js" defer></script>
   <link rel="stylesheet" href="css/ai-assistant.css" />
+  <script src="js/scripts.js" defer></script>
+  <script src="js/ai-assistant.js" defer></script>
 </head>
 <body>
   <div class="layout">
@@ -14,14 +15,15 @@
     <aside class="sidebar" aria-label="Department Navigation">
       <div class="sidebar-header">
         <img src="assets/commit-logo-white.svg" alt="Commit Logo" class="sidebar-logo" />
-       
-       
+        <form class="sidebar-search" role="search">
+          <input type="text" id="searchInput" placeholder="Search…" onkeyup="filterSidebar()" />
+        </form>
+        <h2>Departments</h2>
       </div>
       <nav>
         <ul>
-          <h2>Departments</h2>
           <li><a href="departments/hr.html">👥 HR</a></li>
-          <li><a href="departments/it.html">💻 IT Support</a></li>
+          <li><a href="departments/it.html" class="active">💻 IT Support</a></li>
           <li><a href="departments/operations.html">📦 Operations</a></li>
           <li><a href="departments/policy.html">📜 Policy</a></li>
           <li><a href="development.html">💡 Development</a></li>
@@ -29,8 +31,9 @@
       </nav>
     </aside>
 
-    <!-- Topnav -->
+    <!-- Main Content -->
     <div class="main-content">
+      <!-- Topnav -->
       <header class="site-header">
         <h1>Commit Intranet Hub</h1>
         <nav class="topnav">
@@ -41,55 +44,55 @@
             <li><a href="documents.html">Documents</a></li>
             <li><a href="shoutouts.html">Shoutouts</a></li>
             <li><a href="wiki.html">Wiki</a></li>
+            <li><a href="ai.html">Ask AI</a></li>
           </ul>
         </nav>
       </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <h1>Submit an IT Help Desk Request</h1>
-      <form id="helpdesk-form" class="form-card">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required />
+      <main>
+        <h1>Submit an IT Help Desk Request</h1>
+        <form id="helpdesk-form" class="form-card">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required />
 
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required />
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required />
 
-        <label for="department">Department</label>
-        <select id="department" name="department" required>
-          <option value="">-- Select --</option>
-          <option value="IT">IT</option>
-          <option value="HR">Human Resources</option>
-          <option value="Operations">Operations</option>
-          <option value="Policy">Policy</option>
-          <option value="Other">Other</option>
-        </select>
+          <label for="department">Department</label>
+          <select id="department" name="department" required>
+            <option value="">-- Select --</option>
+            <option value="IT">IT</option>
+            <option value="HR">Human Resources</option>
+            <option value="Operations">Operations</option>
+            <option value="Policy">Policy</option>
+            <option value="Other">Other</option>
+          </select>
 
-        <label for="issue">Issue Description</label>
-        <textarea id="issue" name="issue" rows="5" required></textarea>
+          <label for="issue">Issue Description</label>
+          <textarea id="issue" name="issue" rows="5" required></textarea>
 
-        <button type="submit">Submit Request</button>
-        <p class="success-message" id="success-msg">✅ Request submitted! Our IT team will follow up shortly.</p>
-      </form>
-      <section class="panel mock-teams">
-  <h3>💬 IT Teams Channel</h3>
-  <div class="message"><strong>Marcus:</strong> VPN rollout completed across all remote users ✔️</div>
-  <div class="message"><strong>Jasmine:</strong> Next ticket automation script will deploy Friday.</div>
-  <div class="message"><strong>Andre:</strong> Anyone free to test Jamf lock remotely?</div>
+          <button type="submit">Submit Request</button>
+          <p class="success-message" id="success-msg">✅ Request submitted! Our IT team will follow up shortly.</p>
+        </form>
 
-  <form class="mock-teams-form">
-    <input type="text" placeholder="Post a message (mock only)" disabled />
-    <button type="submit" disabled>Send</button>
-  </form>
-</section>
+        <!-- Mock Teams Chat -->
+        <section class="panel mock-teams">
+          <h3>💬 IT Teams Channel</h3>
+          <div class="message"><strong>Marcus:</strong> VPN rollout completed across all remote users ✔️</div>
+          <div class="message"><strong>Jasmine:</strong> Next ticket automation script will deploy Friday.</div>
+          <div class="message"><strong>Andre:</strong> Anyone free to test Jamf lock remotely?</div>
+          <form class="mock-teams-form">
+            <input type="text" placeholder="Post a message (mock only)" disabled />
+            <button type="submit" disabled>Send</button>
+          </form>
+        </section>
+      </main>
 
-    </main>
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
+    </div>
   </div>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <p>© 2025 The Commit Partnership. All rights reserved.</p>
-  </footer>
 
   <script>
     document.getElementById('helpdesk-form').addEventListener('submit', function (e) {
@@ -106,8 +109,7 @@
         const successMsg = document.getElementById('success-msg');
         successMsg.innerHTML = `
           ✅ Request submitted! Jira ticket <strong>${fakeIssueId}</strong> has been created. 
-          Our IT team will follow up shortly.
-          <br/><br/>
+          Our IT team will follow up shortly.<br/><br/>
           <a href="mock-ticket.html?ticket=${fakeIssueId}" class="view-ticket-button">📄 View Ticket</a>
         `;
         successMsg.style.display = 'block';
@@ -120,28 +122,27 @@
 
     function filterSidebar() {
       const input = document.getElementById("searchInput").value.toLowerCase();
-      const links = document.getElementById("navLinks").getElementsByTagName("li");
-      for (let i = 0; i < links.length; i++) {
-        const a = links[i].getElementsByTagName("a")[0];
-        const textValue = a.textContent || a.innerText;
-        links[i].style.display = textValue.toLowerCase().includes(input) ? "" : "none";
-      }
+      const links = document.querySelectorAll(".sidebar nav ul li");
+      links.forEach(link => {
+        const a = link.querySelector("a");
+        const text = a.textContent.toLowerCase();
+        link.style.display = text.includes(input) ? "" : "none";
+      });
     }
   </script>
-    <!-- AI Assistant Bubble -->
-<div id="ai-chat-widget">
-  <button id="ai-toggle" aria-label="Open AI Assistant">🤖</button>
-  <div id="ai-chat-window" style="display: none;">
-    <div class="ai-chat-header">
-      <span>Commit AI Assistant</span>
-      <button id="ai-close">×</button>
-    </div>
-    <div class="ai-chat-body" id="ai-messages"></div>
-    <textarea id="ai-user-input" placeholder="Ask a question..."></textarea>
-    <button id="ai-send">Send</button>
-  </div>
-</div>
 
-<script src="../js/ai-assistant.js" defer></script>
+  <!-- AI Assistant -->
+  <div id="ai-chat-widget">
+    <button id="ai-toggle" aria-label="Open AI Assistant">🤖</button>
+    <div id="ai-chat-window" style="display: none;">
+      <div class="ai-chat-header">
+        <span>Commit AI Assistant</span>
+        <button id="ai-close">×</button>
+      </div>
+      <div class="ai-chat-body" id="ai-messages"></div>
+      <textarea id="ai-user-input" placeholder="Ask a question..."></textarea>
+      <button id="ai-send">Send</button>
+    </div>
+  </div>
 </body>
 </html>
