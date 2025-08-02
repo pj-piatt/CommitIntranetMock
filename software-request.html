@@ -24,7 +24,7 @@
 
   <main class="container">
     <h2>Software Request Form</h2>
-    <p>Use this form to request new software installations or access to approved tools.</p>
+    <p>Use this form to request software installation or access to approved tools.</p>
 
     <form id="software-request-form">
       <label for="name">Your Full Name</label>
@@ -47,7 +47,17 @@
       <input type="text" id="software" name="software" required />
 
       <label for="reason">Why is this needed?</label>
-      <textarea id="reason" name="reason" rows="4" required></textarea>
+      <textarea id="reason" name="reason" rows="4" maxlength="500" required></textarea>
+      <p class="char-counter" id="char-count">0 / 500 characters</p>
+
+      <label>Relevant Tags (optional):</label>
+      <div class="tag-options">
+        <label><input type="checkbox" name="tags" value="Collaboration"> Collaboration</label>
+        <label><input type="checkbox" name="tags" value="Security"> Security</label>
+        <label><input type="checkbox" name="tags" value="Analytics"> Analytics</label>
+        <label><input type="checkbox" name="tags" value="Compliance"> Compliance</label>
+        <label><input type="checkbox" name="tags" value="Reporting"> Reporting</label>
+      </div>
 
       <label for="urgency">Urgency Level</label>
       <select id="urgency" name="urgency">
@@ -58,7 +68,7 @@
       </select>
 
       <button type="submit">Submit Request</button>
-      <p class="success-message" id="success-message">✅ Your request has been submitted!</p>
+      <p class="success-message" id="success-message" style="display: none;"></p>
     </form>
   </main>
 
@@ -69,11 +79,26 @@
   <script>
     const form = document.getElementById('software-request-form');
     const successMsg = document.getElementById('success-message');
+    const reason = document.getElementById('reason');
+    const charCount = document.getElementById('char-count');
+
+    reason.addEventListener('input', () => {
+      charCount.textContent = `${reason.value.length} / 500 characters`;
+    });
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const software = document.getElementById('software').value;
+      const fakeID = Math.floor(Math.random() * 9000 + 1000);
+
+      successMsg.innerHTML = `✅ Thank you, ${name}. Your request for <strong>${software}</strong> was submitted successfully. <br>Tracking ID: <strong>#SR-${fakeID}</strong>`;
       successMsg.style.display = 'block';
       form.reset();
+      charCount.textContent = '0 / 500 characters';
+
+      successMsg.scrollIntoView({ behavior: "smooth" });
     });
   </script>
 </body>
