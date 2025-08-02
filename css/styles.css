@@ -1,225 +1,296 @@
-/* styles.css – Complete Stylesheet for Commit Intranet Dashboard */
+/* styles.css – Complete Stylesheet for Commit Intranet Hub */
 
 /* Base Styles */
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f6f9;
   color: #333;
+  line-height: 1.6;
 }
 
-h1, h2, h3 {
+a {
   color: #1c2b39;
-}
-
-/* Layout Container */
-.layout {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* Sidebar Navigation */
-.sidebar {
-  width: 240px;
-  background-color: #1c2b39;
-  color: white;
-  flex-shrink: 0;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 24px;
-}
-
-.sidebar-logo {
-  width: 80px;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  margin-bottom: 12px;
-}
-
-/* Confluence-style Sidebar Search */
-.sidebar-search {
-  width: 100%;
-  margin: 12px 0;
-}
-
-.sidebar-search input[type="text"] {
-  width: 100%;
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: none;
-  font-size: 0.95rem;
-  outline: none;
-  background-color: #fff;
-  color: #1c2b39;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-search input::placeholder {
-  color: #888;
-  font-style: italic;
-}
-
-.sidebar-search input[type="text"]:focus {
-  border: 1px solid #f7941e;
-  box-shadow: 0 0 0 2px rgba(247, 148, 30, 0.3);
-  background-color: #fff;
-}
-
-/* Department Links */
-.sidebar h2 {
-  font-size: 1.1rem;
-  margin: 0;
-  color: #f7941e;
-  text-align: center;
-}
-
-.sidebar nav ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-}
-
-.sidebar nav ul li {
-  margin-bottom: 12px;
-}
-
-.sidebar nav ul li a {
-  color: white;
   text-decoration: none;
-  font-weight: 500;
-  display: block;
-  padding: 10px 12px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
 }
 
-.sidebar nav ul li a:hover,
-.sidebar nav ul li a.active {
-  background-color: #2d3f54;
-  color: #f7941e;
+ul {
+  list-style: none;
+  padding-left: 0;
 }
 
-/* Main Content */
-.main-content {
-  flex: 1;
-  padding: 20px;
-}
-
-/* Top Header */
+/* Header */
 .site-header {
-  background-color: transparent;
-  color: #1c2b39;
-  padding: 0;
-  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 1rem;
 }
 
 .site-header h1 {
-  font-size: 2rem;
-  margin: 0;
-}
-
-.topnav ul {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  gap: 20px;
-}
-
-.topnav ul li a {
+  font-size: 1.5rem;
   color: #1c2b39;
-  text-decoration: none;
-  font-weight: 500;
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
+  flex: 1;
 }
 
-.topnav ul li a.active,
-.topnav ul li a:hover {
-  border-bottom: 2px solid #f7941e;
+/* Navigation */
+nav ul {
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  background-color: #f7941e;
+  color: white;
+}
+
+/* Main Layout */
+main.container {
+  padding: 2rem;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.panel {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #1c2b39;
+  color: white;
+  margin-top: 2rem;
+}
+
+/* Forms */
+form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  margin-top: 1.5rem;
+  background-color: #1c2b39;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #f7941e;
+}
+
+.success-message {
+  margin-top: 1rem;
+  color: green;
+  display: none;
+}
+
+/* Wiki Layout */
+.wiki-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.wiki-sidebar {
+  flex: 1 1 250px;
+  max-width: 250px;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  position: sticky;
+  top: 90px;
+  height: fit-content;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.wiki-main-content {
+  flex: 3;
+}
+
+/* Search Box */
+.search-box input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+/* Wiki Articles */
+.wiki-article-list .article {
+  padding: 1rem;
+  background: #fff;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.wiki-article-list .article:hover {
+  background-color: #f0f0f0;
+}
+
+/* Tags / Chips */
+.tag {
+  display: inline-block;
+  background-color: #f7941e;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.tag:hover {
+  opacity: 0.8;
+}
+
+/* Feedback Buttons */
+.article-feedback {
+  margin-top: 0.5rem;
+}
+
+.article-feedback button {
+  margin-right: 0.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.article-feedback button:hover {
   color: #f7941e;
 }
 
-/* Feedback Buttons Styling */
-.feedback {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.feedback .thumb-up,
-.feedback .thumb-down {
-  cursor: pointer;
-  font-size: 1.2rem;
-  border: none;
-  background: transparent;
-  color: #666;
-  transition: color 0.2s ease;
-}
-
-.feedback .thumb-up:hover,
-.feedback .thumb-down:hover {
-  color: #1c2b39;
-}
-
-.feedback .selected {
-  color: #0077cc;
-  font-weight: bold;
-}
-
-.feedback-status {
-  margin-left: 8px;
-  font-style: italic;
-  color: #3a3a3a;
-}
-
-/* Tag Filter Chips */
-.tag-filters {
+/* Emoji Picker */
+.emoji-picker {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  gap: 0.25rem;
 }
 
-.tag-chip {
-  background-color: #e0e6ed;
-  color: #1c2b39;
+.emoji-picker button {
+  background: none;
   border: none;
-  padding: 6px 12px;
-  border-radius: 16px;
+  font-size: 1.25rem;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.2s ease;
 }
 
-.tag-chip:hover {
-  background-color: #d2dbe7;
+/* Upload Section */
+.dropzone {
+  padding: 1rem;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 1rem;
+  transition: background-color 0.2s;
 }
 
-.tag-chip.active {
-  background-color: #0077cc;
-  color: #fff;
-  font-weight: bold;
+.dropzone.dragover {
+  background-color: #f9f9f9;
 }
 
-/* Sticky Sidebar */
-.sidebar-sticky {
-  position: sticky;
-  top: 90px;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
-  padding-right: 12px;
+.uploaded-list {
+  margin-top: 1rem;
+}
+
+.uploaded-list li {
+  background: #eee;
+  padding: 0.5rem;
+  margin-bottom: 0.25rem;
+  border-radius: 4px;
+}
+
+/* Department Tabs */
+.department-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.department-tabs button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.department-tabs button.active {
+  background: #1c2b39;
+  color: white;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .wiki-layout {
+    flex-direction: column;
+  }
+
+  .wiki-sidebar {
+    position: relative;
+    top: 0;
+    max-width: 100%;
+  }
 }
