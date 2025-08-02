@@ -14,8 +14,10 @@ async function loadPartial(id, url) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadPartial("sidebar", "../partials/sidebar.html");
-  loadPartial("topnav", "../partials/header.html");
-  loadPartial("footer", "../partials/footer.html");
-  loadPartial("ai-widget", "../partials/ai-widget.html");
+  const base = location.pathname.includes("/CommitIntranetMock/") ? "/CommitIntranetMock/" : "/";
+  loadPartial("sidebar", `${base}partials/sidebar.html`);
+  loadPartial("topnav", `${base}partials/header.html`);
+  loadPartial("footer", `${base}partials/footer.html`);
+  loadPartial("ai-widget", `${base}partials/ai-widget.html`);
 });
+
