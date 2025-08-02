@@ -2,40 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Company Wiki | Commit Intranet Hub</title>
-  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="scripts/wiki.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
-    <h1>Commit Intranet Hub</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href="shoutouts.html">Shoutouts</a></li>
-        <li><a href="wiki.html" class="active">Wiki</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar sticky">
+      <img src="assets/commit-logo.png" alt="Commit Logo" class="logo" />
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="calendar.html">Calendar</a></li>
+          <li><a href="documents.html">Documents</a></li>
+          <li><a href="shoutouts.html">Shoutouts</a></li>
+          <li><a href="wiki.html" class="active">Wiki</a></li>
+        </ul>
+      </nav>
 
-  <main class="container">
-    <h2>Company Wiki</h2>
-    <p>Explore internal resources, policies, how-tos, and frequently asked questions. This is your go-to space for shared knowledge across Commit.</p>
-
-    <section class="panel-grid">
-      <div class="panel">
-        <h3>How to Reset Your Password</h3>
-        <p>If you're locked out of your account, visit the <strong>Password Reset Portal</strong> and follow the steps. For MFA issues, contact IT Support.</p>
+      <!-- Sticky Category Filters -->
+      <div class="sidebar-categories">
+        <h4>Categories</h4>
+        <ul>
+          <li><button class="tag-chip" data-tag="IT">IT</button></li>
+          <li><button class="tag-chip" data-tag="HR">HR</button></li>
+          <li><button class="tag-chip" data-tag="Onboarding">Onboarding</button></li>
+          <li><button class="tag-chip" data-tag="Tools">Tools</button></li>
+        </ul>
       </div>
+    </aside>
 
-      <div class="panel">
-        <h3>New Hire Onboarding Checklist</h3>
-        <p>Includes setting up your accounts, tools access, HR paperwork, and an intro to Commit culture. Managers can access editable templates here.</p>
-      </div>
+    <main class="main-content">
+      <h1>Company Wiki</h1>
+      <p>Explore internal resources, policies, how-tos, and FAQs. Search and filter articles below.</p>
 
-      <div class="panel">
-        <h3>Submit a Software Access Reque
+      <input type="text" id="wiki-search" placeholder="Search articles..." class="search-bar" />
+
+      <section class="wiki-grid" id="wiki-articles">
+        <!-- Each .article is a real link with feedback -->
+        <a href="wiki-articles/reset-password.html" class="article" data-tags="IT,Tools">
+          <h3>How to Reset Your Password</h3>
+          <p>Visit the password reset portal or contact IT for MFA support.</p>
+          <div class="feedback">
+            <span>Was this helpful?</span>
+            <button class="thumbs-up">👍</button>
+            <button class="thumbs-down">👎</button>
+          </div>
+        </a>
+
+        <a href="wiki-articles/onboarding-checklist.html" class="article" data-tags="HR,Onboarding">
+          <h3>New Hire Onboarding Checklist</h3>
+          <p>Get started with accounts, tools, HR paperwork, and Commit culture.</p>
+          <div class="feedback">
+            <span>Was this helpful?</span>
+            <button class="thumbs-up">👍</button>
+            <button class="thumbs-down">👎</button>
+          </div>
+        </a>
+
+        <a href="wiki-articles/software-request.html" class="article" data-tags="IT,Tools">
+          <h3>Submit a Software Access Request</h3>
+          <p>Instructions and form to request software installation or license access.</p>
+          <div class="feedback">
+            <span>Was this helpful?</span>
+            <button class="thumbs-up">👍</button>
+            <button class="thumbs-down">👎</button>
+          </div>
+        </a>
+
+        <a href="wiki-articles/pto-policy.html" class="article" data-tags="HR">
+          <h3>Understanding PTO & Leave Policies</h3>
+          <p>Review our updated policies on vacation, sick time, and parental leave.</p>
+          <div class="feedback">
+            <span>Was this helpful?</span>
+            <button class="thumbs-up">👍</button>
+            <button class="thumbs-down">👎</button>
+          </div>
+        </a>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>© 2025 The Commit Partnership. All rights reserved.</p>
+  </footer>
+</body>
+</html>
