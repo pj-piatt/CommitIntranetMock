@@ -7,16 +7,15 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-   <!-- Sidebar -->
+  <div class="layout">
+    <!-- Sidebar -->
     <aside class="sidebar" aria-label="Department Navigation">
       <div class="sidebar-header">
         <img src="assets/commit-logo-white.svg" alt="Commit Logo" class="sidebar-logo" />
-       
-       
       </div>
       <nav>
+        <h2>Departments</h2>
         <ul>
-          <h2>Departments</h2>
           <li><a href="departments/hr.html">👥 HR</a></li>
           <li><a href="departments/it.html">💻 IT Support</a></li>
           <li><a href="departments/operations.html">📦 Operations</a></li>
@@ -26,68 +25,70 @@
       </nav>
     </aside>
 
-    <!-- Topnav -->
+    <!-- Main Content -->
     <div class="main-content">
       <header class="site-header">
         <h1>Commit Intranet Hub</h1>
         <nav class="topnav">
           <ul>
-            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="news.html">News</a></li>
             <li><a href="calendar.html">Calendar</a></li>
             <li><a href="documents.html">Documents</a></li>
-            <li><a href="shoutouts.html">Shoutouts</a></li>
+            <li><a href="shoutouts.html" class="active">Shoutouts</a></li>
             <li><a href="wiki.html">Wiki</a></li>
           </ul>
         </nav>
       </header>
 
-  <main class="container">
-    <h2>Team Shoutouts & Recognition</h2>
+      <main class="container">
+        <h2>Team Shoutouts & Recognition</h2>
 
-    <section class="panel">
-      <h3>Recent Shoutouts</h3>
-      <ul id="shoutout-list">
-        <li>👏 Huge thanks to Marcus from IT for the rapid laptop deployment!</li>
-        <li>🎉 Shoutout to the Ops team for pulling off a flawless event launch!</li>
-        <li>🌟 Kudos to Jasmine in HR for the new onboarding workflow!</li>
-      </ul>
-    </section>
+        <section class="panel">
+          <h3>Recent Shoutouts</h3>
+          <ul id="shoutout-list">
+            <li>👏 Huge thanks to Marcus from IT for the rapid laptop deployment!</li>
+            <li>🎉 Shoutout to the Ops team for pulling off a flawless event launch!</li>
+            <li>🌟 Kudos to Jasmine in HR for the new onboarding workflow!</li>
+          </ul>
+        </section>
 
-    <section class="panel">
-      <h3>Give a Shoutout</h3>
-      <form id="shoutout-form">
-        <label for="from">Your Name:</label>
-        <input type="text" id="from" name="from" required />
+        <section class="panel">
+          <h3>Give a Shoutout</h3>
+          <form id="shoutout-form">
+            <label for="from">Your Name:</label>
+            <input type="text" id="from" name="from" required />
 
-        <label for="to">Shoutout To:</label>
-        <input type="text" id="to" name="to" required />
+            <label for="to">Shoutout To:</label>
+            <input type="text" id="to" name="to" required />
 
-        <label for="department">Department:</label>
-        <select id="department" name="department" required>
-          <option value="">Select</option>
-          <option value="HR">HR</option>
-          <option value="IT">IT</option>
-          <option value="Operations">Operations</option>
-          <option value="Policy">Policy</option>
-          <option value="Development">Development</option>
-        </select>
+            <label for="department">Department:</label>
+            <select id="department" name="department" required>
+              <option value="">Select</option>
+              <option value="HR">HR</option>
+              <option value="IT">IT</option>
+              <option value="Operations">Operations</option>
+              <option value="Policy">Policy</option>
+              <option value="Development">Development</option>
+            </select>
 
-        <label for="message">Message:</label>
-        <div class="emoji-wrapper">
-          <textarea id="message" name="message" rows="4" placeholder="Enter your message..." required></textarea>
-          <button type="button" id="emoji-button">😀</button>
-        </div>
+            <label for="message">Message:</label>
+            <div class="emoji-wrapper">
+              <textarea id="message" name="message" rows="4" placeholder="Enter your message..." required></textarea>
+              <button type="button" id="emoji-button">😀</button>
+            </div>
 
-        <button type="submit">Submit Shoutout</button>
-        <p class="success-message" id="shoutout-success" style="display: none;"></p>
-      </form>
-    </section>
-  </main>
+            <button type="submit">Submit Shoutout</button>
+            <p class="success-message" id="shoutout-success" style="display: none;"></p>
+          </form>
+        </section>
+      </main>
 
-  <footer class="site-footer">
-    <p>© 2025 The Commit Partnership. All rights reserved.</p>
-  </footer>
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
+    </div>
+  </div>
 
   <script>
     const emojiButton = document.getElementById("emoji-button");
