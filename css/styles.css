@@ -445,5 +445,51 @@ button:hover {
   margin-top: 5px;
   color: #444;
 }
+.mock-teams {
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  max-height: 350px;
+  overflow-y: auto;
+  font-size: 0.95rem;
+}
+
+.mock-teams h3 {
+  margin-top: 0;
+  color: #1c2b39;
+}
+
+.mock-teams .message {
+  margin-bottom: 12px;
+}
+
+.mock-teams .message strong {
+  color: #1c2b39;
+}
+
+.mock-teams-form {
+  display: flex;
+  margin-top: 1rem;
+  gap: 10px;
+}
+
+.mock-teams-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.mock-teams-form button {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
 
