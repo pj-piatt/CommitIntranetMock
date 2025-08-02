@@ -5,6 +5,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Company Wiki | Commit Intranet Hub</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .wiki-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .article {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.25rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .article:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .article h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #1c2b39;
+    }
+
+    .article p {
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background-color: #f0f4fa;
+      color: #1c2b39;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .feedback {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .feedback button {
+      background-color: transparent;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.85rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .feedback button:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
   <script defer src="scripts/wiki.js"></script>
 </head>
 <body>
@@ -13,8 +82,8 @@
     <aside class="sidebar" aria-label="Department Navigation">
       <div class="sidebar-header">
         <img src="assets/commit-logo-white.svg" alt="Commit Logo" class="logo" />
-        
        
+      
       </div>
       <nav>
         <ul>
@@ -60,15 +129,15 @@
       <input type="text" id="wiki-search" placeholder="Search articles..." class="search-bar" />
 
       <section class="wiki-grid" id="wiki-articles">
-        <!-- Static articles -->
+        <!-- Articles here -->
         <a href="wiki-articles/reset-password.html" class="article" data-tags="IT,Tools">
           <h3>How to Reset Your Password</h3>
           <p>Visit the password reset portal or contact IT for MFA support.</p>
           <div class="tags"><span class="tag">IT</span> <span class="tag">Tools</span></div>
           <div class="feedback">
             <span>Was this helpful?</span>
-            <button class="thumbs-up">👍</button>
-            <button class="thumbs-down">👎</button>
+            <button class="thumbs-up">Yes</button>
+            <button class="thumbs-down">No</button>
           </div>
         </a>
 
@@ -78,8 +147,8 @@
           <div class="tags"><span class="tag">HR</span> <span class="tag">Onboarding</span></div>
           <div class="feedback">
             <span>Was this helpful?</span>
-            <button class="thumbs-up">👍</button>
-            <button class="thumbs-down">👎</button>
+            <button class="thumbs-up">Yes</button>
+            <button class="thumbs-down">No</button>
           </div>
         </a>
 
@@ -89,8 +158,8 @@
           <div class="tags"><span class="tag">IT</span> <span class="tag">Tools</span></div>
           <div class="feedback">
             <span>Was this helpful?</span>
-            <button class="thumbs-up">👍</button>
-            <button class="thumbs-down">👎</button>
+            <button class="thumbs-up">Yes</button>
+            <button class="thumbs-down">No</button>
           </div>
         </a>
 
@@ -100,8 +169,8 @@
           <div class="tags"><span class="tag">HR</span></div>
           <div class="feedback">
             <span>Was this helpful?</span>
-            <button class="thumbs-up">👍</button>
-            <button class="thumbs-down">👎</button>
+            <button class="thumbs-up">Yes</button>
+            <button class="thumbs-down">No</button>
           </div>
         </a>
       </section>
