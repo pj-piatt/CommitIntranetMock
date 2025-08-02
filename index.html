@@ -91,5 +91,17 @@
       </footer>
     </div>
   </div>
+  <script>
+  document.querySelector('.sidebar-search input').addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    const widgets = document.querySelectorAll('.widget');
+
+    widgets.forEach(widget => {
+      const text = widget.innerText.toLowerCase();
+      widget.style.display = text.includes(query) ? 'block' : 'none';
+    });
+  });
+</script>
+
 </body>
 </html>
