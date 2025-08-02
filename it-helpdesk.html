@@ -116,5 +116,20 @@
       }
     }
   </script>
+    <!-- AI Assistant Bubble -->
+<div id="ai-chat-widget">
+  <button id="ai-toggle" aria-label="Open AI Assistant">🤖</button>
+  <div id="ai-chat-window" style="display: none;">
+    <div class="ai-chat-header">
+      <span>Commit AI Assistant</span>
+      <button id="ai-close">×</button>
+    </div>
+    <div class="ai-chat-body" id="ai-messages"></div>
+    <textarea id="ai-user-input" placeholder="Ask a question..."></textarea>
+    <button id="ai-send">Send</button>
+  </div>
+</div>
+
+<script src="../js/ai-assistant.js" defer></script>
 </body>
 </html>
