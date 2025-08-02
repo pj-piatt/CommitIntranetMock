@@ -3,39 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IT Department</title>
+  <title>IT Department | Commit Intranet</title>
   <link rel="stylesheet" href="../css/styles.css"/>
-  <script src="../js/scripts.js"></script>
+  <script src="../js/scripts.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>IT Department</h1>
-    <nav><a href="../index.html">← Back to Dashboard</a></nav>
-  </header>
-  <main>
-    <section class="widget">
-      <h2>Help Desk Request</h2>
-      <form>
-        <label>Issue Title: <input type="text" name="title"/></label>
-        <label>Description: <textarea name="description"></textarea></label>
-        <button type="submit">Submit Ticket</button>
-      </form>
-    </section>
-    <section class="widget">
-      <h2>Hardware/Software Request</h2>
-      <form>
-        <label>Name: <input type="text" name="name"/></label>
-        <label>Item Needed: <input type="text" name="item"/></label>
-        <button type="submit">Request Item</button>
-      </form>
-    </section>
-    <section class="widget">
-      <h2>IT Wiki</h2>
-      <ul>
-        <li><a href="#">How to Reset Password</a></li>
-        <li><a href="#">VPN Setup Guide</a></li>
-      </ul>
-    </section>
-  </main>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Department Navigation">
+      <div class="sidebar-header">
+        <img src="../assets/commit-logo.png" alt="Commit Logo" class="sidebar-logo" />
+        <form class="sidebar-search" role="search" aria-label="Site Search">
+          <input type="text" placeholder="Search the intranet..." />
+        </form>
+        <h2>Departments</h2>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="hr.html">👥 HR</a></li>
+          <li><a href="it.html" class="active">💻 IT Support</a></li>
+          <li><a href="operations.html">📦 Operations</a></li>
+          <li><a href="policy.html">📜 Policy</a></li>
+          <li><a href="development.html">💡 Development</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="site-header">
+        <h1>IT Department</h1>
+        <nav class="topnav">
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../news.html">News</a></li>
+            <li><a href="../calendar.html">Calendar</a></li>
+            <li><a href="../documents.html">Documents</a></li>
+            <li><a href="../shoutouts.html">Shoutouts</a></li>
+            <li><a href="../wiki.html">Wiki</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main class="container">
+        <section class="panel">
+          <h2>Help Desk Request</h2>
+          <form id="ticket-form">
+            <label for="title">Issue Title</label>
+            <input type="text" id="title" name="title" required />
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <button type="submit">Submit Ticket</button>
+            <p class="success-message" id="ticket-success" style="display: none;"></p>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>Hardware/Software Request</h2>
+          <form id="hardware-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="item">Item Needed</label>
+            <input type="text" id="item" name="item" required />
+
+            <button type="submit">Request Item</button>
+            <p class="success-message" id="hardware-success" style="display: none;"></p>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>IT Wiki</h2>
+          <ul>
+            <li><a href="../wiki-articles/reset-password.html">🔐 How to Reset Your Password</a></li>
+            <li><a href="../documents.html">🌐 VPN Setup Guide</a></li>
+            <li><a href="../wiki-articles/software-request.html">💾 Software Access Request Instructions</a></li>
+          </ul>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Simulated Submission Scripts -->
+  <script>
+    document.getElementById("ticket-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const title = document.getElementById("title").value;
+      const fakeID = "IT-" + Math.floor(Math.random() * 9000 + 1000);
+      const successMsg = document.getElementById("ticket-success");
+
+      successMsg.innerHTML = `✅ Ticket for "<strong>${title}</strong>" submitted. Your confirmation ID is <strong>${fakeID}</strong>.`;
+      successMsg.style.display = "block";
+      this.reset();
+      successMsg.scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("hardware-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const item = document.getElementById("item").value;
+      const fakeID = "HW-" + Math.floor(Math.random() * 9000 + 1000);
+      const successMsg = document.getElementById("hardware-success");
+
+      successMsg.innerHTML = `✅ Request for <strong>${item}</strong> submitted successfully. Tracking ID: <strong>${fakeID}</strong>.`;
+      successMsg.style.display = "block";
+      this.reset();
+      successMsg.scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
 </body>
 </html>
