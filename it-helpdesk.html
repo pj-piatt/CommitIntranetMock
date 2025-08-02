@@ -5,50 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IT Help Desk | Commit Intranet</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/scripts.js" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
-    <h1>Commit Intranet Hub</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href="shoutouts.html">Shoutouts</a></li>
-        <li><a href="wiki.html">Wiki</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="sidebar-logo" />
+        <input type="text" id="searchInput" placeholder="Search…" class="sidebar-search" onkeyup="filterSidebar()" />
+      </div>
+      <nav class="sidebar-nav">
+        <ul id="navLinks">
+          <li><a href="index.html">🏠 Home</a></li>
+          <li><a href="news.html">📰 News</a></li>
+          <li><a href="calendar.html">📅 Calendar</a></li>
+          <li><a href="documents.html">📁 Documents</a></li>
+          <li><a href="shoutouts.html">🎉 Shoutouts</a></li>
+          <li><a href="wiki.html">📚 Wiki</a></li>
+          <li><a href="ai.html">🤖 Ask AI</a></li>
+          <li><a href="hardware-request.html">💻 Hardware Request</a></li>
+          <li><a href="it-helpdesk.html" class="active">🛠 IT Help Desk</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-  <main class="container">
-    <h2>Submit an IT Help Desk Request</h2>
-    <form id="helpdesk-form">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required />
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Submit an IT Help Desk Request</h1>
+      <form id="helpdesk-form" class="form-card">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required />
 
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required />
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required />
 
-      <label for="department">Department</label>
-      <select id="department" name="department" required>
-        <option value="">-- Select --</option>
-        <option value="IT">IT</option>
-        <option value="HR">Human Resources</option>
-        <option value="Operations">Operations</option>
-        <option value="Policy">Policy</option>
-        <option value="Other">Other</option>
-      </select>
+        <label for="department">Department</label>
+        <select id="department" name="department" required>
+          <option value="">-- Select --</option>
+          <option value="IT">IT</option>
+          <option value="HR">Human Resources</option>
+          <option value="Operations">Operations</option>
+          <option value="Policy">Policy</option>
+          <option value="Other">Other</option>
+        </select>
 
-      <label for="issue">Issue Description</label>
-      <textarea id="issue" name="issue" rows="5" required></textarea>
+        <label for="issue">Issue Description</label>
+        <textarea id="issue" name="issue" rows="5" required></textarea>
 
-      <button type="submit">Submit Request</button>
-      <p class="success-message" id="success-msg">✅ Request submitted! Our IT team will follow up shortly.</p>
-    </form>
-  </main>
+        <button type="submit">Submit Request</button>
+        <p class="success-message" id="success-msg">✅ Request submitted! Our IT team will follow up shortly.</p>
+      </form>
+    </main>
+  </div>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <p>© 2025 The Commit Partnership. All rights reserved.</p>
   </footer>
@@ -56,9 +67,39 @@
   <script>
     document.getElementById('helpdesk-form').addEventListener('submit', function (e) {
       e.preventDefault();
-      document.getElementById('success-msg').style.display = 'block';
-      this.reset();
+
+      const form = this;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      setTimeout(() => {
+        const fakeIssueId = "IT-" + Math.floor(Math.random() * 9000 + 1000);
+
+        const successMsg = document.getElementById('success-msg');
+        successMsg.innerHTML = `
+          ✅ Request submitted! Jira ticket <strong>${fakeIssueId}</strong> has been created. 
+          Our IT team will follow up shortly.
+          <br/><br/>
+          <a href="mock-ticket.html?ticket=${fakeIssueId}" class="view-ticket-button">📄 View Ticket</a>
+        `;
+        successMsg.style.display = 'block';
+
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Request";
+      }, 1200);
     });
+
+    function filterSidebar() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const links = document.getElementById("navLinks").getElementsByTagName("li");
+      for (let i = 0; i < links.length; i++) {
+        const a = links[i].getElementsByTagName("a")[0];
+        const textValue = a.textContent || a.innerText;
+        links[i].style.display = textValue.toLowerCase().includes(input) ? "" : "none";
+      }
+    }
   </script>
 </body>
 </html>
