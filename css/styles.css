@@ -247,4 +247,162 @@ button:hover {
 .button-link:hover {
   background-color: #005fa3;
 }
+/* Sidebar Layout */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  width: 240px;
+  background-color: #1c2b39;
+  color: white;
+  flex-shrink: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.sidebar-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.sidebar h2 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #f7941e;
+  text-align: center;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 12px;
+}
+
+.sidebar nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  padding: 10px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  background-color: #2d3f54;
+  color: #f7941e;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Adjust header to stay within main content */
+.site-header {
+  background-color: transparent;
+  color: #1c2b39;
+  padding: 0;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.topnav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 20px;
+}
+
+.topnav ul li a {
+  color: #1c2b39;
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.topnav ul li a.active,
+.topnav ul li a:hover {
+  border-bottom: 2px solid #f7941e;
+  color: #f7941e;
+}
+
+/* Responsive Sidebar */
+@media screen and (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+
+  .sidebar nav ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+
+  .sidebar nav ul li {
+    margin: 0 10px;
+  }
+
+  .sidebar-header {
+    flex-direction: row;
+    gap: 15px;
+    margin-bottom: 0;
+  }
+
+  .sidebar h2 {
+    font-size: 1rem;
+  }
+
+  .main-content {
+    padding: 16px;
+  }
+
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .topnav ul {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
 
