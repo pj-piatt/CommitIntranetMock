@@ -8,58 +8,98 @@
   <script defer src="scripts/form-submit.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
-    <h1>Commit Intranet Hub</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href="shoutouts.html">Shoutouts</a></li>
-        <li><a href="wiki.html">Wiki</a></li>
-        <li><a href="hr.html" class="active">HR</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="sidebar-logo" />
+        <div class="sidebar-search">
+          <input type="text" id="sidebar-search" placeholder="Search pages..." />
+        </div>
+      </div>
+      <h2>Departments</h2>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="calendar.html">Calendar</a></li>
+          <li><a href="documents.html">Documents</a></li>
+          <li><a href="shoutouts.html">Shoutouts</a></li>
+          <li><a href="wiki.html">Wiki</a></li>
+          <li><a href="hr.html" class="active">HR</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-  <main class="container">
-    <h2>Submit PTO Request</h2>
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="site-header">
+        <h1>Commit Intranet Hub</h1>
+      </header>
 
-    <form id="pto-form">
-      <label for="name">Employee Name:</label>
-      <input type="text" id="name" name="name" required />
+      <h2>Submit PTO Request</h2>
 
-      <label for="email">Work Email:</label>
-      <input type="email" id="email" name="email" required />
+      <form id="pto-form">
+        <label for="name">Employee Name:</label>
+        <input type="text" id="name" name="name" required />
 
-      <label for="department">Department:</label>
-      <select id="department" name="department" required>
-        <option value="">Select</option>
-        <option value="HR">Human Resources</option>
-        <option value="IT">IT</option>
-        <option value="Operations">Operations</option>
-        <option value="Policy">Policy</option>
-        <option value="Development">Development</option>
-      </select>
+        <label for="email">Work Email:</label>
+        <input type="email" id="email" name="email" required />
 
-      <label for="start">Start Date:</label>
-      <input type="date" id="start" name="start" required />
+        <label for="department">Department:</label>
+        <select id="department" name="department" required>
+          <option value="">Select</option>
+          <option value="HR">Human Resources</option>
+          <option value="IT">IT</option>
+          <option value="Operations">Operations</option>
+          <option value="Policy">Policy</option>
+          <option value="Development">Development</option>
+        </select>
 
-      <label for="end">End Date:</label>
-      <input type="date" id="end" name="end" required />
+        <label for="start">Start Date:</label>
+        <input type="date" id="start" name="start" required />
 
-      <label for="notes">Additional Notes:</label>
-      <textarea id="notes" name="notes" rows="4" placeholder="Optional..."></textarea>
+        <label for="end">End Date:</label>
+        <input type="date" id="end" name="end" required />
 
-      <button type="submit">Submit Request</button>
-      <p class="success-message" id="pto-success">Request submitted successfully (simulated)!</p>
-    </form>
-  </main>
+        <label for="notes">Additional Notes:</label>
+        <textarea id="notes" name="notes" rows="4" placeholder="Optional..."></textarea>
 
-  <footer class="site-footer">
-    <p>© 2025 The Commit Partnership. All rights reserved.</p>
-  </footer>
+        <button type="submit">Submit Request</button>
+        <p class="success-message" id="pto-success" style="display: none;"></p>
+
+        <!-- Simulated Extra Features -->
+        <div id="enhancements" style="display: none; margin-top: 1em;">
+          <p>📧 A copy of your request was sent to your email address.</p>
+          <p>📆 This event will be added to your calendar (simulated).</p>
+          <button type="button" onclick="window.print()">📄 Download Confirmation</button>
+        </div>
+      </form>
+
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('pto-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const start = document.getElementById('start').value;
+      const end = document.getElementById('end').value;
+
+      const id = '#PTO-REQ-' + Math.floor(Math.random() * 9000 + 1000);
+      const msg = document.getElementById('pto-success');
+      msg.innerHTML = `✅ PTO Request submitted!<br><strong>Confirmation ID:</strong> ${id}<br><strong>Dates:</strong> ${start} to ${end}`;
+      msg.style.display = 'block';
+
+      // Show simulated enhancements
+      document.getElementById('enhancements').style.display = 'block';
+
+      this.reset();
+    });
+  </script>
 </body>
 </html>
