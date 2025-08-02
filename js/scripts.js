@@ -139,4 +139,56 @@ function submitAIQuestion() {
     response.innerHTML = `<strong>AI Response:</strong> ${answer}`;
   }, 500);
 }
+// Add emoji picker functionality
+const emojiButton = document.getElementById("emoji-button");
+const messageField = document.getElementById("message");
+
+emojiButton.addEventListener("click", () => {
+  const emojis = ["😀", "🎉", "👏", "🌟", "💯", "🔥", "🙌", "💪"];
+  const picker = document.createElement("div");
+  picker.classList.add("emoji-picker");
+
+  emojis.forEach((emoji) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = emoji;
+    btn.onclick = () => {
+      messageField.value += emoji;
+      picker.remove();
+    };
+    picker.appendChild(btn);
+  });
+
+  // Remove any existing picker before adding a new one
+  const existing = document.querySelector(".emoji-picker");
+  if (existing) existing.remove();
+
+  emojiButton.insertAdjacentElement("afterend", picker);
+});
+
+// Enhanced submit with department tag
+document.getElementById("shoutout-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const from = document.getElementById("from").value;
+  const to = document.getElementById("to").value;
+  const msg = document.getElementById("message").value;
+  const dept = document.getElementById("department").value;
+
+  const shoutout = `🎊 [${dept}] Shoutout from ${from} to ${to}: ${msg}`;
+  const list = document.getElementById("shoutout-list");
+  const newItem = document.createElement("li");
+  newItem.textContent = shoutout;
+  list.insertBefore(newItem, list.firstChild);
+
+  const confirm = document.getElementById("shoutout-success");
+  confirm.innerHTML = `✅ Shoutout posted! Confirmation ID: #SO-${Math.floor(Math.random() * 9000 + 1000)}`;
+  confirm.style.display = "block";
+
+  this.reset();
+  confirm.scrollIntoView({ behavior: "smooth" });
+
+  const picker = document.querySelector(".emoji-picker");
+  if (picker) picker.remove();
+});
+
 
