@@ -7,96 +7,89 @@
   <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
-  <header class="site-header">
-    <img src="assets/commit-logo.png" alt="Commit Partnership Logo" class="logo" />
-    <h1>Commit Intranet Hub</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href="shoutouts.html">Shoutouts</a></li>
-        <li><a href="wiki.html">Wiki</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Department Navigation">
+      <div class="sidebar-header">
+        <img src="assets/commit-logo.png" alt="Commit Logo" class="sidebar-logo">
+        <h2>Departments</h2>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="departments/hr.html">👥 HR</a></li>
+          <li><a href="departments/it.html">💻 IT Support</a></li>
+          <li><a href="departments/operations.html">📦 Operations</a></li>
+          <li><a href="departments/policy.html">📜 Policy</a></li>
+          <li><a href="departments/development.html">💡 Development</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-  <main class="dashboard">
-    <section class="widget">
-      <h2>Welcome to the Hub</h2>
-      <p>Use this dashboard to stay updated, submit requests, and collaborate across teams.</p>
-    </section>
+    <div class="main-content">
+      <header class="site-header">
+        <h1>Commit Intranet Hub</h1>
+        <nav class="topnav">
+          <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="calendar.html">Calendar</a></li>
+            <li><a href="documents.html">Documents</a></li>
+            <li><a href="shoutouts.html">Shoutouts</a></li>
+            <li><a href="wiki.html">Wiki</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <section class="widget quick-links">
-      <h2>Quick Links</h2>
-      <ul>
-        <li><a href="pto-request.html">Request PTO</a></li>
-        <li><a href="it-helpdesk.html">IT Help Desk</a></li>
-        <li><a href="hardware-request.html">Hardware Request</a></li>
-        <li><a href="software-request.html">Software Request</a></li>
-      </ul>
-    </section>
+      <main class="dashboard">
+        <section class="widget">
+          <h2>Welcome to the Hub</h2>
+          <p>Use this dashboard to stay updated, submit requests, and collaborate across teams.</p>
+        </section>
 
-    <section class="widget">
-  <h2>Virtual Assistant</h2>
-  <p>Need help? Ask Commit AI your HR, IT, or general questions.</p>
-  <a href="ai.html" class="button-link">Ask Commit AI</a>
-</section>
+        <section class="widget quick-links">
+          <h2>Quick Links</h2>
+          <ul>
+            <li><a href="pto-request.html">Request PTO</a></li>
+            <li><a href="it-helpdesk.html">IT Help Desk</a></li>
+            <li><a href="hardware-request.html">Hardware Request</a></li>
+            <li><a href="software-request.html">Software Request</a></li>
+          </ul>
+        </section>
 
-    <section class="widget calendar">
-      <h2>Upcoming Events</h2>
-      <ul>
-        <li><strong>Aug 5:</strong> All-Staff Meeting</li>
-        <li><strong>Aug 12:</strong> Summer PTO Deadline</li>
-        <li><strong>Aug 20:</strong> Birthday Bash – 🎉</li>
-      </ul>
-    </section>
+        <section class="widget">
+          <h2>Virtual Assistant</h2>
+          <p>Need help? Ask Commit AI your HR, IT, or general questions.</p>
+          <a href="ai.html" class="button-link">Ask Commit AI</a>
+        </section>
 
-    <section class="widget news">
-      <h2>Latest News</h2>
-      <ul>
-        <li><a href="news.html#item1">Commit Ranked #1 in Local Impact!</a></li>
-        <li><a href="news.html#item2">New HR Policies Go Live</a></li>
-        <li><a href="news.html#item3">August Birthday Celebrations 🎂</a></li>
-      </ul>
-    </section>
+        <section class="widget calendar">
+          <h2>Upcoming Events</h2>
+          <ul>
+            <li><strong>Aug 5:</strong> All-Staff Meeting</li>
+            <li><strong>Aug 12:</strong> Summer PTO Deadline</li>
+            <li><strong>Aug 20:</strong> Birthday Bash – 🎉</li>
+          </ul>
+        </section>
 
-    <section class="widget shoutouts">
-      <h2>Shoutouts & Recognition</h2>
-      <p>👏 Huge thanks to the Ops team for crushing last quarter’s goals!</p>
-      <p>🎉 Welcome our newest team members in Policy & Dev!</p>
-    </section>
-  </main>
-  <section class="widget">
-  <h2>Departments</h2>
-  <div class="department-grid">
-    <a class="department-tile" href="departments/hr.html">
-      <div class="icon">👥</div>
-      <span>Human Resources</span>
-    </a>
-    <a class="department-tile" href="departments/it.html">
-      <div class="icon">💻</div>
-      <span>IT Support</span>
-    </a>
-    <a class="department-tile" href="departments/operations.html">
-      <div class="icon">📦</div>
-      <span>Operations</span>
-    </a>
-    <a class="department-tile" href="departments/policy.html">
-      <div class="icon">📜</div>
-      <span>Policy</span>
-    </a>
-    <a class="department-tile" href="development.html">
-      <div class="icon">💡</div>
-      <span>Development</span>
-    </a>
+        <section class="widget news">
+          <h2>Latest News</h2>
+          <ul>
+            <li><a href="news.html#item1">Commit Ranked #1 in Local Impact!</a></li>
+            <li><a href="news.html#item2">New HR Policies Go Live</a></li>
+            <li><a href="news.html#item3">August Birthday Celebrations 🎂</a></li>
+          </ul>
+        </section>
+
+        <section class="widget shoutouts">
+          <h2>Shoutouts & Recognition</h2>
+          <p>👏 Huge thanks to the Ops team for crushing last quarter’s goals!</p>
+          <p>🎉 Welcome our newest team members in Policy & Dev!</p>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership. All rights reserved.</p>
+      </footer>
+    </div>
   </div>
-</section>
-
-
-  <footer class="site-footer">
-    <p>© 2025 The Commit Partnership. All rights reserved.</p>
-  </footer>
 </body>
 </html>
