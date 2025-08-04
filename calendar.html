@@ -101,11 +101,35 @@
         </div>
       </main>
 
-      <footer class="site-footer">
-        <p>© 2025 The Commit Partnership. All rights reserved.</p>
-      </footer>
+
+       <footer class="site-footer">
+       <p>© 2025 The Commit Partnership &nbsp;|&nbsp; Built for demonstration purposes</p>
+       <p style="font-size: 0.8rem; color: #aaa;">All content and interactions are simulated.</p>
+     </footer>
+ </div>
+</div>
+      
+     
+
+
+  <script src="../js/loadPartials.js"></script>
+ 
+  
+<!-- AI Assistant Bubble -->
+<div id="ai-chat-widget">
+  <button id="ai-toggle" aria-label="Open AI Assistant">🤖</button>
+  <div id="ai-chat-window" style="display: none;">
+    <div class="ai-chat-header">
+      <span>Commit AI Assistant</span>
+      <button id="ai-close">×</button>
     </div>
+    <div class="ai-chat-body" id="ai-messages"></div>
+    <textarea id="ai-user-input" placeholder="Ask a question..."></textarea>
+    <button id="ai-send">Send</button>
   </div>
+</div>
+
+<script src="js/ai-assistant.js" defer></script>
 
   <!-- JavaScript Calendar Logic -->
   <script>
