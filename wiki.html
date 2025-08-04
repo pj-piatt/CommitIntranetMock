@@ -297,6 +297,54 @@
     if (typeof initAssistant === "function") initAssistant();
   });
 </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("ai-toggle");
+    const chatWindow = document.getElementById("ai-chat-window");
+    const closeBtn = document.getElementById("ai-close");
+    const sendBtn = document.getElementById("ai-send");
+    const chatBody = document.getElementById("ai-messages");
+    const inputField = document.getElementById("ai-user-input");
+
+    if (!toggleBtn || !chatWindow || !closeBtn || !sendBtn || !chatBody || !inputField) {
+      console.warn("AI Assistant could not initialize.");
+      return;
+    }
+
+    toggleBtn.onclick = () => {
+      chatWindow.style.display = "block";
+      inputField.focus();
+    };
+
+    closeBtn.onclick = () => {
+      chatWindow.style.display = "none";
+    };
+
+    sendBtn.onclick = () => {
+      const input = inputField.value.trim();
+      if (!input) return;
+
+      const userMsg = document.createElement("div");
+      userMsg.innerHTML = `<strong>You:</strong> ${input}`;
+      chatBody.appendChild(userMsg);
+
+      const aiMsg = document.createElement("div");
+      aiMsg.innerHTML = `<strong>Commit AI:</strong> ${getAIResponse(input)}`;
+      chatBody.appendChild(aiMsg);
+
+      inputField.value = "";
+      chatBody.scrollTop = chatBody.scrollHeight;
+    };
+
+    inputField.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendBtn.click();
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>
