@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Company Wiki | Commit Intranet Hub</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="scripts/wiki.js"></script>
+  <script defer src="scripts/ai-assistant.js"></script>
+
   <style>
     .wiki-grid {
       display: grid;
@@ -74,17 +77,99 @@
     .feedback button:hover {
       background-color: #2e3f54;
     }
+
+    /* AI Assistant Styles */
+    .ai-bubble {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #0078d4;
+      color: white;
+      font-size: 1.5rem;
+      padding: 10px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .ai-chat {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 1000;
+      overflow: hidden;
+      flex-direction: column;
+      font-size: 0.95rem;
+    }
+
+    .ai-header {
+      background: #1c2b39;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ai-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .ai-body {
+      max-height: 200px;
+      overflow-y: auto;
+      padding: 10px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    .ai-input {
+      display: flex;
+      padding: 10px;
+      gap: 6px;
+    }
+
+    .ai-input textarea {
+      flex: 1;
+      resize: none;
+      padding: 6px;
+      font-size: 0.95rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .ai-input button {
+      padding: 6px 12px;
+      background-color: #0078d4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .ai-input button:hover {
+      background-color: #005fa3;
+    }
   </style>
-  <script defer src="scripts/wiki.js"></script>
 </head>
+
 <body>
   <div class="layout">
     <!-- Sidebar Navigation -->
     <aside class="sidebar" aria-label="Department Navigation">
       <div class="sidebar-header">
         <img src="assets/commit-logo-white.svg" alt="Commit Logo" class="logo" />
-      
-        
       </div>
       <nav>
         <ul>
@@ -130,14 +215,14 @@
       <input type="text" id="wiki-search" placeholder="Search articles..." class="search-bar" />
 
       <section class="wiki-grid" id="wiki-articles">
-        <!-- Articles here -->
-        <a href="wiki-articles/Commit_Mock_Document_Upload_guide.pdf" class="article" data-tags="IT,Tools">
-          <h3>Upload Documents to the Library</h3>
-          <p>Step-by-step guide for uploading files by department in the Document Library.</p>
+        <a href="wiki-articles/reset-password.html" class="article" data-tags="IT,Tools">
+          <h3>How to Reset Your Password</h3>
+          <p>Visit the password reset portal or contact IT for MFA support.</p>
+          <div class="tags"><span class="tag">IT</span> <span class="tag">Tools</span></div>
           <div class="feedback">
-          <span>Was this helpful?</span>
-          <button class="thumbs-up">👍</button>
-          <button class="thumbs-down">👎</button>
+            <span>Was this helpful?</span>
+            <button class="thumbs-up">Yes</button>
+            <button class="thumbs-down">No</button>
           </div>
         </a>
 
@@ -173,6 +258,18 @@
             <button class="thumbs-down">No</button>
           </div>
         </a>
+
+        <a href="wiki-articles/upload-documents.html" class="article" data-tags="IT,Tools">
+          <h3>Upload Documents to the Library</h3>
+          <p>Step-by-step guide for uploading files by department in the Document Library.</p>
+          <div class="tags"><span class="tag">IT</span> <span class="tag">Tools</span></div>
+          <div class="feedback">
+            <span>Was this helpful?</span>
+            <button class="thumbs-up">Yes</button>
+            <button class="thumbs-down">No</button>
+          </div>
+        </a>
+
       </section>
     </main>
   </div>
@@ -180,5 +277,20 @@
   <footer class="site-footer">
     <p>© 2025 The Commit Partnership. All rights reserved.</p>
   </footer>
+
+  <!-- AI Assistant UI -->
+  <div id="ai-toggle" class="ai-bubble">💬</div>
+
+  <div id="ai-chat-window" class="ai-chat">
+    <div class="ai-header">
+      <strong>Commit AI</strong>
+      <button id="ai-close" class="ai-close">×</button>
+    </div>
+    <div id="ai-messages" class="ai-body"></div>
+    <div class="ai-input">
+      <textarea id="ai-user-input" placeholder="Ask me anything..."></textarea>
+      <button id="ai-send">Send</button>
+    </div>
+  </div>
 </body>
 </html>
