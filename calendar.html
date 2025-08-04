@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calendar – Commit Intranet Hub</title>
   <link rel="stylesheet" href="css/styles.css"/>
-
+  <link rel="stylesheet" href="css/ai-assistant.css" />
   <style>
     .calendar-container {
       max-width: 800px;
@@ -56,8 +56,6 @@
     <aside class="sidebar" aria-label="Department Navigation">
       <div class="sidebar-header">
         <img src="assets/commit-logo-white.svg" alt="Commit Logo" class="sidebar-logo" />
-        
-        
       </div>
       <nav>
         <ul>
@@ -88,7 +86,7 @@
         </nav>
       </header>
 
-      <main>
+      <main class="dashboard">
         <div class="calendar-container">
           <div class="calendar-header">
             <h2 id="month-year"></h2>
@@ -101,35 +99,30 @@
         </div>
       </main>
 
+      <footer class="site-footer">
+        <p>© 2025 The Commit Partnership &nbsp;|&nbsp; Built for demonstration purposes</p>
+        <p style="font-size: 0.8rem; color: #aaa;">All content and interactions are simulated.</p>
+      </footer>
+    </div> <!-- End .main-content -->
+  </div> <!-- End .layout -->
 
-       <footer class="site-footer">
-       <p>© 2025 The Commit Partnership &nbsp;|&nbsp; Built for demonstration purposes</p>
-       <p style="font-size: 0.8rem; color: #aaa;">All content and interactions are simulated.</p>
-     </footer>
- </div>
-</div>
-      
-     
-
-
-  <script src="../js/loadPartials.js"></script>
- 
-  
-<!-- AI Assistant Bubble -->
-<div id="ai-chat-widget">
-  <button id="ai-toggle" aria-label="Open AI Assistant">🤖</button>
-  <div id="ai-chat-window" style="display: none;">
-    <div class="ai-chat-header">
-      <span>Commit AI Assistant</span>
-      <button id="ai-close">×</button>
+  <!-- AI Assistant Bubble -->
+  <div id="ai-chat-widget">
+    <button id="ai-toggle" aria-label="Open AI Assistant">🤖</button>
+    <div id="ai-chat-window" style="display: none;">
+      <div class="ai-chat-header">
+        <span>Commit AI Assistant</span>
+        <button id="ai-close">×</button>
+      </div>
+      <div class="ai-chat-body" id="ai-messages"></div>
+      <textarea id="ai-user-input" placeholder="Ask a question..."></textarea>
+      <button id="ai-send">Send</button>
     </div>
-    <div class="ai-chat-body" id="ai-messages"></div>
-    <textarea id="ai-user-input" placeholder="Ask a question..."></textarea>
-    <button id="ai-send">Send</button>
   </div>
-</div>
 
-<script src="js/ai-assistant.js" defer></script>
+  <!-- Scripts -->
+  <script src="js/loadPartials.js"></script>
+  <script src="js/ai-assistant.js" defer></script>
 
   <!-- JavaScript Calendar Logic -->
   <script>
@@ -153,7 +146,6 @@
       calendarGrid.innerHTML = "";
       monthYear.textContent = `${date.toLocaleString("default", { month: "long" })} ${year}`;
 
-      // Day headers
       ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach(day => {
         const div = document.createElement("div");
         div.className = "day";
@@ -206,18 +198,6 @@
     }
 
     renderCalendar(currentDate);
-  </script>
-
-  <!-- Sidebar Search Logic -->
-  <script>
-    document.querySelector('.sidebar-search input').addEventListener('input', function () {
-      const query = this.value.toLowerCase();
-      const widgets = document.querySelectorAll('.widget');
-      widgets.forEach(widget => {
-        const text = widget.innerText.toLowerCase();
-        widget.style.display = text.includes(query) ? 'block' : 'none';
-      });
-    });
   </script>
 </body>
 </html>
