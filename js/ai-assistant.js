@@ -85,6 +85,8 @@ function getAIResponse(input) {
   // Document Upload
   if (
     lower.includes("upload a document") ||
+    lower.includes("document") ||
+    lower.includes("document guide") ||
     lower.includes("upload file") ||
     lower.includes("add document") ||
     lower.includes("submit document") ||
@@ -92,7 +94,7 @@ function getAIResponse(input) {
     lower.includes("upload to documents") ||
     lower.includes("upload guide")
   )
-    return `You can upload files to your department panel on the <a href='documents.html'>Documents page</a>.<br>Need step-by-step help? View the <a href='wiki-articles/upload-documents.html'>Upload Documents Guide</a>.`;
+    return `You can upload files to your department panel on the <a href='documents.html'>Documents page</a>.<br>Need step-by-step help? View the <a href='wiki-articles/Commit_Mock_Document_Upload_guide.pdf'>Upload Documents Guide</a>.`;
 
   // Fallback
   return "I'm still learning! Try rephrasing your question or check the <a href='wiki.html'>Wiki</a> for help. You can ask about things like PTO, onboarding, password resets, or where to upload files.";
