@@ -1,6 +1,6 @@
 // ai-assistant.js
 
-// Toggle open/close
+// Element references
 const toggleBtn = document.getElementById("ai-toggle");
 const chatWindow = document.getElementById("ai-chat-window");
 const closeBtn = document.getElementById("ai-close");
@@ -8,8 +8,13 @@ const sendBtn = document.getElementById("ai-send");
 const chatBody = document.getElementById("ai-messages");
 const inputField = document.getElementById("ai-user-input");
 
+// Chat UI functionality
 if (toggleBtn && chatWindow && closeBtn && sendBtn && chatBody && inputField) {
-  toggleBtn.onclick = () => (chatWindow.style.display = "block");
+  toggleBtn.onclick = () => {
+    chatWindow.style.display = "block";
+    inputField.focus();
+  };
+
   closeBtn.onclick = () => (chatWindow.style.display = "none");
 
   sendBtn.onclick = () => {
@@ -27,8 +32,17 @@ if (toggleBtn && chatWindow && closeBtn && sendBtn && chatBody && inputField) {
     inputField.value = "";
     chatBody.scrollTop = chatBody.scrollHeight;
   };
+
+  // Trigger on Enter key (Shift+Enter allows new line)
+  inputField.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendBtn.click();
+    }
+  });
 }
 
+// AI logic engine
 function getAIResponse(input) {
   const lower = input.toLowerCase();
 
