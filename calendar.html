@@ -126,6 +126,7 @@
 
   <!-- JavaScript Calendar Logic -->
   <script>
+  document.addEventListener("DOMContentLoaded", () => {
     const calendarGrid = document.getElementById("calendar-grid");
     const monthYear = document.getElementById("month-year");
     let currentDate = new Date();
@@ -197,7 +198,13 @@
       renderCalendar(currentDate);
     }
 
+    // Expose to global scope so buttons can access them
+    window.prevMonth = prevMonth;
+    window.nextMonth = nextMonth;
+
     renderCalendar(currentDate);
-  </script>
+  });
+</script>
+
 </body>
 </html>
