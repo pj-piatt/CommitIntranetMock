@@ -94,8 +94,7 @@ function getAIResponse(input) {
     lower.includes("upload to documents") ||
     lower.includes("upload guide")
   )
-    return `You can upload files to your department panel on the <a href='documents.html'>Documents page</a>.<br>Need step-by-step help? View the <a href='wiki-articles/Commit_Mock_Document_Upload_guide.pdf'>Upload Documents Guide</a>.`;
-
+   return `You can upload files directly to your department panel on the <a href='documents.html'>Documents page</a>.<br><br>📄 Need help? <a href='wiki-articles/Commit_Mock_Document_Upload_guide.pdf' target='_blank' rel='noopener'>View the Upload Documents Guide (PDF)</a>.`;
   // Fallback
   return "I'm still learning! Try rephrasing your question or check the <a href='wiki.html'>Wiki</a> for help. You can ask about things like PTO, onboarding, password resets, or where to upload files.";
 }
