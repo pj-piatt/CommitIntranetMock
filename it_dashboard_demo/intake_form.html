@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Dashboard — Initiative Intake Form</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100vh;padding:32px 20px}
+.wrap{max-width:680px;margin:0 auto}
+.top{background:#1a1a1a;border-radius:12px;padding:20px 24px;margin-bottom:24px}
+.top-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:4px}
+.top-sub{font-size:13px;color:rgba(255,255,255,.55)}
+.notice{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:14px 16px;margin-bottom:24px;font-size:13px;color:#1e40af;line-height:1.6}
+.notice b{font-weight:700}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:24px;margin-bottom:16px}
+.card-title{font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #f3f4f6;color:#374151}
+.field{margin-bottom:18px}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:12px;font-weight:600;color:#6b7280;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
+.req{color:#dc2626;margin-left:2px}
+input[type=text],input[type=email],input[type=date],select,textarea{width:100%;font-family:inherit;font-size:13px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;color:#1a1a1a;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#3b82f6;background:#fff}
+textarea{resize:vertical;min-height:80px}
+.hint{font-size:11px;color:#9ca3af;margin-top:5px;line-height:1.5}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.status-opt{border:1.5px solid #e5e7eb;border-radius:8px;padding:10px 14px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:8px}
+.status-opt:hover{border-color:#93c5fd;background:#f0f9ff}
+.status-opt.selected{border-color:#3b82f6;background:#eff6ff}
+.status-opt input{width:16px;height:16px;accent-color:#3b82f6;flex-shrink:0}
+.status-opt-label{font-size:13px;font-weight:500}
+.status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.submit-area{margin-top:24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.submit-btn{font-family:inherit;font-size:14px;font-weight:700;padding:12px 28px;border-radius:10px;border:none;background:#1a1a1a;color:#fff;cursor:pointer;transition:background .15s}
+.submit-btn:hover{background:#374151}
+.submit-btn:disabled{background:#9ca3af;cursor:not-allowed}
+.cancel-note{font-size:12px;color:#9ca3af}
+.success{display:none;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:20px 24px;text-align:center}
+.success-title{font-size:16px;font-weight:700;color:#166534;margin-bottom:6px}
+.success-sub{font-size:13px;color:#16a34a}
+.divider{height:1px;background:#f3f4f6;margin:16px 0}
+.type-grid{display:grid;grid-template-columns:3fr 1fr;gap:10px;align-items:end}
+@media(max-width:520px){.row-2,.status-grid,.type-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="top-title">IT Dashboard — Initiative Intake Form</div>
+    <div class="top-sub">Commit Partnership · IT Operations · One-time submission per initiative</div>
+  </div>
+
+  <div class="notice">
+    <b>Who this is for:</b> Craig Dennis and Michael Perdunn / Oaktruss.<br>
+    Fill out one form per initiative or workstream you own. This populates the IT Leadership Dashboard. Takes about 5 minutes per initiative. If you have questions, contact PJ Piatt.
+  </div>
+
+  <div id="form-wrap">
+    <div class="card">
+      <div class="card-title">Your information</div>
+      <div class="row-2">
+        <div class="field">
+          <label>Your name <span class="req">*</span></label>
+          <input type="text" id="submitter_name" placeholder="e.g. Craig Dennis">
+        </div>
+        <div class="field">
+          <label>Your role / org</label>
+          <input type="text" id="submitter_role" placeholder="e.g. IT Consultant / Oaktruss vCISO">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Initiative basics</div>
+      <div class="field">
+        <label>Initiative name <span class="req">*</span></label>
+        <input type="text" id="init_name" placeholder="e.g. Security risk assessment, End-user support program">
+        <div class="hint">Use a clear, leadership-friendly name — this appears on the dashboard.</div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Dashboard group <span class="req">*</span></label>
+          <select id="init_group">
+            <option value="">Select group...</option>
+            <option value="Featured">Featured — active, high-visibility</option>
+            <option value="Platform">Platform & infrastructure</option>
+            <option value="Governance">Governance & enablement</option>
+            <option value="Future — FY27">Future state — FY27</option>
+          </select>
+          <div class="hint">Where should this appear on the portfolio view?</div>
+        </div>
+        <div class="field">
+          <label>Owner</label>
+          <input type="text" id="init_owner" placeholder="Your name or team">
+        </div>
+      </div>
+      <div class="field">
+        <label>Brief description</label>
+        <textarea id="init_desc" placeholder="1–2 sentences: what is this initiative and why does it matter to leadership?"></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Timeline & progress</div>
+      <div class="row-2">
+        <div class="field">
+          <label>Start month <span class="req">*</span></label>
+          <select id="start_month">
+            <option value="">Select...</option>
+            <option value="0">Jan 2026 (FY26)</option>
+            <option value="1">Feb 2026 (FY26)</option>
+            <option value="2">Mar 2026 (FY26)</option>
+            <option value="3">Apr 2026 (FY26)</option>
+            <option value="4">May 2026 (FY26)</option>
+            <option value="5">Jun 2026 (FY26)</option>
+            <option value="6">Jul 2026 (FY27)</option>
+            <option value="7">Aug 2026 (FY27)</option>
+            <option value="8">Sep 2026 (FY27)</option>
+            <option value="9">Oct 2026 (FY27)</option>
+            <option value="10">Nov 2026 (FY27)</option>
+            <option value="11">Dec 2026 (FY27)</option>
+            <option value="12">Jan 2027 (FY27)</option>
+            <option value="13">Feb 2027 (FY27)</option>
+            <option value="14">Mar 2027 (FY27)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>End / target month <span class="req">*</span></label>
+          <select id="end_month">
+            <option value="">Select...</option>
+            <option value="0">Jan 2026 (FY26)</option>
+            <option value="1">Feb 2026 (FY26)</option>
+            <option value="2">Mar 2026 (FY26)</option>
+            <option value="3">Apr 2026 (FY26)</option>
+            <option value="4">May 2026 (FY26)</option>
+            <option value="5">Jun 2026 (FY26)</option>
+            <option value="6">Jul 2026 (FY27)</option>
+            <option value="7">Aug 2026 (FY27)</option>
+            <option value="8">Sep 2026 (FY27)</option>
+            <option value="9">Oct 2026 (FY27)</option>
+            <option value="10">Nov 2026 (FY27)</option>
+            <option value="11">Dec 2026 (FY27)</option>
+            <option value="12">Jan 2027 (FY27)</option>
+            <option value="13">Feb 2027 (FY27)</option>
+            <option value="14">Mar 2027 (FY27)</option>
+          </select>
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Current progress (%) <span class="req">*</span></label>
+          <input type="text" id="init_progress" placeholder="e.g. 40" oninput="updateProgressDisplay(this)">
+          <div class="hint" id="progress-display">Enter a number between 0 and 100</div>
+        </div>
+        <div class="field">
+          <label>Fiscal year <span class="req">*</span></label>
+          <select id="init_fy">
+            <option value="">Select...</option>
+            <option value="fy26">FY26 only (ends Jun 30)</option>
+            <option value="fy27">FY27 only (starts Jul 1)</option>
+            <option value="both">Spans FY26 and FY27</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Current status</div>
+      <div class="field">
+        <label>Overall health <span class="req">*</span></label>
+        <div class="status-grid">
+          <div class="status-opt" onclick="selectStatus('green',this)"><input type="radio" name="status" value="green"><div class="status-dot" style="background:#22c55e"></div><span class="status-opt-label">On track / complete</span></div>
+          <div class="status-opt" onclick="selectStatus('amber',this)"><input type="radio" name="status" value="amber"><div class="status-dot" style="background:#f59e0b"></div><span class="status-opt-label">In progress</span></div>
+          <div class="status-opt" onclick="selectStatus('red',this)"><input type="radio" name="status" value="red"><div class="status-dot" style="background:#ef4444"></div><span class="status-opt-label">Needs decision / at risk</span></div>
+          <div class="status-opt" onclick="selectStatus('blue',this)"><input type="radio" name="status" value="blue"><div class="status-dot" style="background:#3b82f6"></div><span class="status-opt-label">Exceeding targets</span></div>
+          <div class="status-opt" onclick="selectStatus('gray',this)"><input type="radio" name="status" value="gray"><div class="status-dot" style="background:#9ca3af"></div><span class="status-opt-label">Planned / not started</span></div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="field">
+        <label>Status update 1 — what's happening</label>
+        <div class="type-grid">
+          <input type="text" id="status_1" placeholder="e.g. Weekly cadence established and running">
+          <select id="status_1_type">
+            <option value="">Neutral</option>
+            <option value="g">Good (green)</option>
+            <option value="w">Warning (amber)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Status update 2 (optional)</label>
+        <div class="type-grid">
+          <input type="text" id="status_2" placeholder="e.g. 3 of 9 SOPs complete">
+          <select id="status_2_type">
+            <option value="">Neutral</option>
+            <option value="g">Good (green)</option>
+            <option value="w">Warning (amber)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Status update 3 (optional)</label>
+        <div class="type-grid">
+          <input type="text" id="status_3" placeholder="e.g. Blocked until ticketing decision is made">
+          <select id="status_3_type">
+            <option value="">Neutral</option>
+            <option value="g">Good (green)</option>
+            <option value="w">Warning (amber)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Concerns & risks</div>
+      <div class="field">
+        <label>Concern 1 (optional)</label>
+        <div class="type-grid">
+          <input type="text" id="concern_1" placeholder="e.g. Dependency on SSO decision before this can progress">
+          <select id="concern_1_type">
+            <option value="">Neutral</option>
+            <option value="w">Warning (amber)</option>
+            <option value="g">Positive note</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Concern 2 (optional)</label>
+        <div class="type-grid">
+          <input type="text" id="concern_2" placeholder="e.g. Capacity limited — competing with L1 support load">
+          <select id="concern_2_type">
+            <option value="">Neutral</option>
+            <option value="w">Warning (amber)</option>
+            <option value="g">Positive note</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Next milestone</div>
+      <div class="row-2">
+        <div class="field">
+          <label>Milestone date / timeframe</label>
+          <input type="text" id="ms_date" placeholder="e.g. May 1, 2026 or Q1 FY27">
+        </div>
+        <div class="field">
+          <label>Milestone name</label>
+          <input type="text" id="ms_name" placeholder="e.g. Risk register delivered to leadership">
+        </div>
+      </div>
+      <div class="field">
+        <label>What does this milestone mean?</label>
+        <textarea id="ms_desc" placeholder="1–2 sentences describing what gets delivered and why it matters to leadership."></textarea>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button class="submit-btn" onclick="submitIntake()">Submit initiative</button>
+      <span class="cancel-note">Data goes directly into the IT Dashboard Google Sheet. Contact PJ with questions.</span>
+    </div>
+  </div>
+
+  <div class="success" id="success-msg">
+    <div class="success-title">Initiative submitted successfully</div>
+    <div class="success-sub">PJ will review and add this to the live dashboard. You'll hear back within 24 hours if anything needs clarification.<br><br>To submit another initiative, refresh this page.</div>
+  </div>
+</div>
+
+<script>
+const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+let selectedStatus = '';
+
+function selectStatus(val, el) {
+  document.querySelectorAll('.status-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+  selectedStatus = val;
+}
+
+function updateProgressDisplay(input) {
+  const v = parseInt(input.value);
+  const el = document.getElementById('progress-display');
+  if (!isNaN(v) && v >= 0 && v <= 100) {
+    el.textContent = `${v}% complete`;
+    el.style.color = v === 100 ? '#16a34a' : v >= 50 ? '#d97706' : '#6b7280';
+  } else {
+    el.textContent = 'Enter a number between 0 and 100';
+    el.style.color = '#9ca3af';
+  }
+}
+
+function val(id) { return document.getElementById(id)?.value?.trim() || ''; }
+
+function submitIntake() {
+  const required = ['submitter_name','init_name','init_group','start_month','end_month','init_progress','init_fy'];
+  for (const id of required) {
+    if (!val(id)) { alert('Please fill in all required fields (marked with *).'); document.getElementById(id).focus(); return; }
+  }
+  if (!selectedStatus) { alert('Please select an overall health status.'); return; }
+
+  const btn = document.querySelector('.submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  const data = {
+    form_type: 'intake',
+    submitted_at: new Date().toISOString(),
+    submitter_name: val('submitter_name'),
+    submitter_role: val('submitter_role'),
+    init_name: val('init_name'),
+    init_group: val('init_group'),
+    init_owner: val('init_owner') || val('submitter_name'),
+    init_desc: val('init_desc'),
+    start_month: val('start_month'),
+    end_month: val('end_month'),
+    progress: val('init_progress'),
+    fy: val('init_fy'),
+    color_code: selectedStatus,
+    status_1: val('status_1'),
+    status_1_type: val('status_1_type'),
+    status_2: val('status_2'),
+    status_2_type: val('status_2_type'),
+    status_3: val('status_3'),
+    status_3_type: val('status_3_type'),
+    concern_1: val('concern_1'),
+    concern_1_type: val('concern_1_type'),
+    concern_2: val('concern_2'),
+    concern_2_type: val('concern_2_type'),
+    ms_date: val('ms_date'),
+    ms_name: val('ms_name'),
+    ms_desc: val('ms_desc'),
+  };
+
+  if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+    setTimeout(() => {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }, 800);
+    return;
+  }
+
+  fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+    .then(() => {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.textContent = 'Submit initiative';
+      alert('Submission failed. Please try again or contact PJ directly.');
+    });
+}
+</script>
+</body>
+</html>
