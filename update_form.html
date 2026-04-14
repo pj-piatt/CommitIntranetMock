@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Dashboard — Weekly Update Form</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100vh;padding:32px 20px}
+.wrap{max-width:620px;margin:0 auto}
+.top{background:#1a1a1a;border-radius:12px;padding:20px 24px;margin-bottom:20px}
+.top-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:4px}
+.top-sub{font-size:13px;color:rgba(255,255,255,.55)}
+.notice{background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:13px 16px;margin-bottom:20px;font-size:13px;color:#166534;line-height:1.6}
+.notice b{font-weight:700}
+.week-banner{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:13px 16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.week-label{font-size:13px;color:#1e40af;font-weight:600}
+.week-date{font-size:12px;color:#3b82f6}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:22px;margin-bottom:14px}
+.card-title{font-size:14px;font-weight:700;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #f3f4f6;color:#374151;display:flex;align-items:center;gap:8px}
+.step-badge{background:#1a1a1a;color:#fff;font-size:11px;font-weight:700;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+label{display:block;font-size:12px;font-weight:600;color:#6b7280;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
+.req{color:#dc2626}
+input[type=text],select,textarea{width:100%;font-family:inherit;font-size:13px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;color:#1a1a1a;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#3b82f6;background:#fff}
+textarea{resize:vertical;min-height:72px}
+.hint{font-size:11px;color:#9ca3af;margin-top:5px;line-height:1.5}
+.field{margin-bottom:16px}
+.field:last-child{margin-bottom:0}
+.rag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rag-opt{border:1.5px solid #e5e7eb;border-radius:8px;padding:10px;cursor:pointer;text-align:center;transition:all .15s}
+.rag-opt:hover{border-color:#93c5fd}
+.rag-opt.sel-green{border-color:#22c55e;background:#f0fdf4}
+.rag-opt.sel-amber{border-color:#f59e0b;background:#fffbeb}
+.rag-opt.sel-red{border-color:#ef4444;background:#fef2f2}
+.rag-dot{width:14px;height:14px;border-radius:50%;margin:0 auto 5px}
+.rag-label{font-size:12px;font-weight:600}
+.prog-wrap{display:flex;align-items:center;gap:12px}
+.prog-input{width:90px;flex-shrink:0}
+.prog-track{flex:1;height:8px;background:#f3f4f6;border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;border-radius:4px;transition:width .3s}
+.prog-pct{font-size:13px;font-weight:700;min-width:36px;text-align:right}
+.submit-area{margin-top:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.submit-btn{font-family:inherit;font-size:14px;font-weight:700;padding:12px 28px;border-radius:10px;border:none;background:#1a1a1a;color:#fff;cursor:pointer;transition:background .15s}
+.submit-btn:hover{background:#374151}
+.submit-btn:disabled{background:#9ca3af;cursor:not-allowed}
+.cancel-note{font-size:12px;color:#9ca3af}
+.success{display:none;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:24px;text-align:center}
+.success-title{font-size:16px;font-weight:700;color:#166534;margin-bottom:6px}
+.success-sub{font-size:13px;color:#16a34a;line-height:1.6}
+.success-another{margin-top:14px;font-family:inherit;font-size:13px;font-weight:600;padding:9px 20px;border-radius:8px;border:1.5px solid #22c55e;background:transparent;cursor:pointer;color:#166534}
+.success-another:hover{background:#f0fdf4}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="top-title">IT Dashboard — Weekly Update</div>
+    <div class="top-sub">Commit Partnership · IT Operations · Takes about 3 minutes</div>
+  </div>
+
+  <div class="notice">
+    <b>Weekly cadence:</b> Submit by end of day Friday. One submission per initiative you own. The dashboard updates as soon as PJ publishes. Questions? Contact PJ Piatt.
+  </div>
+
+  <div class="week-banner">
+    <div class="week-label" id="week-label">Week ending: loading...</div>
+    <div class="week-date" id="week-date"></div>
+  </div>
+
+  <div id="form-wrap">
+    <div class="card">
+      <div class="card-title"><div class="step-badge">1</div>Your info & initiative</div>
+      <div class="field">
+        <label>Your name <span class="req">*</span></label>
+        <input type="text" id="submitter_name" placeholder="e.g. Craig Dennis">
+      </div>
+      <div class="field">
+        <label>Initiative you're updating <span class="req">*</span></label>
+        <select id="initiative_id">
+          <option value="">Select initiative...</option>
+          <optgroup label="Your initiatives">
+            <option value="other">My initiative (not listed — I'll type it below)</option>
+          </optgroup>
+          <optgroup label="Current dashboard initiatives">
+            <option value="tick">Ticketing system — platform decision</option>
+            <option value="audit">Systems audit & SharePoint cleanup</option>
+            <option value="aiit">AI-enabled IT operations pilot (AIIT)</option>
+            <option value="claude">Claude AI pilot</option>
+            <option value="m365">M365 optimization</option>
+            <option value="sf">Salesforce administration</option>
+            <option value="ext">External access & collaboration model</option>
+            <option value="sop">SOP development</option>
+            <option value="kb">Knowledge base & self-service</option>
+            <option value="sec">Security & compliance</option>
+            <option value="slack">Slack → Teams migration</option>
+            <option value="intra">Intranet & internal tooling</option>
+            <option value="itfn">IT function buildout</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="field" id="custom-name-field" style="display:none">
+        <label>Initiative name</label>
+        <input type="text" id="custom_initiative_name" placeholder="Type the name of your initiative">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="step-badge">2</div>Overall health this week</div>
+      <div class="field">
+        <label>RAG status <span class="req">*</span></label>
+        <div class="rag-grid">
+          <div class="rag-opt" id="rag-green" onclick="selectRag('Green',this)"><div class="rag-dot" style="background:#22c55e"></div><div class="rag-label" style="color:#166534">Green</div></div>
+          <div class="rag-opt" id="rag-amber" onclick="selectRag('Amber',this)"><div class="rag-dot" style="background:#f59e0b"></div><div class="rag-label" style="color:#92400e">Amber</div></div>
+          <div class="rag-opt" id="rag-red" onclick="selectRag('Red',this)"><div class="rag-dot" style="background:#ef4444"></div><div class="rag-label" style="color:#991b1b">Red</div></div>
+        </div>
+        <div class="hint">Green = on track · Amber = in progress, watching something · Red = blocked or needs a decision</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="step-badge">3</div>Progress</div>
+      <div class="field">
+        <label>Completion % <span class="req">*</span></label>
+        <div class="prog-wrap">
+          <input class="prog-input" type="text" id="progress" placeholder="0–100" oninput="updateProg(this)">
+          <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%;background:#22c55e"></div></div>
+          <div class="prog-pct" id="prog-pct">—</div>
+        </div>
+        <div class="hint">Overall completion of this initiative, not just this week's work.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="step-badge">4</div>This week's update</div>
+      <div class="field">
+        <label>Progress this week <span class="req">*</span></label>
+        <textarea id="progress_update" placeholder="What was accomplished this week? Keep it brief — 2–4 bullet points or short sentences work well."></textarea>
+      </div>
+      <div class="field">
+        <label>Next steps</label>
+        <textarea id="next_steps" placeholder="What's happening next week or coming up soon?"></textarea>
+      </div>
+      <div class="field">
+        <label>Risks or blockers</label>
+        <textarea id="risks_blockers" placeholder="Anything blocking progress, or risks leadership should be aware of? Leave blank if none."></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="step-badge">5</div>Next milestone (optional — update if changed)</div>
+      <div class="field">
+        <label>Milestone date / timeframe</label>
+        <input type="text" id="ms_date" placeholder="e.g. May 15 or end of Q1 FY27">
+      </div>
+      <div class="field">
+        <label>Milestone name</label>
+        <input type="text" id="ms_name" placeholder="e.g. Risk register delivered to leadership">
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button class="submit-btn" onclick="submitUpdate()">Submit update</button>
+      <span class="cancel-note">Submits to IT Dashboard · Weekly cadence · Contact PJ with questions</span>
+    </div>
+  </div>
+
+  <div class="success" id="success-msg">
+    <div class="success-title">Update submitted — thank you!</div>
+    <div class="success-sub">Your update has been recorded and will appear on the IT Leadership Dashboard after PJ's weekly review.<br><br>Next update due: <span id="next-due"></span></div>
+    <button class="success-another" onclick="resetForm()">Submit another initiative update</button>
+  </div>
+</div>
+
+<script>
+const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+let selectedRag = '';
+
+function getWeekEnding() {
+  const today = new Date();
+  const day = today.getDay();
+  const diff = day === 0 ? 0 : 7 - day;
+  const friday = new Date(today);
+  friday.setDate(today.getDate() + (day <= 5 ? (5 - day) : (5 - day + 7)));
+  return friday;
+}
+
+function formatDate(d) {
+  return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+(function initDates() {
+  const we = getWeekEnding();
+  document.getElementById('week-label').textContent = `Week ending: ${we.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+  document.getElementById('week-date').textContent = `Submit by Friday EOD`;
+  const nextFri = new Date(we);
+  nextFri.setDate(nextFri.getDate() + 7);
+  document.getElementById('next-due').textContent = nextFri.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+})();
+
+document.getElementById('initiative_id').addEventListener('change', function() {
+  document.getElementById('custom-name-field').style.display = this.value === 'other' ? 'block' : 'none';
+});
+
+function selectRag(val, el) {
+  document.querySelectorAll('.rag-opt').forEach(o => o.className = 'rag-opt');
+  el.classList.add(`sel-${val.toLowerCase()}`);
+  selectedRag = val;
+}
+
+function updateProg(input) {
+  const v = parseInt(input.value);
+  const fill = document.getElementById('prog-fill');
+  const pct = document.getElementById('prog-pct');
+  if (!isNaN(v) && v >= 0 && v <= 100) {
+    fill.style.width = v + '%';
+    fill.style.background = v >= 75 ? '#22c55e' : v >= 40 ? '#f59e0b' : '#ef4444';
+    pct.textContent = v + '%';
+  } else {
+    fill.style.width = '0%';
+    pct.textContent = '—';
+  }
+}
+
+function val(id) { return document.getElementById(id)?.value?.trim() || ''; }
+
+function submitUpdate() {
+  if (!val('submitter_name')) { alert('Please enter your name.'); document.getElementById('submitter_name').focus(); return; }
+  if (!val('initiative_id')) { alert('Please select the initiative you are updating.'); return; }
+  if (!selectedRag) { alert('Please select an overall RAG status.'); return; }
+  if (!val('progress')) { alert('Please enter a completion percentage.'); return; }
+  if (!val('progress_update')) { alert('Please describe this week\'s progress.'); return; }
+
+  const btn = document.querySelector('.submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  const we = getWeekEnding();
+  const initId = val('initiative_id');
+  const data = {
+    form_type: 'weekly_update',
+    submitted_at: new Date().toISOString(),
+    week_ending: we.toLocaleDateString('en-US'),
+    submitter_name: val('submitter_name'),
+    initiative_id: initId,
+    initiative_name: initId === 'other' ? val('custom_initiative_name') : document.getElementById('initiative_id').options[document.getElementById('initiative_id').selectedIndex].text,
+    overall_status: selectedRag,
+    progress: val('progress'),
+    progress_update: val('progress_update'),
+    next_steps: val('next_steps'),
+    risks_blockers: val('risks_blockers'),
+    ms_date: val('ms_date'),
+    ms_name: val('ms_name'),
+  };
+
+  if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+    setTimeout(() => {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }, 800);
+    return;
+  }
+
+  fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+    .then(() => {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.textContent = 'Submit update';
+      alert('Submission failed. Please try again or email your update to PJ directly.');
+    });
+}
+
+function resetForm() {
+  document.getElementById('form-wrap').style.display = 'block';
+  document.getElementById('success-msg').style.display = 'none';
+  document.querySelector('.submit-btn').disabled = false;
+  document.querySelector('.submit-btn').textContent = 'Submit update';
+  selectedRag = '';
+  document.querySelectorAll('.rag-opt').forEach(o => o.className = 'rag-opt');
+  document.getElementById('initiative_id').value = '';
+  document.getElementById('progress').value = '';
+  document.getElementById('prog-fill').style.width = '0%';
+  document.getElementById('prog-pct').textContent = '—';
+  ['submitter_name','progress_update','next_steps','risks_blockers','ms_date','ms_name','custom_initiative_name'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+}
+</script>
+</body>
+</html>
