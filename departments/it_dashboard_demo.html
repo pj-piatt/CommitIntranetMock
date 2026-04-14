@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Leadership Dashboard — Commit Partnership</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1a1a1a;background:#f5f5f3;font-size:13px;min-height:100vh}
+.app{max-width:1100px;margin:0 auto;padding:24px 20px 60px}
+.top-bar{background:#1a1a1a;border-radius:12px;padding:18px 22px;margin-bottom:20px;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.top-bar-left{}
+.top-bar-title{font-size:20px;font-weight:600;color:#fff;margin-bottom:3px}
+.top-bar-meta{font-size:12px;color:rgba(255,255,255,.55)}
+.top-bar-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.top-pill{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.15)}
+.top-badge{font-size:12px;padding:5px 13px;border-radius:20px;background:#fef2f2;color:#991b1b;font-weight:600;border:1px solid #fecaca;align-self:flex-start;margin-top:2px}
+.tag{display:inline-block;font-size:11px;padding:3px 9px;border-radius:20px;font-weight:500}
+.tg{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+.ta{background:#fffbeb;color:#92400e;border:1px solid #fde68a}
+.tr{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.tb{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
+.tgr{background:#f9fafb;color:#374151;border:1px solid #e5e7eb}
+
+.dec-bar{background:#fff;border:2px solid #ef4444;border-radius:12px;margin-bottom:18px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dec-trigger{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;background:transparent;width:100%;border:none;text-align:left;font-family:inherit}
+.dec-trigger:hover{background:#fef2f2}
+.dec-left{display:flex;align-items:center;gap:10px}
+.dec-dots{display:flex;gap:4px}
+.dec-dot{width:8px;height:8px;border-radius:50%;background:#ef4444}
+.dec-lbl{font-size:13px;font-weight:600;color:#991b1b}
+.dec-ct{background:#fef2f2;color:#991b1b;font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px;border:1px solid #fecaca}
+.dec-hint{font-size:11px;color:#9ca3af;margin-left:4px}
+.dec-chev{color:#991b1b;font-size:13px;transition:transform .2s;display:inline-block}
+.dec-chev.open{transform:rotate(180deg)}
+.dec-body{display:none;border-top:1.5px solid #fecaca}
+.dec-body.show{display:block}
+.dec-item{display:flex;gap:12px;padding:14px 18px;border-bottom:1px solid #fef2f2}
+.dec-item:last-child{border-bottom:none}
+.dec-n{font-size:20px;font-weight:700;color:#ef4444;min-width:22px;line-height:1.1;flex-shrink:0}
+.dec-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.dec-sub{font-size:12px;color:#6b7280;line-height:1.6}
+.dec-meta{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap;align-items:center}
+.ask-btn{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid #d1d5db;background:transparent;cursor:pointer;color:#6b7280;font-family:inherit}
+.ask-btn:hover{background:#f9fafb;color:#374151}
+
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:18px}
+.mc{background:#fff;border-radius:10px;padding:13px 15px;border:1px solid #e5e7eb}
+.mc-lbl{font-size:11px;color:#9ca3af;margin-bottom:5px;line-height:1.3}
+.mc-val{font-size:24px;font-weight:700;line-height:1}
+.mc-sub{font-size:11px;color:#9ca3af;margin-top:3px}
+
+.wins-section{margin-bottom:18px}
+.sec-lbl{font-size:11px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.wins-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.win-card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;border-left:3px solid #22c55e}
+.win-top{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.win-icon{width:26px;height:26px;border-radius:50%;background:#f0fdf4;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.win-title{font-size:13px;font-weight:600;color:#166534}
+.win-desc{font-size:12px;color:#6b7280;line-height:1.5}
+.win-meta{font-size:11px;color:#22c55e;margin-top:5px;font-weight:600}
+
+.gp-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:18px;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.gp-card:hover{border-color:#93c5fd}
+.gp-hdr{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid #f3f4f6}
+.gp-title{font-size:13px;font-weight:600}
+.gp-meta{font-size:12px;color:#9ca3af;margin-top:1px}
+.gp-open{font-size:11px;padding:5px 13px;border-radius:20px;border:1px solid #d1d5db;background:transparent;cursor:pointer;color:#374151;font-family:inherit;font-weight:500}
+.gp-open:hover{background:#f9fafb}
+.gp-bars{padding:12px 16px;display:flex;flex-direction:column;gap:7px}
+.gp-row{display:flex;align-items:center;gap:10px}
+.gp-label{font-size:11px;color:#6b7280;width:170px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gp-track{flex:1;height:11px;background:#f3f4f6;border-radius:4px;position:relative;overflow:visible}
+.gp-bar{position:absolute;height:100%;border-radius:4px}
+.gp-today{position:absolute;top:-3px;bottom:-3px;width:2px;background:#ef4444;opacity:.5;z-index:2}
+.gp-foot{padding:8px 16px 13px;font-size:11px;color:#9ca3af;display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-top:1px solid #f3f4f6}
+.gp-leg{display:flex;align-items:center;gap:4px}
+
+.qk-section{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.qk-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px}
+.qk-top{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.qk-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.qk-title{font-size:13px;font-weight:600}
+.qk-sub{font-size:12px;color:#6b7280;margin-bottom:11px;line-height:1.5}
+.qk-form{display:flex;flex-direction:column;gap:7px}
+.qk-form input,.qk-form textarea{font-family:inherit;font-size:12px;padding:8px 11px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;color:#1a1a1a;transition:border-color .15s}
+.qk-form input:focus,.qk-form textarea:focus{outline:none;border-color:#93c5fd;background:#fff}
+.qk-form textarea{resize:none;min-height:72px}
+.qk-submit{font-family:inherit;font-size:12px;padding:8px 16px;border-radius:8px;border:1px solid #d1d5db;background:#1a1a1a;cursor:pointer;color:#fff;align-self:flex-end;font-weight:500;transition:background .15s}
+.qk-submit:hover{background:#374151}
+.qk-confirm{font-size:12px;font-weight:600;display:none;padding:6px 0}
+.inbox{margin-top:10px;display:flex;flex-direction:column;gap:5px;max-height:150px;overflow-y:auto}
+.inbox-item{background:#f9fafb;border-radius:8px;padding:9px 11px;font-size:12px}
+.inbox-from{font-weight:600;font-size:11px;margin-bottom:2px}
+.inbox-msg{color:#4b5563;line-height:1.4}
+.inbox-time{font-size:10px;color:#9ca3af;margin-top:3px}
+.inbox-q{border-left:2px solid #3b82f6}
+.inbox-k{border-left:2px solid #22c55e}
+
+.nav{display:flex;border-bottom:1px solid #e5e7eb;margin-bottom:16px;flex-wrap:wrap;background:#fff;border-radius:10px 10px 0 0;padding:0 4px;border:1px solid #e5e7eb;border-bottom:none}
+.nb{font-size:12px;padding:11px 14px;border:none;background:transparent;color:#9ca3af;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit;white-space:nowrap;font-weight:500}
+.nb.on{color:#1a1a1a;border-bottom-color:#1a1a1a}
+.nb:hover:not(.on){color:#374151;background:#f9fafb}
+.tab-content{background:#fff;border:1px solid #e5e7eb;border-radius:0 0 12px 12px;border-top:none;padding:18px}
+.pane{display:none}.pane.on{display:block}
+
+.ic{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;cursor:pointer;margin-bottom:8px;transition:border-color .15s}
+.ic:hover{border-color:#93c5fd}
+.ic.open{border-color:#3b82f6}
+.ic-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ic-name{font-size:13px;font-weight:600;flex:1;min-width:140px}
+.ic-detail{margin-top:12px;padding-top:12px;border-top:1px solid #f3f4f6;display:none}
+.ic.open .ic-detail{display:block}
+.dc{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.dch{font-size:11px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.dci{font-size:12px;color:#374151;line-height:1.5;padding-left:10px;position:relative;margin-bottom:3px}
+.dci::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:#d1d5db}
+.dci.w{color:#92400e}.dci.w::before{background:#f59e0b}
+.dci.g{color:#166534}.dci.g::before{background:#22c55e}
+.pb{display:flex;align-items:center;gap:8px;margin-top:8px}
+.pb-t{flex:1;height:6px;background:#f3f4f6;border-radius:3px;overflow:hidden}
+.pb-f{height:100%;border-radius:3px}
+.pb-p{font-size:11px;font-weight:600;min-width:28px;text-align:right;color:#9ca3af}
+.rolled{background:#f9fafb;border-radius:8px;padding:10px 14px;margin-bottom:8px;border:1px solid #f3f4f6}
+.ri{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:4px 0;border-bottom:1px solid #f3f4f6}
+.ri:last-child{border-bottom:none}
+.ri-label{color:#374151;flex:1;padding-right:10px}
+.gh{font-size:12px;font-weight:600;color:#9ca3af;margin:14px 0 7px;text-transform:uppercase;letter-spacing:.4px}
+
+.ms-list{display:flex;flex-direction:column;gap:7px}
+.ms-row{display:flex;align-items:center;gap:10px;background:#f9fafb;border:1px solid #f3f4f6;border-radius:8px;padding:11px 14px}
+.ms-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.ms-b{flex:1}.ms-name{font-size:13px;font-weight:600}.ms-proj{font-size:11px;color:#9ca3af;margin-top:1px}
+.ms-r{text-align:right;min-width:90px}.ms-date{font-size:12px;font-weight:600}.ms-st{font-size:11px;color:#9ca3af;margin-top:1px}
+
+.risk-list{display:flex;flex-direction:column;gap:8px}
+.risk-row{display:flex;gap:10px;background:#f9fafb;border:1px solid #f3f4f6;border-radius:8px;padding:12px 14px}
+.risk-bar{width:5px;border-radius:3px;flex-shrink:0;align-self:stretch;min-height:20px}
+.risk-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.risk-desc{font-size:12px;color:#6b7280;line-height:1.5}
+.risk-mit{font-size:12px;color:#6b7280;margin-top:6px;padding-top:6px;border-top:1px solid #e5e7eb;line-height:1.5}
+.risk-mit b{color:#374151}
+
+.bt{width:100%;border-collapse:collapse;font-size:12px}
+.bt th{text-align:left;padding:9px 11px;font-size:11px;font-weight:600;color:#9ca3af;border-bottom:1px solid #e5e7eb;background:#f9fafb;text-transform:uppercase;letter-spacing:.3px}
+.bt td{padding:10px 11px;border-bottom:1px solid #f3f4f6;vertical-align:top;color:#374151}
+.bt tr:last-child td{border-bottom:none}
+.bt tr:hover td{background:#f9fafb}
+
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:14px}
+.cap-card{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:14px}
+.cap-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-bottom:10px}
+.cap-name{font-size:13px;font-weight:600}.cap-role{font-size:12px;color:#9ca3af;margin-bottom:8px}
+.cap-bl{display:flex;justify-content:space-between;font-size:11px;color:#9ca3af;margin-bottom:3px;margin-top:7px}
+.cap-b{height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;margin-bottom:5px}
+.cap-bf{height:100%;border-radius:3px}
+
+.gantt-outer{overflow-x:auto;border:1px solid #e5e7eb;border-radius:10px}
+.gantt-inner{min-width:820px}
+.mhdr{display:flex;border-bottom:1px solid #e5e7eb}
+.lcol{width:185px;flex-shrink:0;padding:8px 11px;font-size:11px;font-weight:600;color:#9ca3af;border-right:1px solid #e5e7eb;background:#f9fafb;text-transform:uppercase;letter-spacing:.3px}
+.marea{flex:1;display:flex}
+.mcell{flex:1;text-align:center;font-size:10px;padding:7px 2px;color:#9ca3af;border-right:1px solid #f3f4f6}
+.mcell:last-child{border-right:none}
+.fy-m{font-size:9px;padding:1px 4px;border-radius:2px;margin-top:2px;display:inline-block;font-weight:600}
+.grow{display:flex;background:#f9fafb;border-bottom:1px solid #e5e7eb}
+.glbl{width:185px;flex-shrink:0;padding:6px 11px;font-size:10px;font-weight:700;color:#9ca3af;border-right:1px solid #e5e7eb;text-transform:uppercase;letter-spacing:.5px}
+.trow{display:flex;border-bottom:1px solid #f3f4f6;cursor:pointer;transition:background .1s}
+.trow:hover{background:#f0f9ff}
+.trow.sel{background:#eff6ff}
+.trow:last-child{border-bottom:none}
+.tlbl{width:185px;flex-shrink:0;padding:8px 11px;font-size:11px;border-right:1px solid #f3f4f6;display:flex;align-items:center;gap:6px;line-height:1.3;font-weight:500}
+.tdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.barea{flex:1;position:relative;padding:7px 0;display:flex;align-items:center}
+.gbar{position:absolute;height:14px;border-radius:4px}
+.todayline{position:absolute;top:0;bottom:0;width:2px;background:#ef4444;opacity:.4;pointer-events:none;z-index:4}
+.msdiamond{position:absolute;width:9px;height:9px;transform:rotate(45deg);top:50%;margin-top:-4px;z-index:3}
+.gcallout{background:#fff;border:1.5px solid #3b82f6;border-radius:10px;padding:16px;margin-top:14px;display:none}
+.gcallout.show{display:block}
+.gch{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:8px}
+.gc-title{font-size:14px;font-weight:700}
+.gc-close{font-size:18px;cursor:pointer;color:#9ca3af;background:none;border:none;font-family:inherit;padding:0 2px;line-height:1}
+.gc-close:hover{color:#374151}
+.gcb{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.gcsh{font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.gcsi{font-size:12px;line-height:1.5;padding-left:10px;position:relative;margin-bottom:3px;color:#374151}
+.gcsi::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:#d1d5db}
+.gcsi.w{color:#92400e}.gcsi.w::before{background:#f59e0b}
+.gcsi.g{color:#166534}.gcsi.g::before{background:#22c55e}
+.ms-card{background:#f0f9ff;border-radius:8px;padding:11px 13px;margin-top:10px;border:1px solid #bfdbfe}
+.ms-card-lbl{font-size:10px;font-weight:700;color:#1e40af;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.ms-card-name{font-size:13px;font-weight:700;color:#1e40af}
+.ms-card-date{font-size:12px;color:#3b82f6;margin-top:2px;font-weight:600}
+.ms-card-desc{font-size:12px;color:#1e40af;margin-top:5px;line-height:1.5}
+.gleg{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 12px;font-size:11px;color:#9ca3af}
+.gli{display:flex;align-items:center;gap:5px}
+.gfilt{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.gfb{font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;color:#6b7280;font-family:inherit;transition:all .15s}
+.gfb.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.gfb:hover:not(.on){background:#f9fafb;color:#374151}
+
+.demo-banner{background:linear-gradient(135deg,#1e40af,#3b82f6);border-radius:10px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.demo-text{color:#fff;font-size:13px;font-weight:600}
+.demo-sub{color:rgba(255,255,255,.7);font-size:12px;margin-top:2px}
+.demo-badge{background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:4px 11px;border-radius:20px;font-weight:600;border:1px solid rgba(255,255,255,.3)}
+
+@media(max-width:600px){.qk-section{grid-template-columns:1fr}.top-bar{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="demo-banner">
+  <div>
+    <div class="demo-text">IT Leadership Dashboard — Demo Version</div>
+    <div class="demo-sub">Commit Partnership · IT Operations · Built for review and feedback before production build</div>
+  </div>
+  <span class="demo-badge">DRAFT — Apr 14 2026</span>
+</div>
+
+<div class="top-bar">
+  <div class="top-bar-left">
+    <div class="top-bar-title">IT — Leadership Dashboard</div>
+    <div class="top-bar-meta">Commit Partnership &nbsp;·&nbsp; April 14, 2026 &nbsp;·&nbsp; IT Operations</div>
+    <div class="top-bar-pills">
+      <span class="top-pill">PJ Piatt — IT Manager</span>
+      <span class="top-pill">Craig Dennis — IT Consultant</span>
+      <span class="top-pill">Michael Perdunn / Oaktruss — vCISO</span>
+    </div>
+  </div>
+  <span class="top-badge">3 decisions pending</span>
+</div>
+
+<div class="dec-bar">
+  <button class="dec-trigger" onclick="toggleDec()">
+    <div class="dec-left">
+      <div class="dec-dots"><div class="dec-dot"></div><div class="dec-dot" style="opacity:.6"></div><div class="dec-dot" style="opacity:.3"></div></div>
+      <span class="dec-lbl">3 decisions needed from leadership</span>
+      <span class="dec-ct">3 open</span>
+      <span class="dec-hint">Click to expand</span>
+    </div>
+    <span class="dec-chev" id="dec-chev">&#9660;</span>
+  </button>
+  <div class="dec-body" id="dec-body">
+    <div class="dec-item">
+      <div class="dec-n">1</div>
+      <div>
+        <div class="dec-title">Approve Freshdesk Enterprise as unified ticketing platform</div>
+        <div class="dec-sub">IT recommends Freshdesk Enterprise (10 agents, $10,680/yr). Lowest risk, fastest deployment (6–8 wks), preserves Salesforce Phase 2 bandwidth. 5 departments still without formal ticketing — delay compounds fragmentation weekly.</div>
+        <div class="dec-meta"><span class="tag tr">Pending approval</span><span class="tag tgr">$10,680/yr</span><span class="tag tgr">6–8 wk deployment</span></div>
+      </div>
+    </div>
+    <div class="dec-item">
+      <div class="dec-n">2</div>
+      <div>
+        <div class="dec-title">Confirm pilot testing group for AI-enabled IT operations (AIIT)</div>
+        <div class="dec-sub">Leadership needs to confirm which departments join the AIIT pilot — currently scoped to Ops + Finance with additional users TBD. Unblocks Build phase tasks starting mid-April.</div>
+        <div class="dec-meta"><span class="tag ta">Blocking build phase</span><span class="tag tgr">AIIT project</span></div>
+      </div>
+    </div>
+    <div class="dec-item">
+      <div class="dec-n">3</div>
+      <div>
+        <div class="dec-title">Align on SSO enforcement priority and timeline</div>
+        <div class="dec-sub">Systems audit confirms SSO not consistently enforced org-wide — shared credentials confirmed in at least one dept. Leadership direction needed: immediate security mandate or phased FY26 initiative. Drives entire security roadmap sequence.</div>
+        <div class="dec-meta"><span class="tag tr">Security risk</span><span class="tag tgr">Systems audit output</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="metrics">
+  <div class="mc"><div class="mc-lbl">Active initiatives</div><div class="mc-val">8</div><div class="mc-sub">of 13 total</div></div>
+  <div class="mc"><div class="mc-lbl">Decisions pending</div><div class="mc-val" style="color:#dc2626">3</div><div class="mc-sub">need leadership</div></div>
+  <div class="mc"><div class="mc-lbl">Claude pilot</div><div class="mc-val" style="color:#1d4ed8">100%</div><div class="mc-sub">40/40 active</div></div>
+  <div class="mc"><div class="mc-lbl">AIIT progress</div><div class="mc-val" style="color:#16a34a">30%</div><div class="mc-sub">Strategy done</div></div>
+  <div class="mc"><div class="mc-lbl">Systems audit</div><div class="mc-val" style="color:#d97706">60%</div><div class="mc-sub">Synthesis phase</div></div>
+  <div class="mc"><div class="mc-lbl">Ticketing</div><div class="mc-val" style="color:#dc2626">TBD</div><div class="mc-sub">Awaiting approval</div></div>
+</div>
+
+<div class="wins-section">
+  <div class="sec-lbl">Recent wins</div>
+  <div class="wins-grid">
+    <div class="win-card">
+      <div class="win-top"><div class="win-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#16a34a" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="win-title">Claude pilot — 100% adoption in 26 days</div></div>
+      <div class="win-desc">40 of 40 users active. 83% adoption by day 6 — well above typical SaaS pilot benchmarks. Users self-organizing and sharing best practices organically.</div>
+      <div class="win-meta">Output quality: 5.0/5.0 · Launched Mar 18</div>
+    </div>
+    <div class="win-card">
+      <div class="win-top"><div class="win-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#16a34a" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="win-title">AIIT strategy phase complete</div></div>
+      <div class="win-desc">All 10 strategy tasks done on time. Scope, workstreams, agent roles, success metrics, and digital workforce model fully defined and documented.</div>
+      <div class="win-meta">10/10 tasks · Quality rated 5.0/5</div>
+    </div>
+    <div class="win-card">
+      <div class="win-top"><div class="win-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#16a34a" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="win-title">Ticketing evaluation complete</div></div>
+      <div class="win-desc">Full 3-platform evaluation done with licensing audit. IT identified $5,340/yr in savings through license reclassification before requesting any new spend.</div>
+      <div class="win-meta">Recommendation prepared · Awaiting sign-off</div>
+    </div>
+    <div class="win-card">
+      <div class="win-top"><div class="win-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#16a34a" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="win-title">Org-wide systems discovery complete</div></div>
+      <div class="win-desc">Discovery sessions completed across all departments. First-ever full system landscape view underway — 5 cross-cutting risk patterns already identified.</div>
+      <div class="win-meta">Synthesis in progress · Report due end of April</div>
+    </div>
+    <div class="win-card">
+      <div class="win-top"><div class="win-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#16a34a" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="win-title">Salesforce OwnBackup & DKIM complete</div></div>
+      <div class="win-desc">Backup validated across all 3 Salesforce instances. DKIM and domain validation complete — strengthens email deliverability and security posture.</div>
+      <div class="win-meta">Finance · PI · EC-12 instances</div>
+    </div>
+    <div class="win-card">
+      <div class="win-top"><div class="win-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#16a34a" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="win-title">Security score above industry baseline</div></div>
+      <div class="win-desc">Secure Score currently above the industry average for Commit's size. KnowBe4 phishing training and Proofpoint email security both active.</div>
+      <div class="win-meta">vCISO: Michael Perdunn / Oaktruss</div>
+    </div>
+  </div>
+</div>
+
+<div class="gp-card" onclick="openGanttTab()">
+  <div class="gp-hdr">
+    <div><div class="gp-title">Initiative timeline — FY26 / FY27</div><div class="gp-meta">8 active initiatives · Click to open full interactive Gantt chart</div></div>
+    <button class="gp-open" onclick="openGanttTab();event.stopPropagation()">Open full timeline &#8594;</button>
+  </div>
+  <div class="gp-bars" id="gp-bars"></div>
+  <div class="gp-foot">
+    <div class="gp-leg"><div style="width:10px;height:10px;border-radius:2px;background:#16a34a"></div>On track</div>
+    <div class="gp-leg"><div style="width:10px;height:10px;border-radius:2px;background:#d97706"></div>In progress</div>
+    <div class="gp-leg"><div style="width:10px;height:10px;border-radius:2px;background:#dc2626"></div>Needs decision</div>
+    <div class="gp-leg"><div style="width:10px;height:10px;border-radius:2px;background:#1d4ed8"></div>Exceeding</div>
+    <div class="gp-leg"><div style="width:10px;height:10px;border-radius:2px;background:#9ca3af"></div>Planned</div>
+    <div class="gp-leg"><div style="width:2px;height:10px;background:#dc2626;opacity:.5"></div>Today</div>
+    <span style="margin-left:auto;font-size:11px;color:#9ca3af">FY26 ends Jun 30 · FY27 starts Jul 1</span>
+  </div>
+</div>
+
+<div class="qk-section">
+  <div class="qk-card">
+    <div class="qk-top"><div class="qk-icon" style="background:#eff6ff"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#1d4ed8" stroke-width="1.5"/><path d="M8 7v4M8 5.5v.5" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="qk-title">Submit a question for IT</div></div>
+    <div class="qk-sub">Have a question about IT priorities, projects, or decisions? Submit it here — IT will follow up.</div>
+    <div class="qk-form">
+      <input type="text" id="q-name" placeholder="Your name (optional)">
+      <textarea id="q-text" placeholder="What's your question for IT?"></textarea>
+      <button class="qk-submit" onclick="submitQ()">Send question</button>
+      <div class="qk-confirm" id="q-confirm" style="color:#16a34a">Question received — thank you!</div>
+    </div>
+    <div class="inbox" id="q-inbox"></div>
+  </div>
+  <div class="qk-card">
+    <div class="qk-top"><div class="qk-icon" style="background:#f0fdf4"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2l1.5 3.5L13 6l-2.5 2.5.5 3.5L8 10.5 5 12l.5-3.5L3 6l3.5-.5L8 2z" stroke="#16a34a" stroke-width="1.3" stroke-linejoin="round"/></svg></div><div class="qk-title">Send kudos to IT</div></div>
+    <div class="qk-sub">Recognize the IT team for a great experience, fast resolution, or strong project work.</div>
+    <div class="qk-form">
+      <input type="text" id="k-name" placeholder="Your name (optional)">
+      <textarea id="k-text" placeholder="What did IT do well?"></textarea>
+      <button class="qk-submit" onclick="submitK()">Send kudos</button>
+      <div class="qk-confirm" id="k-confirm" style="color:#16a34a">Kudos sent — the IT team will love this!</div>
+    </div>
+    <div class="inbox" id="k-inbox"></div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nb on" onclick="sw('portfolio',this)">Portfolio</button>
+  <button class="nb" id="gantt-tab-btn" onclick="sw('gantt',this)">Timeline</button>
+  <button class="nb" onclick="sw('milestones',this)">Milestones</button>
+  <button class="nb" onclick="sw('risks',this)">Risks</button>
+  <button class="nb" onclick="sw('budget',this)">Budget</button>
+  <button class="nb" onclick="sw('capacity',this)">Capacity</button>
+</div>
+<div class="tab-content">
+
+<div class="pane on" id="pane-portfolio">
+  <div class="sec-lbl">Featured initiatives</div>
+  <div class="ic" onclick="tog(this)"><div class="ic-top"><div class="ic-name">Ticketing system — platform decision</div><span class="tag tr">Decision pending</span><span class="tag tgr">70%</span></div><div class="pb"><div class="pb-t"><div class="pb-f" style="width:70%;background:#dc2626"></div></div><div class="pb-p">70%</div></div><div class="ic-detail"><div class="dc"><div><div class="dch">Status</div><div class="dci g">Evaluation complete — recommendation prepared</div><div class="dci">Freshdesk Enterprise recommended: $10,680/yr, 10 agents</div><div class="dci">License audit saves $5,340/yr vs current plan</div><div class="dci w">5 departments still without formal ticketing</div></div><div><div class="dch">Recommendation</div><div class="dci">Freshdesk Enterprise — clean sandbox rebuild</div><div class="dci">6–8 week IT-owned deployment, no partner needed</div><div class="dci">Salesforce Service Cloud: revisit in 18–24 months</div></div><div><div class="dch">If delayed</div><div class="dci w">IT, Comms, HR/Talent remain without structured intake</div><div class="dci w">Workarounds compound and become harder to unwind</div></div></div></div></div>
+  <div class="ic" onclick="tog(this)"><div class="ic-top"><div class="ic-name">Systems audit & SharePoint cleanup</div><span class="tag ta">Synthesis phase</span><span class="tag tgr">60%</span></div><div class="pb"><div class="pb-t"><div class="pb-f" style="width:60%;background:#d97706"></div></div><div class="pb-p">60%</div></div><div class="ic-detail"><div class="dc"><div><div class="dch">Status</div><div class="dci g">Discovery complete across all departments</div><div class="dci w">~25–30% of depts fully synthesized</div><div class="dci">5 risk patterns identified</div><div class="dci">Target: synthesis done ~Apr 21</div></div><div><div class="dch">Emerging risks</div><div class="dci w">SSO not consistently enforced — shared credentials confirmed</div><div class="dci w">SharePoint ownership fragmented across departments</div><div class="dci w">Widespread informal AI use — no governance in place</div></div><div><div class="dch">Coming next</div><div class="dci">Executive findings report — end of April</div><div class="dci">SSO gap analysis and recommendations</div><div class="dci">FY26 IT roadmap inputs — mid-May</div></div></div></div></div>
+  <div class="ic" onclick="tog(this)"><div class="ic-top"><div class="ic-name">AI-enabled IT operations pilot (AIIT)</div><span class="tag tg">On track</span><span class="tag tgr">30%</span></div><div class="pb"><div class="pb-t"><div class="pb-f" style="width:30%;background:#16a34a"></div></div><div class="pb-p">30%</div></div><div class="ic-detail"><div class="dc"><div><div class="dch">Phase status</div><div class="dci g">Strategy phase 100% complete — all 10 tasks</div><div class="dci g">Output quality rated 5.0/5</div><div class="dci">Build phase begins now (April)</div><div class="dci">Pilot May · Adopt Jun · Optimize Jul</div></div><div><div class="dch">What it delivers</div><div class="dci">AI-assisted IT service delivery model</div><div class="dci">Reduced manual workload for IT team</div><div class="dci">10–15 knowledge base articles as byproduct</div></div><div><div class="dch">Decisions needed</div><div class="dci w">Confirm pilot testing group — blocks Build phase</div><div class="dci w">Confirm service assistant integration scope</div></div></div></div></div>
+  <div class="ic" onclick="tog(this)"><div class="ic-top"><div class="ic-name">Claude AI pilot — Commit Partnership</div><span class="tag tb">Exceeding targets</span><span class="tag tgr">100%</span></div><div class="pb"><div class="pb-t"><div class="pb-f" style="width:100%;background:#1d4ed8"></div></div><div class="pb-p">100%</div></div><div class="ic-detail"><div class="dc"><div><div class="dch">Results</div><div class="dci g">40/40 users active — 100% adoption</div><div class="dci g">83% adoption by day 6</div><div class="dci g">Output quality 5.0/5</div></div><div><div class="dch">Incidents (learning)</div><div class="dci w">All usage hits trace to PPT/deck workflows</div><div class="dci">All resolved — workarounds documented</div><div class="dci">P1 fix: Claude-optimized Commit template</div></div><div><div class="dch">Next steps</div><div class="dci">Tier 1 super user check-in</div><div class="dci">Build optimized Commit PPT template</div><div class="dci">Evaluate FY27 org-wide rollout</div></div></div></div></div>
+  <div class="gh">Platform & infrastructure</div>
+  <div class="rolled"><div class="ri"><span class="ri-label">M365 optimization (SharePoint, Teams, OneDrive, Entra ID)</span><span class="tag ta">Active</span></div><div class="ri"><span class="ri-label">Salesforce administration (Finance, PI, EC-12)</span><span class="tag ta">Active</span></div><div class="ri"><span class="ri-label">External access & collaboration model</span><span class="tag ta">Design</span></div></div>
+  <div class="gh">Governance & enablement</div>
+  <div class="rolled"><div class="ri"><span class="ri-label">SOP development — 9 core SOPs in progress</span><span class="tag ta">Active</span></div><div class="ri"><span class="ri-label">Knowledge base & self-service — 2 articles/week target</span><span class="tag ta">Building</span></div><div class="ri"><span class="ri-label">Security & compliance — Secure Score above baseline</span><span class="tag tg">Ongoing</span></div><div class="ri"><span class="ri-label">End-user support — ~90+ users continuous</span><span class="tag tgr">Continuous</span></div></div>
+  <div class="gh">Future state — FY27</div>
+  <div class="rolled"><div class="ri"><span class="ri-label">Slack → Teams migration (Jul 2026 – Mar 2027)</span><span class="tag tgr">Planned</span></div><div class="ri"><span class="ri-label">Intranet & internal tooling (intake, AI assistant)</span><span class="tag tgr">Prototype</span></div><div class="ri"><span class="ri-label">IT function buildout (governance, policies, service model)</span><span class="tag ta">In progress</span></div></div>
+</div>
+
+<div class="pane" id="pane-gantt">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+    <div><div style="font-size:14px;font-weight:700">Initiative timeline — FY26 / FY27</div><div style="font-size:12px;color:#9ca3af;margin-top:2px">Click any bar to see milestone detail, progress, and concerns</div></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <span style="font-size:11px;padding:3px 9px;border-radius:4px;font-weight:600;background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe">FY26 ends Jun 30</span>
+      <span style="font-size:11px;padding:3px 9px;border-radius:4px;font-weight:600;background:#f0fdf4;color:#166534;border:1px solid #bbf7d0">FY27 starts Jul 1</span>
+      <span style="font-size:11px;padding:3px 9px;border-radius:4px;font-weight:600;background:#fffbeb;color:#92400e;border:1px solid #fde68a">Today: Apr 14</span>
+    </div>
+  </div>
+  <div class="gfilt">
+    <span style="font-size:11px;color:#9ca3af;align-self:center">Filter:</span>
+    <button class="gfb on" onclick="gFilt('all',this)">All</button>
+    <button class="gfb" onclick="gFilt('featured',this)">Featured</button>
+    <button class="gfb" onclick="gFilt('fy26',this)">FY26</button>
+    <button class="gfb" onclick="gFilt('fy27',this)">FY27</button>
+  </div>
+  <div class="gleg">
+    <div class="gli"><div style="width:10px;height:10px;border-radius:2px;background:#16a34a"></div>On track / complete</div>
+    <div class="gli"><div style="width:10px;height:10px;border-radius:2px;background:#d97706"></div>In progress</div>
+    <div class="gli"><div style="width:10px;height:10px;border-radius:2px;background:#dc2626"></div>Needs decision</div>
+    <div class="gli"><div style="width:10px;height:10px;border-radius:2px;background:#1d4ed8"></div>Exceeding</div>
+    <div class="gli"><div style="width:10px;height:10px;border-radius:2px;background:#9ca3af"></div>Planned</div>
+    <div class="gli"><div style="width:9px;height:9px;background:#92400e;transform:rotate(45deg)"></div>Next milestone</div>
+    <div class="gli"><div style="width:2px;height:10px;background:#ef4444;opacity:.5"></div>Today</div>
+  </div>
+  <div class="gantt-outer"><div class="gantt-inner" id="gi"></div></div>
+  <div class="gcallout" id="gcallout">
+    <div class="gch"><div><div class="gc-title" id="gc-title"></div><div id="gc-badges" style="display:flex;gap:5px;margin-top:6px;flex-wrap:wrap"></div></div><button class="gc-close" onclick="gClose()">&#x2715;</button></div>
+    <div id="gc-prog" style="margin-bottom:10px"></div>
+    <div class="gcb" id="gc-body"></div>
+    <div class="ms-card" id="gc-ms"></div>
+  </div>
+</div>
+
+<div class="pane" id="pane-milestones">
+  <div class="sec-lbl" style="margin-bottom:12px">Key dates — all active initiatives</div>
+  <div class="ms-list">
+    <div class="ms-row"><div class="ms-dot" style="background:#dc2626"></div><div class="ms-b"><div class="ms-name">Leadership approval — Freshdesk</div><div class="ms-proj">Ticketing system decision</div></div><div class="ms-r"><div class="ms-date" style="color:#dc2626">Pending</div><div class="ms-st">Blocks 5 departments</div></div></div>
+    <div class="ms-row"><div class="ms-dot" style="background:#d97706"></div><div class="ms-b"><div class="ms-name">AIIT — core system designed</div><div class="ms-proj">AI-enabled IT ops pilot</div></div><div class="ms-r"><div class="ms-date">Apr 17</div><div class="ms-st">In progress</div></div></div>
+    <div class="ms-row"><div class="ms-dot" style="background:#16a34a"></div><div class="ms-b"><div class="ms-name">Systems audit — synthesis complete</div><div class="ms-proj">Systems audit & SharePoint</div></div><div class="ms-r"><div class="ms-date">~Apr 21</div><div class="ms-st">On track</div></div></div>
+    <div class="ms-row"><div class="ms-dot" style="background:#3b82f6"></div><div class="ms-b"><div class="ms-name">Systems audit — executive report</div><div class="ms-proj">Systems audit & SharePoint</div></div><div class="ms-r"><div class="ms-date">End of Apr</div><div class="ms-st">On track</div></div></div>
+    <div class="ms-row"><div class="ms-dot" style="background:#d97706"></div><div class="ms-b"><div class="ms-name">Freshdesk sandbox build (if approved)</div><div class="ms-proj">Ticketing system</div></div><div class="ms-r"><div class="ms-date">~May 9</div><div class="ms-st">Pending decision</div></div></div>
+    <div class="ms-row"><div class="ms-dot" style="background:#3b82f6"></div><div class="ms-b"><div class="ms-name">AIIT — service assistant ready</div><div class="ms-proj">AI-enabled IT ops pilot</div></div><div class="ms-r"><div class="ms-date">May 1</div><div class="ms-st">Not started</div></div></div>
+    <div class="ms-row"><div class="ms-dot" style="background:#3b82f6"></div><div class="ms-b"><div class="ms-name">Systems audit — final recommendations</div><div class="ms-proj">Systems audit & SharePoint</div></div><div class="ms-r"><div class="ms-date">Mid-May</div><div class="ms-st">On track</div></div></div>
+    <div class="ms-row"><div class="ms-dot" style="background:#16a34a"></div><div class="ms-b"><div class="ms-name">Freshdesk org-wide deployment (if approved)</div><div class="ms-proj">Ticketing system</div></div><div class="ms-r"><div class="ms-date">~Jun 6</div><div class="ms-st">Pending decision</div></div></div>
+    <div class="ms-row"><div class="ms-dot" style="background:#3b82f6"></div><div class="ms-b"><div class="ms-name">AIIT — adoption established</div><div class="ms-proj">AI-enabled IT ops pilot</div></div><div class="ms-r"><div class="ms-date">Jun 30</div><div class="ms-st">FY26 close</div></div></div>
+    <div class="ms-row"><div class="ms-dot" style="background:#d97706"></div><div class="ms-b"><div class="ms-name">Slack → Teams migration kickoff</div><div class="ms-proj">Future state — FY27</div></div><div class="ms-r"><div class="ms-date">Jul 1</div><div class="ms-st">FY27 start</div></div></div>
+    <div class="ms-row"><div class="ms-dot" style="background:#16a34a"></div><div class="ms-b"><div class="ms-name">AIIT — pilot complete, FY27 recommendation</div><div class="ms-proj">AI-enabled IT ops pilot</div></div><div class="ms-r"><div class="ms-date">Jul 30</div><div class="ms-st">FY27</div></div></div>
+  </div>
+</div>
+
+<div class="pane" id="pane-risks">
+  <div class="sec-lbl" style="margin-bottom:12px">Active risks</div>
+  <div class="risk-list">
+    <div class="risk-row"><div class="risk-bar" style="background:#dc2626"></div><div><div class="risk-title">SSO not enforced org-wide — identity & access exposure</div><div class="risk-desc">Shared credentials confirmed in at least one department. SSO available but not enabled across multiple tools. Creates lifecycle gaps and data access risk.</div><div class="risk-mit"><b>Mitigation:</b> Awaiting leadership direction on enforcement priority (Decision 3). IT + vCISO to develop plan once prioritized.</div></div></div>
+    <div class="risk-row"><div class="risk-bar" style="background:#dc2626"></div><div><div class="risk-title">5 departments without formal ticketing</div><div class="risk-desc">IT, Communications, and HR/Talent have no structured intake. Each week without a decision widens the gap and compounds workarounds.</div><div class="risk-mit"><b>Mitigation:</b> Freshdesk approval (Decision 1) resolves within 6–8 weeks of sign-off.</div></div></div>
+    <div class="risk-row"><div class="risk-bar" style="background:#dc2626"></div><div><div class="risk-title">Ungoverned AI tool use across departments</div><div class="risk-desc">Widespread informal use of ChatGPT and custom bots with no formal governance, data policy, or usage standards.</div><div class="risk-mit"><b>Mitigation:</b> AIIT pilot builds governance model. Formal AI policy needed in FY26 roadmap.</div></div></div>
+    <div class="risk-row"><div class="risk-bar" style="background:#f59e0b"></div><div><div class="risk-title">Capacity constraint — lean team, broad portfolio</div><div class="risk-desc">2 FTE-equivalent IT staff plus vCISO supporting ~90+ users, 8 active initiatives, and continuous L1 support. ~40–50% consumed by operational support.</div><div class="risk-mit"><b>Mitigation:</b> KB, AI pilot, and ticketing reduce L1 load over time. FY27 resourcing conversation warranted.</div></div></div>
+    <div class="risk-row"><div class="risk-bar" style="background:#f59e0b"></div><div><div class="risk-title">SharePoint structural fragility</div><div class="risk-desc">Inconsistent architecture, unclear ownership, duplicate content, some teams housed in other departments' sites.</div><div class="risk-mit"><b>Mitigation:</b> Systems audit will produce sequenced cleanup plan. No changes until leadership aligned.</div></div></div>
+    <div class="risk-row"><div class="risk-bar" style="background:#f59e0b"></div><div><div class="risk-title">Salesforce Phase 2 bandwidth contention</div><div class="risk-desc">Active Phase 2 rollout competes for partner capacity and org change management bandwidth.</div><div class="risk-mit"><b>Mitigation:</b> Freshdesk recommendation avoids Salesforce dependency. Service Cloud re-evaluated 18–24 months post Phase 2.</div></div></div>
+    <div class="risk-row"><div class="risk-bar" style="background:#22c55e"></div><div><div class="risk-title">Freshdesk automation debt (if approved)</div><div class="risk-desc">~75 prior automations, ~90% broken. Sandbox rebuild mitigates this.</div><div class="risk-mit"><b>Mitigation:</b> Full audit gates the sandbox build. IT owns this without external dependency.</div></div></div>
+  </div>
+</div>
+
+<div class="pane" id="pane-budget">
+  <div class="sec-lbl" style="margin-bottom:12px">Known costs — current & pending</div>
+  <table class="bt">
+    <thead><tr><th>Item</th><th>Annual cost</th><th>Status</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Freshdesk Enterprise (recommended)</strong></td><td><strong>$10,680</strong></td><td><span class="tag tr">Pending approval</span></td><td>10 agents @ $89/mo + 5 Contributors. License audit saves $5,340/yr.</td></tr>
+      <tr><td>Atlassian Suite (benchmark)</td><td>$10,800</td><td><span class="tag tgr">Not recommended</span></td><td>JSM + Confluence + Guard. Vendor stability concern added Mar 2026.</td></tr>
+      <tr><td>Salesforce Service Cloud (comparison)</td><td>$17,100+</td><td><span class="tag tgr">Not now</span></td><td>15 agents required. Custom dev cost unknown. Revisit 18–24 months.</td></tr>
+      <tr><td>Claude Team Plan</td><td>Active</td><td><span class="tag tg">Secured</span></td><td>40 users. 100% adoption. Delivering value now.</td></tr>
+      <tr><td>ChatGPT Enterprise</td><td>Active</td><td><span class="tag ta">Evaluating</span></td><td>70 licenses. Formal governance needed in FY26.</td></tr>
+      <tr><td>KnowBe4 — phishing training</td><td>Active</td><td><span class="tag tg">Ongoing</span></td><td>Security awareness. Embedded in compliance workstream.</td></tr>
+      <tr><td>Proofpoint — email security</td><td>Active</td><td><span class="tag tg">Ongoing</span></td><td>Email security. Secure Score above industry baseline.</td></tr>
+      <tr><td>Oaktruss / vCISO (Michael Perdunn)</td><td>Active</td><td><span class="tag tg">Engaged</span></td><td>Security advisory. Supporting SSO strategy and risk management.</td></tr>
+    </tbody>
+  </table>
+  <div style="display:flex;justify-content:flex-end;margin-top:12px"><div style="background:#f9fafb;border-radius:8px;padding:10px 16px;font-size:13px;border:1px solid #e5e7eb">Pending approval: <strong style="color:#dc2626;margin-left:5px">$10,680/yr</strong><span style="color:#9ca3af;font-size:12px;margin-left:8px">(lowest of 3 options evaluated)</span></div></div>
+</div>
+
+<div class="pane" id="pane-capacity">
+  <div class="sec-lbl" style="margin-bottom:12px">IT team — resources & workload</div>
+  <div class="cap-grid">
+    <div class="cap-card"><div class="cap-av" style="background:#dbeafe;color:#1e40af">PJ</div><div class="cap-name">PJ Piatt</div><div class="cap-role">IT Manager — IT Operations</div><div class="cap-bl"><span>Operational support</span><span>45%</span></div><div class="cap-b"><div class="cap-bf" style="width:45%;background:#d97706"></div></div><div class="cap-bl"><span>Strategic initiatives</span><span>30%</span></div><div class="cap-b"><div class="cap-bf" style="width:30%;background:#1d4ed8"></div></div><div class="cap-bl"><span>Governance / docs</span><span>25%</span></div><div class="cap-b"><div class="cap-bf" style="width:25%;background:#16a34a"></div></div></div>
+    <div class="cap-card"><div class="cap-av" style="background:#dcfce7;color:#166534">CD</div><div class="cap-name">Craig Dennis</div><div class="cap-role">IT Consultant — FTE schedule</div><div class="cap-bl"><span>End-user support</span><span>50%</span></div><div class="cap-b"><div class="cap-bf" style="width:50%;background:#d97706"></div></div><div class="cap-bl"><span>Project support</span><span>30%</span></div><div class="cap-b"><div class="cap-bf" style="width:30%;background:#1d4ed8"></div></div><div class="cap-bl"><span>Documentation</span><span>20%</span></div><div class="cap-b"><div class="cap-bf" style="width:20%;background:#16a34a"></div></div></div>
+    <div class="cap-card"><div class="cap-av" style="background:#fef3c7;color:#92400e">MP</div><div class="cap-name">Michael Perdunn</div><div class="cap-role">vCISO — Oaktruss</div><div class="cap-bl"><span>Security advisory</span><span>60%</span></div><div class="cap-b"><div class="cap-bf" style="width:60%;background:#d97706"></div></div><div class="cap-bl"><span>Risk & compliance</span><span>40%</span></div><div class="cap-b"><div class="cap-bf" style="width:40%;background:#dc2626"></div></div></div>
+  </div>
+  <div style="background:#f9fafb;border-radius:10px;padding:14px 16px;border:1px solid #e5e7eb"><div style="font-size:13px;font-weight:700;margin-bottom:6px">Capacity context for leadership</div><div style="font-size:12px;color:#6b7280;line-height:1.7">2 FTE-equivalent IT staff support ~90+ users, 8 active initiatives, and continuous L1 volume. Approximately 40–50% of capacity is consumed by operational support, limiting strategic throughput. The knowledge base, AI pilot, and ticketing system are designed to reduce this ratio over time. As the FY27 portfolio grows, a resourcing conversation will be necessary. This is a planning signal, not a crisis.</div></div>
+</div>
+
+</div>
+</div>
+
+<script>
+const MONTHS=[{l:'Jan',fy:'26'},{l:'Feb',fy:'26'},{l:'Mar',fy:'26'},{l:'Apr',fy:'26'},{l:'May',fy:'26'},{l:'Jun',fy:'26'},{l:'Jul',fy:'27'},{l:'Aug',fy:'27'},{l:'Sep',fy:'27'},{l:'Oct',fy:'27'},{l:'Nov',fy:'27'},{l:'Dec',fy:'27'},{l:'Jan',fy:'27'},{l:'Feb',fy:'27'},{l:'Mar',fy:'27'}];
+const TM=15,TODAY=3+(14/30);
+const GDATA=[
+  {grp:'Featured',tasks:[
+    {id:'tick',n:'Ticketing decision',c:'#dc2626',f:3,t:7,p:70,fy:'fy26',tag:'featured',ms:{d:'Pending approval',n:'Leadership approval — Freshdesk Enterprise',desc:'Approve Freshdesk Enterprise (10 agents, $10,680/yr). Unblocks sandbox build and org-wide deployment for IT, Comms, and HR/Talent within 6–8 weeks of sign-off.'},st:[{t:'Evaluation complete — recommendation prepared',w:'g'},{t:'5 departments still without formal ticketing',w:'w'},{t:'License audit saves $5,340/yr at 10-agent tier',w:'g'}],co:[{t:'Decision time-sensitive — workarounds compound weekly',w:'w'},{t:'Salesforce bandwidth impacted if Service Cloud chosen',w:'w'}]},
+    {id:'audit',n:'Systems audit & SharePoint',c:'#d97706',f:1,t:5,p:60,fy:'fy26',tag:'featured',ms:{d:'~Apr 21',n:'Synthesis complete — cross-dept risk analysis ready',desc:'All department data normalized. Risk profiles, SSO gap analysis, and SharePoint ownership map finalized. Feeds executive findings report end of April.'},st:[{t:'Discovery sessions complete across org',w:'g'},{t:'~25–30% of depts fully synthesized',w:'w'},{t:'5 risk patterns identified',w:''}],co:[{t:'SSO not enforced — shared credentials confirmed',w:'w'},{t:'Ungoverned AI use surfaced as emerging risk',w:'w'}]},
+    {id:'aiit',n:'AIIT pilot',c:'#d97706',f:2,t:6,p:30,fy:'fy26',tag:'featured',ms:{d:'Apr 17',n:'Core system designed',desc:'Ops Lead workflow, KB template, and service assistant flow defined. Unblocks Build phase tasks AIIT-011 through AIIT-020 starting mid-April.'},st:[{t:'Strategy phase 100% complete',w:'g'},{t:'Output quality 5.0/5',w:'g'},{t:'Build phase begins now',w:''}],co:[{t:'Pilot testing group not yet confirmed',w:'w'},{t:'Service assistant scope needs leadership direction',w:'w'}]},
+    {id:'claude',n:'Claude AI pilot',c:'#1d4ed8',f:2,t:5,p:100,fy:'fy26',tag:'featured',ms:{d:'April check-in',n:'Tier 1 super user check-in & deck template',desc:'Check-in with highest-engagement users and build Claude-optimized Commit PPT template to resolve the #1 usage limit trigger.'},st:[{t:'40/40 users — 100% adoption',w:'g'},{t:'83% adoption by day 6',w:'g'},{t:'All incidents resolved',w:'g'}],co:[{t:'All usage hits trace to PPT/deck workflows — template is P1 fix',w:'w'}]},
+  ]},
+  {grp:'Platform',tasks:[
+    {id:'m365',n:'M365 optimization',c:'#d97706',f:0,t:9,p:35,fy:'both',tag:'platform',ms:{d:'Tied to audit',n:'SharePoint ownership map and cleanup plan',desc:'Systems audit outputs drive sequenced, dept-approved SharePoint restructuring. No cleanup until ownership validated and leadership aligned.'},st:[{t:'SharePoint, Teams, OneDrive, Entra ID in scope',w:''},{t:'SharePoint cleanup blocked pending audit',w:'w'}],co:[{t:'Fragmented SharePoint architecture',w:'w'}]},
+    {id:'sf',n:'Salesforce admin',c:'#16a34a',f:0,t:5,p:55,fy:'fy26',tag:'platform',ms:{d:'Ongoing with Servio',n:'Phase 2 rollout support',desc:'Supporting active Salesforce Phase 2 across Finance, PI, and EC-12. OwnBackup validated, DKIM complete, training with Servio ongoing.'},st:[{t:'OwnBackup and DKIM complete',w:'g'},{t:'3 instances managed: Finance, PI, EC-12',w:''}],co:[{t:'Phase 2 consuming org bandwidth',w:'w'}]},
+    {id:'ext',n:'External access model',c:'#9ca3af',f:3,t:7,p:20,fy:'fy26',tag:'platform',ms:{d:'May 2026',n:'External access policy and MFA design',desc:'Define SharePoint guest access model, MFA requirements for external users, and access request/approval workflow.'},st:[{t:'Design phase with vCISO',w:''}],co:[{t:'No formal external access policy yet',w:'w'}]},
+  ]},
+  {grp:'Governance',tasks:[
+    {id:'sop',n:'SOP development',c:'#d97706',f:1,t:8,p:30,fy:'both',tag:'governance',ms:{d:'Rolling weekly',n:'9 core SOPs in active development',desc:'Access control, onboarding/offboarding, asset lifecycle, vendor management, remote work, records retention, physical security, messaging, MDM.'},st:[{t:'Weekly cadence established',w:'g'},{t:'9 SOPs in progress',w:''}],co:[{t:'SOPs blocked until ticketing and SSO decisions made',w:'w'}]},
+    {id:'kb',n:'Knowledge base',c:'#d97706',f:2,t:8,p:25,fy:'both',tag:'governance',ms:{d:'Ongoing',n:'KB article cadence on SharePoint + Compass',desc:'End-user guides and IT documentation. Goal: reduce L1 support volume and enable self-service for common requests.'},st:[{t:'Target 2 articles/week established',w:''},{t:'AI integration planned to accelerate',w:'g'}],co:[{t:'Effectiveness limited until ticketing provides intake data',w:'w'}]},
+    {id:'sec',n:'Security & compliance',c:'#16a34a',f:0,t:14,p:60,fy:'both',tag:'governance',ms:{d:'Ongoing',n:'Secure Score above industry baseline',desc:'MFA, KnowBe4, Proofpoint all active. Secure Score above industry baseline for Commit\'s size.'},st:[{t:'Secure Score above industry baseline',w:'g'},{t:'KnowBe4 + Proofpoint active',w:'g'}],co:[{t:'SSO enforcement gaps — awaiting leadership direction',w:'w'}]},
+  ]},
+  {grp:'Future — FY27',tasks:[
+    {id:'slack',n:'Slack → Teams migration',c:'#9ca3af',f:6,t:14,p:0,fy:'fy27',tag:'future',ms:{d:'Jul 1, 2026',n:'Migration kickoff — channel mapping begins',desc:'Slack transitions to read-only. Teams becomes primary collaboration platform. Channel mapping, file migration, governance model, training rollout.'},st:[{t:'Planned — scope defined',w:''},{t:'SharePoint cleanup is a prerequisite',w:'w'}],co:[{t:'SharePoint must be restructured first',w:'w'},{t:'High change management bandwidth required',w:'w'}]},
+    {id:'intra',n:'Intranet & tooling',c:'#9ca3af',f:5,t:11,p:5,fy:'both',tag:'future',ms:{d:'Q1 FY27',n:'Unified IT intake layer operational',desc:'IT Help Desk intake form, software/hardware request workflows, and AI assistant interface centralized as single employee experience layer.'},st:[{t:'Prototype — intake form in progress',w:''}],co:[{t:'Requires ticketing decision before full build',w:'w'}]},
+    {id:'itfn',n:'IT function buildout',c:'#d97706',f:0,t:11,p:40,fy:'both',tag:'future',ms:{d:'Q2 FY27',n:'Formal IT governance model complete',desc:'Full governance, policies, service delivery model, and centralized documentation complete. All systems with defined owners. IT strategy aligned to COO and leadership priorities for FY27+.'},st:[{t:'All initiatives feed into this',w:''},{t:'Service delivery building via ticketing + AIIT + KB',w:''}],co:[{t:'Most dependent on parallel workstream completion',w:'w'},{t:'FY27 resourcing conversation warranted',w:'w'}]},
+  ]},
+];
+let gFilter_='all',gSel=null;
+const subs={q:[],k:[]};
+
+function renderPreview(){
+  const PT=[{n:'Ticketing decision',c:'#dc2626',f:3,t:7},{n:'Systems audit',c:'#d97706',f:1,t:5},{n:'AIIT pilot',c:'#d97706',f:2,t:6},{n:'Claude AI pilot',c:'#1d4ed8',f:2,t:5},{n:'M365 optimization',c:'#d97706',f:0,t:9},{n:'Salesforce admin',c:'#16a34a',f:0,t:5},{n:'Security & compliance',c:'#16a34a',f:0,t:14},{n:'Slack → Teams',c:'#9ca3af',f:6,t:14}];
+  const tp=(TODAY/TM*100).toFixed(2);
+  document.getElementById('gp-bars').innerHTML=PT.map(t=>`<div class="gp-row"><div class="gp-label">${t.n}</div><div class="gp-track"><div class="gp-today" style="left:${tp}%"></div><div class="gp-bar" style="left:${(t.f/TM*100).toFixed(2)}%;width:${((t.t-t.f)/TM*100).toFixed(2)}%;background:${t.c};opacity:.85"></div></div></div>`).join('');
+}
+
+function renderGantt(){
+  const tp=(TODAY/TM*100).toFixed(2);
+  let h='<div class="mhdr"><div class="lcol">Initiative</div><div class="marea">';
+  MONTHS.forEach(m=>{const is26=m.fy==='26';h+=`<div class="mcell">${m.l}<br><span class="fy-m" style="background:${is26?'#eff6ff':'#f0fdf4'};color:${is26?'#1e40af':'#166534'};border:1px solid ${is26?'#bfdbfe':'#bbf7d0'}">FY${m.fy}</span></div>`;});
+  h+='</div></div>';
+  GDATA.forEach(grp=>{
+    const vis=grp.tasks.filter(t=>gFilter_==='all'||(gFilter_==='featured'&&t.tag==='featured')||(gFilter_==='fy26'&&(t.fy==='fy26'||t.fy==='both'))||(gFilter_==='fy27'&&(t.fy==='fy27'||t.fy==='both')));
+    if(!vis.length) return;
+    h+=`<div class="grow"><div class="glbl">${grp.grp}</div><div style="flex:1"></div></div>`;
+    vis.forEach(t=>{
+      const sel=gSel===t.id?' sel':'';
+      const lp=(t.f/TM*100).toFixed(2),wp=((t.t-t.f)/TM*100).toFixed(2),msp=(Math.min(t.t,TM-0.3)/TM*100).toFixed(2);
+      h+=`<div class="trow${sel}" id="grow-${t.id}" onclick="gShow('${t.id}')"><div class="tlbl"><div class="tdot" style="background:${t.c}"></div>${t.n}</div><div class="barea"><div class="todayline" style="left:${tp}%"></div><div class="gbar" style="left:${lp}%;width:${wp}%;background:${t.c};opacity:${t.p===100?.6:1}">${parseFloat(wp)>8?`<span style="position:absolute;left:5px;top:50%;transform:translateY(-50%);font-size:9px;font-weight:700;color:${t.c==='#9ca3af'?'#374151':'#fff'};pointer-events:none;white-space:nowrap">${t.p}%</span>`:''}</div>${t.p<100?`<div class="msdiamond" style="left:calc(${msp}% - 4px);background:#92400e"></div>`:''}</div></div>`;
+    });
+  });
+  document.getElementById('gi').innerHTML=h;
+}
+
+function mkB(txt,bg,c){return `<span style="font-size:11px;padding:3px 10px;border-radius:20px;background:${bg};color:${c};font-weight:600;border:1px solid ${bg}">${txt}</span>`;}
+
+function gShow(id){
+  gSel=id;
+  document.querySelectorAll('.trow').forEach(r=>r.classList.remove('sel'));
+  const row=document.getElementById('grow-'+id);
+  if(row)row.classList.add('sel');
+  let task=null;
+  GDATA.forEach(g=>g.tasks.forEach(t=>{if(t.id===id)task=t;}));
+  if(!task)return;
+  document.getElementById('gc-title').textContent=task.n;
+  let bh='';
+  if(task.p===100)bh+=mkB('Complete','#f0fdf4','#166534');
+  else if(task.c==='#dc2626')bh+=mkB('Needs decision','#fef2f2','#991b1b');
+  else if(task.c==='#d97706')bh+=mkB('In progress','#fffbeb','#92400e');
+  else if(task.c==='#16a34a')bh+=mkB('On track','#f0fdf4','#166534');
+  else if(task.c==='#1d4ed8')bh+=mkB('Exceeding','#eff6ff','#1e40af');
+  else bh+=mkB('Planned','#f9fafb','#374151');
+  bh+=mkB(task.p+'% complete','#f9fafb','#6b7280');
+  if(task.fy==='fy26')bh+=mkB('FY26','#eff6ff','#1e40af');
+  else if(task.fy==='fy27')bh+=mkB('FY27','#f0fdf4','#166534');
+  else bh+=mkB('FY26 → FY27','#f9fafb','#374151');
+  document.getElementById('gc-badges').innerHTML=bh;
+  document.getElementById('gc-prog').innerHTML=`<div style="display:flex;justify-content:space-between;font-size:11px;color:#9ca3af;margin-bottom:4px"><span>Progress</span><span style="font-weight:600">${task.p}%</span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;overflow:hidden"><div style="height:100%;width:${task.p}%;background:${task.c};border-radius:3px"></div></div>`;
+  let body='';
+  if(task.st&&task.st.length){body+='<div><div class="gcsh">Current status</div>';task.st.forEach(s=>{body+=`<div class="gcsi ${s.w||''}">${s.t}</div>`;});body+='</div>';}
+  if(task.co&&task.co.length){body+='<div><div class="gcsh">Concerns / delays</div>';task.co.forEach(c=>{body+=`<div class="gcsi ${c.w||''}">${c.t}</div>`;});body+='</div>';}
+  document.getElementById('gc-body').innerHTML=body;
+  const ms=document.getElementById('gc-ms');
+  if(task.ms){ms.innerHTML=`<div class="ms-card-lbl">Next milestone</div><div class="ms-card-name">${task.ms.n}</div><div class="ms-card-date">${task.ms.d}</div><div class="ms-card-desc">${task.ms.desc}</div>`;ms.style.display='block';}
+  else ms.style.display='none';
+  const callout=document.getElementById('gcallout');
+  callout.classList.add('show');
+  callout.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function gClose(){gSel=null;document.querySelectorAll('.trow').forEach(r=>r.classList.remove('sel'));document.getElementById('gcallout').classList.remove('show');}
+function gFilt(f,btn){gFilter_=f;document.querySelectorAll('.gfb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderGantt();gClose();}
+
+function sw(name,btn){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('pane-'+name).classList.add('on');
+  btn.classList.add('on');
+  if(name==='gantt')renderGantt();
+}
+
+function openGanttTab(){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('pane-gantt').classList.add('on');
+  document.getElementById('gantt-tab-btn').classList.add('on');
+  renderGantt();
+  document.querySelector('.nav').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function toggleDec(){
+  const body=document.getElementById('dec-body'),chev=document.getElementById('dec-chev');
+  const isOpen=body.classList.contains('show');
+  body.classList.toggle('show');
+  chev.classList.toggle('open',!isOpen);
+}
+
+function tog(card){const was=card.classList.contains('open');document.querySelectorAll('.ic').forEach(c=>c.classList.remove('open'));if(!was)card.classList.add('open');}
+
+function submitQ(){
+  const name=document.getElementById('q-name').value.trim()||'Leadership';
+  const msg=document.getElementById('q-text').value.trim();
+  if(!msg)return;
+  subs.q.unshift({name,msg,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
+  document.getElementById('q-name').value='';
+  document.getElementById('q-text').value='';
+  const c=document.getElementById('q-confirm');
+  c.style.display='block';setTimeout(()=>c.style.display='none',3000);
+  renderInbox('q');
+}
+
+function submitK(){
+  const name=document.getElementById('k-name').value.trim()||'Leadership';
+  const msg=document.getElementById('k-text').value.trim();
+  if(!msg)return;
+  subs.k.unshift({name,msg,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
+  document.getElementById('k-name').value='';
+  document.getElementById('k-text').value='';
+  const c=document.getElementById('k-confirm');
+  c.style.display='block';setTimeout(()=>c.style.display='none',3000);
+  renderInbox('k');
+}
+
+function renderInbox(type){
+  const box=document.getElementById(type+'-inbox');
+  if(!subs[type].length){box.innerHTML='';return;}
+  box.innerHTML=subs[type].map(s=>`<div class="inbox-item inbox-${type}"><div class="inbox-from">${s.name}</div><div class="inbox-msg">${s.msg}</div><div class="inbox-time">${s.time} today</div></div>`).join('');
+}
+
+renderPreview();
+</script>
+</body>
+</html>
